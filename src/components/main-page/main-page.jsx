@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const MainPage = (props) => {
   const {places} = props;
@@ -263,6 +264,10 @@ const MainPage = (props) => {
       </div>
     </main>
   </div>;
+};
+
+MainPage.propTypes = {
+  places: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default MainPage;
