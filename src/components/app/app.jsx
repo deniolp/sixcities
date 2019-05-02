@@ -11,7 +11,14 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.object).isRequired,
+  places: PropTypes.arrayOf(PropTypes.shape({
+    description: PropTypes.string.isRequired,
+    grade: PropTypes.string,
+    price: PropTypes.number.isRequired,
+    ratingWidth: PropTypes.objectOf(PropTypes.string).isRequired,
+    bookmarked: PropTypes.bool.isRequired,
+    type: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default App;

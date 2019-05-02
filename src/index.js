@@ -16,7 +16,6 @@ const init = () => {
     },
     {
       description: `Wood and stone place`,
-      grade: ``,
       price: 80,
       ratingWidth: {
         width: `80%`
@@ -26,7 +25,6 @@ const init = () => {
     },
     {
       description: `Canal View Prinsengracht`,
-      grade: ``,
       price: 132,
       ratingWidth: {
         width: `80%`
@@ -43,16 +41,6 @@ const init = () => {
       },
       bookmarked: false,
       type: `Apartment`,
-    },
-    {
-      description: `Wood and stone place`,
-      grade: ``,
-      price: 80,
-      ratingWidth: {
-        width: `80%`
-      },
-      bookmarked: false,
-      type: `Private room`,
     },
   ];
 

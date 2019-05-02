@@ -93,9 +93,11 @@ const MainPage = (props) => {
               {
                 places.map((item, index) => {
                   return <article className="cities__place-card place-card" key={index}>
-                    <div className="place-card__mark">
-                      <span>{item.grade}</span>
-                    </div>
+                    {
+                      item.grade ? <div className="place-card__mark">
+                        <span>{item.grade}</span>
+                      </div> : null
+                    }
                     <div className="cities__image-wrapper place-card__image-wrapper">
                       <a href="#">
                         <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Place image"/>
@@ -140,7 +142,14 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.object).isRequired,
+  places: PropTypes.arrayOf(PropTypes.shape({
+    description: PropTypes.string.isRequired,
+    grade: PropTypes.string,
+    price: PropTypes.number.isRequired,
+    ratingWidth: PropTypes.objectOf(PropTypes.string).isRequired,
+    bookmarked: PropTypes.bool.isRequired,
+    type: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default MainPage;
