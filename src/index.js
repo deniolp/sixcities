@@ -13,6 +13,7 @@ const init = () => {
       },
       bookmarked: false,
       type: `Apartment`,
+      image: `img/apartment-01.jpg`,
     },
     {
       description: `Wood and stone place`,
@@ -22,6 +23,7 @@ const init = () => {
       },
       bookmarked: true,
       type: `Private room`,
+      image: `img/room.jpg`,
     },
     {
       description: `Canal View Prinsengracht`,
@@ -31,6 +33,7 @@ const init = () => {
       },
       bookmarked: false,
       type: `Apartment`,
+      image: `img/apartment-02.jpg`,
     },
     {
       description: `Nice, cozy, warm big bed apartment`,
@@ -41,6 +44,7 @@ const init = () => {
       },
       bookmarked: false,
       type: `Apartment`,
+      image: `img/apartment-03.jpg`,
     },
   ];
 

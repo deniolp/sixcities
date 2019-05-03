@@ -111,6 +111,7 @@ MainPage.propTypes = {
     ratingWidth: PropTypes.objectOf(PropTypes.string).isRequired,
     bookmarked: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
   })).isRequired,
 };
 
