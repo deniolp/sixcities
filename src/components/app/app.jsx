@@ -3,10 +3,11 @@ import MainPage from '../main-page/main-page.jsx';
 import PropTypes from 'prop-types';
 
 const App = (props) => {
-  const {places} = props;
+  const {places, onClick} = props;
 
   return <MainPage
     places={places}
+    onClick={onClick}
   />;
 };
 
@@ -20,6 +21,7 @@ App.propTypes = {
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
   })).isRequired,
+  onClick: PropTypes.func,
 };
 
 export default App;

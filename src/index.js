@@ -47,10 +47,12 @@ const init = () => {
       image: `img/apartment-03.jpg`,
     },
   ];
+  const onPlaceNameClickHandler = () => null;
 
   ReactDom.render(
       <App
         places={places}
+        onClick={onPlaceNameClickHandler}
       />,
       document.querySelector(`#root`)
   );

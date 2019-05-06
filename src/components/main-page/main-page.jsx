@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Place from '../place/place.jsx';
 
 const MainPage = (props) => {
-  const {places} = props;
+  const {places, onClick} = props;
 
   return <div className="page page--gray page--main">
     <div style={{display: `none`}}>
@@ -91,7 +91,9 @@ const MainPage = (props) => {
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              {places.map((item, index) => (<Place place={item} key={index} />))}
+              {places.map((item, index) => (<Place
+                place={item} key={index} onClick={onClick}
+              />))}
             </div>
           </section>
           <div className="cities__right-section">
@@ -113,6 +115,7 @@ MainPage.propTypes = {
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
   })).isRequired,
+  onClick: PropTypes.func,
 };
 
 export default MainPage;
