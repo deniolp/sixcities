@@ -4,7 +4,7 @@ import App from './components/app/app.jsx';
 import offers from './mocks/offers';
 
 const init = () => {
-  const onPlaceNameClickHandler = () => null;
+  const onPlaceNameClickHandler = () => {};
 
   ReactDom.render(
       <App
