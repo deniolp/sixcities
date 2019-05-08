@@ -1,6 +1,6 @@
 export default [
   {
-    description: `Beautiful luxurious apartment at great location`,
+    title: `Beautiful luxurious apartment at great location`,
     isPremium: true,
     price: 120,
     rating: 93,
@@ -9,7 +9,7 @@ export default [
     image: `img/apartment-01.jpg`,
   },
   {
-    description: `Wood and stone place`,
+    title: `Wood and stone place`,
     isPremium: false,
     price: 80,
     rating: 80,
@@ -18,7 +18,7 @@ export default [
     image: `img/room.jpg`,
   },
   {
-    description: `Canal View Prinsengracht`,
+    title: `Canal View Prinsengracht`,
     isPremium: false,
     price: 132,
     rating: 80,
@@ -27,7 +27,7 @@ export default [
     image: `img/apartment-02.jpg`,
   },
   {
-    description: `Nice, cozy, warm big bed apartment`,
+    title: `Nice, cozy, warm big bed apartment`,
     isPremium: true,
     price: 180,
     rating: 100,

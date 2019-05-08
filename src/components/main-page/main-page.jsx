@@ -107,10 +107,10 @@ const MainPage = (props) => {
 
 MainPage.propTypes = {
   places: PropTypes.arrayOf(PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    grade: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
-    ratingWidth: PropTypes.objectOf(PropTypes.string).isRequired,
+    rating: PropTypes.number.isRequired,
     bookmarked: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,

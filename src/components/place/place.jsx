@@ -6,8 +6,8 @@ const Place = (props) => {
 
   return <article className="cities__place-card place-card">
     {
-      place.grade ? <div className="place-card__mark">
-        <span>{place.grade}</span>
+      place.isPremium ? <div className="place-card__mark">
+        <span>Premium</span>
       </div> : null
     }
     <div className="cities__image-wrapper place-card__image-wrapper">
@@ -30,12 +30,12 @@ const Place = (props) => {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={place.ratingWidth}></span>
+          <span style={{width: `${place.rating}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#" onClick={onClick}>{place.description}</a>
+        <a href="#" onClick={onClick}>{place.title}</a>
       </h2>
       <p className="place-card__type">{place.type}</p>
     </div>
@@ -44,10 +44,10 @@ const Place = (props) => {
 
 Place.propTypes = {
   place: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    grade: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
-    ratingWidth: PropTypes.objectOf(PropTypes.string).isRequired,
+    rating: PropTypes.number.isRequired,
     bookmarked: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
