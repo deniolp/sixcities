@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Place from '../place/place.jsx';
+import Place from '../place/place';
 
 describe(`Place`, () => {
   const place = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PlaceList from '../place-list/place-list.jsx';
+import PlaceList from '../place-list/place-list';
 
 describe(`PlaceList`, () => {
   const places = [

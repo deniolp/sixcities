@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MainPage from '../main-page/main-page.jsx';
+import MainPage from '../main-page/main-page';
 
 describe(`MainPage`, () => {
   const places = [

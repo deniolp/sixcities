@@ -1,26 +1,35 @@
-const path = require(`path`);
+const {join} = require(`path`);
+
+const path = join(__dirname, `public`);
+
+const entry = `./src/index.js`;
+const output = {
+  filename: `bundle.js`,
+  path,
+};
+
+const contentBase = path;
+const compress = false;
+const hot = true;
+const port = 1338;
+const devServer = {contentBase, compress, hot, port};
+
+const babelizing = {
+  test: /\.(js|jsx)$/,
+  exclude: /node_modules/,
+  use: [`babel-loader`],
+};
+const rules = [babelizing];
+
+const resolve = {
+  extensions: [`.js`, `.jsx`],
+};
 
 module.exports = {
-  entry: `./src/index.js`,
-  output: {
-    filename: `bundle.js`,
-    path: path.join(__dirname, `public`)
-  },
-  devServer: {
-    contentBase: path.join(__dirname, `public`),
-    compress: false,
-    port: 1337,
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: `babel-loader`,
-        },
-      }
-    ],
-  },
-  devtool: `source-map`
+  entry,
+  output,
+  devServer,
+  module: {rules},
+  resolve,
+  devtool: `source-map`,
 };
