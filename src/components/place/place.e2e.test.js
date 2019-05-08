@@ -34,13 +34,13 @@ describe(`Before clicking`, () => {
     expect(placeDescription).toHaveLength(1);
   });
 
-  it(`clickHandler should not work`, () => {
+  it(`clickHandler should not be called`, () => {
     expect(clickHandler).toHaveBeenCalledTimes(0);
   });
 });
 
 describe(`After clicking`, () => {
-  it(`clickHandler should work correctly`, () => {
+  it(`clickHandler should be called once`, () => {
     placeDescription.simulate(`click`);
 
     expect(clickHandler).toHaveBeenCalledTimes(1);
