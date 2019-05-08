@@ -18,6 +18,8 @@ const mockObj = {
 let clickHandler;
 let placeElement;
 let placeDescription;
+let image;
+let placeObj = {};
 
 beforeEach(() => {
   clickHandler = jest.fn();
@@ -25,8 +27,12 @@ beforeEach(() => {
       <Place
         place={mockObj}
         onClick={clickHandler}
+        onMouseEnter={() => {
+          placeObj = mockObj;
+        }}
       />);
   placeDescription = placeElement.find(`.place-card__name a`);
+  image = placeElement.find(`.place-card__image`);
 });
 
 describe(`Before clicking`, () => {
@@ -45,4 +51,11 @@ describe(`After clicking`, () => {
 
     expect(clickHandler).toHaveBeenCalledTimes(1);
   });
+});
+
+
+it(`Mouse hover on image will call onMouseEnter event and the right object have to be used`, () => {
+  image.simulate(`mouseenter`);
+
+  expect(placeObj).toEqual(mockObj);
 });
