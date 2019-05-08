@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Place from '../place/place.jsx';
+import PlaceList from '../place-list/place-list.jsx';
 
 const MainPage = (props) => {
   const {places, onClick} = props;
@@ -90,11 +90,10 @@ const MainPage = (props) => {
                 <li className="places__option" tabIndex="0">Top rated first</li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              {places.map((item, index) => (<Place
-                place={item} key={index} onClick={onClick}
-              />))}
-            </div>
+            <PlaceList
+              places={places}
+              onClick={onClick}
+            />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>
