@@ -5,22 +5,19 @@ import App from '../app/app.jsx';
 describe(`App`, () => {
   const places = [
     {
-      description: `Strange place`,
-      grade: `Premium`,
+      title: `Strange place`,
+      isPremium: true,
       price: 1200,
-      ratingWidth: {
-        width: `95%`
-      },
+      rating: 95,
       bookmarked: false,
       type: `Apartment`,
       image: ``,
     },
     {
-      description: `Weird place`,
+      title: `Weird place`,
+      isPremium: false,
       price: 800,
-      ratingWidth: {
-        width: `85%`
-      },
+      rating: 85,
       bookmarked: true,
       type: `Private room`,
       image: ``,
