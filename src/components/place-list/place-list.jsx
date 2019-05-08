@@ -14,10 +14,25 @@ class PlaceList extends PureComponent {
   render() {
     const {places, onClick} = this.props;
     return <div className="cities__places-list places__list tabs__content">
-      {places.map((item, index) => (<Place
-        place={item} key={index} onClick={onClick}
-      />))}
+      {
+        places.map((item, index) => {
+          return this._getPlace(item, index, onClick, () => {
+            this.setState({
+              activeCard: item,
+            });
+          });
+        })
+      }
     </div>;
+  }
+
+  _getPlace(item, index, onClick, onMouseEnter) {
+    return <Place
+      place={item}
+      key={index}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+    />;
   }
 }
 
