@@ -232,7 +232,7 @@ exports[`MainPage renders correctly 1`] = `
               </svg>
             </span>
             <ul
-              className="places__options places__options--custom places__options--opened"
+              className="places__options places__options--custom"
             >
               <li
                 className="places__option places__option--active"
@@ -283,6 +283,7 @@ exports[`MainPage renders correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
+                    onMouseEnter={[Function]}
                     src=""
                     width="260"
                   />
@@ -379,6 +380,7 @@ exports[`MainPage renders correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
+                    onMouseEnter={[Function]}
                     src=""
                     width="260"
                   />

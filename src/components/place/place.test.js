@@ -1,15 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Place from '../place/place.jsx';
+import Place from '../place/place';
 
 describe(`Place`, () => {
   const place = {
-    description: `Strange place`,
-    grade: `Premium`,
+    title: `Strange place`,
+    isPremium: true,
     price: 1200,
-    ratingWidth: {
-      width: `95%`
-    },
+    rating: 95,
     bookmarked: false,
     type: `Apartment`,
     image: ``,

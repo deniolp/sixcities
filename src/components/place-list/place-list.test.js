@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MainPage from '../main-page/main-page';
+import PlaceList from '../place-list/place-list';
 
-describe(`MainPage`, () => {
+describe(`PlaceList`, () => {
   const places = [
     {
       title: `Strange place`,
@@ -16,16 +16,16 @@ describe(`MainPage`, () => {
     {
       title: `Weird place`,
       isPremium: false,
-      price: 800,
-      rating: 85,
+      price: 80,
+      rating: 80,
       bookmarked: true,
-      type: `Private room`,
+      type: `Room`,
       image: ``,
     },
   ];
 
   it(`renders correctly`, () => {
-    const tree = renderer.create(<MainPage
+    const tree = renderer.create(<PlaceList
       places={places}
       onClick={jest.fn()}
     />).toJSON();

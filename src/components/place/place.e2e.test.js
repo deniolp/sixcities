@@ -1,17 +1,15 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Place from '../place/place.jsx';
+import Place from '../place/place';
 
 Enzyme.configure({adapter: new Adapter()});
 
 const mockObj = {
-  description: `Strange place`,
-  grade: `Premium`,
+  title: `Strange place`,
+  isPremium: true,
   price: 1200,
-  ratingWidth: {
-    width: `95%`
-  },
+  rating: 95,
   bookmarked: false,
   type: `Apartment`,
   image: ``,
@@ -20,6 +18,8 @@ const mockObj = {
 let clickHandler;
 let placeElement;
 let placeDescription;
+let image;
+let placeObj = {};
 
 beforeEach(() => {
   clickHandler = jest.fn();
@@ -27,8 +27,12 @@ beforeEach(() => {
       <Place
         place={mockObj}
         onClick={clickHandler}
+        onMouseEnter={() => {
+          placeObj = mockObj;
+        }}
       />);
   placeDescription = placeElement.find(`.place-card__name a`);
+  image = placeElement.find(`.place-card__image`);
 });
 
 describe(`Before clicking`, () => {
@@ -36,15 +40,22 @@ describe(`Before clicking`, () => {
     expect(placeDescription).toHaveLength(1);
   });
 
-  it(`clickHandler should not work`, () => {
+  it(`clickHandler should not be called`, () => {
     expect(clickHandler).toHaveBeenCalledTimes(0);
   });
 });
 
 describe(`After clicking`, () => {
-  it(`clickHandler should work correctly`, () => {
+  it(`clickHandler should be called once`, () => {
     placeDescription.simulate(`click`);
 
     expect(clickHandler).toHaveBeenCalledTimes(1);
   });
+});
+
+
+it(`Mouse hover on image will call onMouseEnter event and the right object have to be used`, () => {
+  image.simulate(`mouseenter`);
+
+  expect(placeObj).toEqual(mockObj);
 });

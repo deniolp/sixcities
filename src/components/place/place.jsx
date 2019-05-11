@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Place = (props) => {
-  const {place, onClick} = props;
+  const {place, onClick, onMouseEnter} = props;
 
   return <article className="cities__place-card place-card">
     {
-      place.grade ? <div className="place-card__mark">
-        <span>{place.grade}</span>
+      place.isPremium ? <div className="place-card__mark">
+        <span>Premium</span>
       </div> : null
     }
     <div className="cities__image-wrapper place-card__image-wrapper">
       <a href="#">
-        <img className="place-card__image" src={place.image} width="260" height="200" alt="Place image"/>
+        <img className="place-card__image" src={place.image} width="260" height="200" alt="Place image" onMouseEnter={onMouseEnter}/>
       </a>
     </div>
     <div className="place-card__info">
@@ -30,12 +30,12 @@ const Place = (props) => {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={place.ratingWidth}></span>
+          <span style={{width: `${place.rating}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#" onClick={onClick}>{place.description}</a>
+        <a href="#" onClick={onClick}>{place.title}</a>
       </h2>
       <p className="place-card__type">{place.type}</p>
     </div>
@@ -44,15 +44,17 @@ const Place = (props) => {
 
 Place.propTypes = {
   place: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    grade: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
-    ratingWidth: PropTypes.objectOf(PropTypes.string).isRequired,
+    rating: PropTypes.number.isRequired,
     bookmarked: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
   }).isRequired,
   onClick: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
 };
 
 export default Place;
