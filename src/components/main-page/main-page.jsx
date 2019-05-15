@@ -98,7 +98,7 @@ const MainPage = (props) => {
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
-              <Map />
+              <Map places={places}/>
             </section>
           </div>
         </div>
@@ -116,6 +116,7 @@ MainPage.propTypes = {
     bookmarked: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
   onClick: PropTypes.func,
 };
