@@ -8,7 +8,9 @@ class Map extends PureComponent {
   }
 
   render() {
-    return <div id="map" style={{height: 794}}></div>;
+    return <div id="map" style={{height: 794}} ref={(ref) => {
+      this.container = ref;
+    }}></div>;
   }
 
   componentDidMount() {
@@ -20,7 +22,7 @@ class Map extends PureComponent {
     });
 
     const zooms = 12;
-    const map = leaflet.map(`map`, {
+    const map = leaflet.map(this.container, {
       center: city,
       zoom: zooms,
       zoomControl: false,
@@ -41,6 +43,10 @@ class Map extends PureComponent {
       .marker(offerCords, {icon})
       .addTo(map);
     });
+  }
+
+  componentWillUnmount() {
+    this.map.remove();
   }
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import App from '../app/app';
+import Map from '../map/map';
 
 describe(`App`, () => {
   const places = [
@@ -27,6 +28,7 @@ describe(`App`, () => {
   ];
 
   it(`renders correctly`, () => {
+    Map.prototype.componentDidMount = () => {};
     const tree = renderer.create(<App
       places={places}
       onClick={jest.fn()}
