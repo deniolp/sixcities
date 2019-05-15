@@ -11,6 +11,7 @@ describe(`Place`, () => {
     bookmarked: false,
     type: `Apartment`,
     image: ``,
+    coords: [12, 87],
   };
 
   it(`renders correctly`, () => {

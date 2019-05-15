@@ -12,6 +12,7 @@ describe(`MainPage`, () => {
       bookmarked: false,
       type: `Apartment`,
       image: ``,
+      coords: [12, 87],
     },
     {
       title: `Weird place`,
@@ -21,6 +22,7 @@ describe(`MainPage`, () => {
       bookmarked: true,
       type: `Private room`,
       image: ``,
+      coords: [13, 88],
     },
   ];
 

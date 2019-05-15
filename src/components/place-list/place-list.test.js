@@ -12,6 +12,7 @@ describe(`PlaceList`, () => {
       bookmarked: false,
       type: `Apartment`,
       image: ``,
+      coords: [12, 87],
     },
     {
       title: `Weird place`,
@@ -21,6 +22,7 @@ describe(`PlaceList`, () => {
       bookmarked: true,
       type: `Room`,
       image: ``,
+      coords: [13, 88],
     },
   ];
 

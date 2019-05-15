@@ -13,6 +13,7 @@ const mockObj = {
   bookmarked: false,
   type: `Apartment`,
   image: ``,
+  coords: [13, 88],
 };
 
 let clickHandler;
