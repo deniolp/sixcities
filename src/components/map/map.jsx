@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 class Map extends PureComponent {
   constructor(props) {
     super(props);
+
+    this._mapContainer = React.createRef();
   }
 
   render() {
-    return <div id="map" style={{height: 794}} ref={(ref) => {
-      this.container = ref;
-    }}></div>;
+    return <div id="map" style={{height: 794}} ref={this._mapContainer}></div>;
   }
 
   componentDidMount() {
@@ -21,7 +21,7 @@ class Map extends PureComponent {
     });
 
     const zooms = 12;
-    const map = leaflet.map(this.container, {
+    const map = leaflet.map(this._mapContainer.current, {
       center: city,
       zoom: zooms,
       zoomControl: false,
