@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react';
-import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 
 class Map extends PureComponent {
@@ -12,7 +11,7 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {places, city} = this.props;
+    const {places, city, leaflet} = this.props;
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
@@ -59,6 +58,7 @@ Map.propTypes = {
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
   city: PropTypes.arrayOf(PropTypes.number).isRequired,
+  leaflet: PropTypes.object.isRequired,
 };
 
 export default Map;

@@ -28,10 +28,10 @@ describe(`MainPage`, () => {
   ];
 
   it(`renders correctly`, () => {
-    leafletMock();
     const tree = renderer.create(<MainPage
       places={places}
       onClick={jest.fn()}
+      leaflet={leafletMock}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();

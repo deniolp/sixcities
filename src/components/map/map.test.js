@@ -29,10 +29,10 @@ describe(`Map`, () => {
   const city = [50.38333, 5.9];
 
   it(`renders correctly`, () => {
-    leafletMock();
     const tree = renderer.create(<Map
       places={places}
       city={city}
+      leaflet={leafletMock}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();

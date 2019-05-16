@@ -4,7 +4,7 @@ import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
 
 const MainPage = (props) => {
-  const {places, onClick} = props;
+  const {places, onClick, leaflet} = props;
 
   return <div className="page page--gray page--main">
     <div style={{display: `none`}}>
@@ -99,7 +99,10 @@ const MainPage = (props) => {
           <div className="cities__right-section">
             <section className="cities__map map">
               <Map
-                places={places} city={[52.38333, 4.9]}/>
+                places={places}
+                city={[52.38333, 4.9]}
+                leaflet={leaflet}
+              />
             </section>
           </div>
         </div>
@@ -120,6 +123,7 @@ MainPage.propTypes = {
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
   onClick: PropTypes.func,
+  leaflet: PropTypes.object.isRequired,
 };
 
 export default MainPage;

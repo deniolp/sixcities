@@ -1,7 +1,21 @@
-const leafletMock = () => {
-  const div = global.document.createElement(`div`);
-  div.setAttribute(`id`, `map`);
-  global.document.body.appendChild(div);
+const leafletMock = {
+  icon: jest.fn(),
+  map() {
+    return {
+      setView: jest.fn(),
+      remove: jest.fn(),
+    };
+  },
+  marker() {
+    return {
+      addTo: jest.fn(),
+    };
+  },
+  tileLayer() {
+    return {
+      addTo: jest.fn(),
+    };
+  },
 };
 
 export default leafletMock;

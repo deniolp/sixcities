@@ -28,10 +28,10 @@ describe(`App`, () => {
   ];
 
   it(`renders correctly`, () => {
-    leafletMock();
     const tree = renderer.create(<App
       places={places}
       onClick={jest.fn()}
+      leaflet={leafletMock}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();
