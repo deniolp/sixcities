@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import App from './components/app/app';
 import offers from './mocks/offers';
-import leafletMock from './mocks/leaflet-mock';
+import leaflet from 'leaflet';
 
 const init = () => {
   const onPlaceNameClickHandler = () => {};
@@ -11,7 +11,7 @@ const init = () => {
       <App
         places={offers}
         onClick={onPlaceNameClickHandler}
-        leaflet={leafletMock}
+        leaflet={leaflet}
       />,
       document.querySelector(`#root`)
   );
