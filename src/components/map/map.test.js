@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import Map from '../map/map';
 
 describe(`Map`, () => {
-  const mocks = [
+  const places = [
     {
       title: `Strange place`,
       isPremium: true,
@@ -25,10 +25,13 @@ describe(`Map`, () => {
       coords: [13, 88],
     },
   ];
+  const city = [50.38333, 5.9];
+
   it(`renders correctly`, () => {
     Map.prototype.componentDidMount = () => {};
     const tree = renderer.create(<Map
-      places={mocks}
+      places={places}
+      city={city}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();
