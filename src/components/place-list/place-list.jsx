@@ -45,6 +45,7 @@ PlaceList.propTypes = {
     bookmarked: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
   onClick: PropTypes.func,
 };

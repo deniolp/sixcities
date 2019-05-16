@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import MainPage from '../main-page/main-page';
+import leafletMock from '../../mocks/leaflet-mock';
 
 describe(`MainPage`, () => {
   const places = [
@@ -12,6 +13,7 @@ describe(`MainPage`, () => {
       bookmarked: false,
       type: `Apartment`,
       image: ``,
+      coords: [12, 87],
     },
     {
       title: `Weird place`,
@@ -21,6 +23,7 @@ describe(`MainPage`, () => {
       bookmarked: true,
       type: `Private room`,
       image: ``,
+      coords: [13, 88],
     },
   ];
 
@@ -28,6 +31,7 @@ describe(`MainPage`, () => {
     const tree = renderer.create(<MainPage
       places={places}
       onClick={jest.fn()}
+      leaflet={leafletMock}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();

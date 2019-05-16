@@ -3,11 +3,12 @@ import MainPage from '../main-page/main-page';
 import PropTypes from 'prop-types';
 
 const App = (props) => {
-  const {places, onClick} = props;
+  const {places, onClick, leaflet} = props;
 
   return <MainPage
     places={places}
     onClick={onClick}
+    leaflet={leaflet}
   />;
 };
 
@@ -20,8 +21,10 @@ App.propTypes = {
     bookmarked: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
   onClick: PropTypes.func,
+  leaflet: PropTypes.object.isRequired,
 };
 
 export default App;

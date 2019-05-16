@@ -1,9 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from '../app/app';
+import Map from '../map/map';
 import leafletMock from '../../mocks/leaflet-mock';
 
-describe(`App`, () => {
+describe(`Map`, () => {
   const places = [
     {
       title: `Strange place`,
@@ -26,11 +26,12 @@ describe(`App`, () => {
       coords: [13, 88],
     },
   ];
+  const city = [50.38333, 5.9];
 
   it(`renders correctly`, () => {
-    const tree = renderer.create(<App
+    const tree = renderer.create(<Map
       places={places}
-      onClick={jest.fn()}
+      city={city}
       leaflet={leafletMock}
     />).toJSON();
 
