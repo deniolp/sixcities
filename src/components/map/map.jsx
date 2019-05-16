@@ -14,8 +14,7 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {places} = this.props;
-    const city = [52.38333, 4.9];
+    const {places, city} = this.props;
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
@@ -59,8 +58,9 @@ Map.propTypes = {
     bookmarked: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    coords: PropTypes.array.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
+  city: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default Map;
