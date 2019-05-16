@@ -98,7 +98,8 @@ const MainPage = (props) => {
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
-              <Map places={places} city={[52.38333, 4.9]}/>
+              <Map
+                places={places} city={[52.38333, 4.9]}/>
             </section>
           </div>
         </div>

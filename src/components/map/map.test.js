@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Map from '../map/map';
+import leafletMock from '../../mocks/leaflet-mock';
 
 describe(`Map`, () => {
   const places = [
@@ -28,7 +29,7 @@ describe(`Map`, () => {
   const city = [50.38333, 5.9];
 
   it(`renders correctly`, () => {
-    Map.prototype.componentDidMount = () => {};
+    leafletMock();
     const tree = renderer.create(<Map
       places={places}
       city={city}

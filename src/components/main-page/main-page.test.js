@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import MainPage from '../main-page/main-page';
-import Map from '../map/map';
+import leafletMock from '../../mocks/leaflet-mock';
 
 describe(`MainPage`, () => {
   const places = [
@@ -28,7 +28,7 @@ describe(`MainPage`, () => {
   ];
 
   it(`renders correctly`, () => {
-    Map.prototype.componentDidMount = () => {};
+    leafletMock();
     const tree = renderer.create(<MainPage
       places={places}
       onClick={jest.fn()}
