@@ -60,19 +60,21 @@ const initialState = {
   ],
 };
 
+const getFilteredOffers = (selectedCity, places) => {
+  return places.filter((it) => it.city.name === selectedCity);
+};
+
 const ActionCreator = {
   changeCity: (selectedCity) => ({
     type: `CHANGE_CITY`,
     payload: selectedCity,
   }),
   getOffers: (selectedCity, places) => {
-    const sortedPlaces = places.filter((it) => {
-      return it.city.name === selectedCity;
-    });
+    const filteredPlaces = getFilteredOffers(selectedCity, places);
 
     return {
       type: `GET_OFFERS`,
-      payload: sortedPlaces,
+      payload: filteredPlaces,
     };
   },
 };
