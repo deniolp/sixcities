@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
+import Cities from '../cities/cities';
 
 const MainPage = (props) => {
-  const {places, onClick, leaflet, offers, city} = props;
+  const {cities, onClick, leaflet, offers, city} = props;
 
   return <div className="page page--gray page--main">
     <div style={{display: `none`}}>
@@ -39,36 +41,10 @@ const MainPage = (props) => {
       <div className="cities tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Paris</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Cologne</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Brussels</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item tabs__item--active">
-                <span>Amsterdam</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Hamburg</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Dusseldorf</span>
-              </a>
-            </li>
+            <Cities
+              cities={cities}
+              city={city}
+            ></Cities>
           </ul>
         </section></div>
       <div className="cities__places-wrapper">
@@ -112,17 +88,6 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    bookmarked: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-    city: PropTypes.string.isRequired,
-  })).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
@@ -136,6 +101,7 @@ MainPage.propTypes = {
   })).isRequired,
   onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,
+  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   city: PropTypes.string.isRequired,
 };
 
