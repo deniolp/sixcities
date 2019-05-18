@@ -20,18 +20,23 @@ class PlaceList extends PureComponent {
             this.setState({
               activeCard: item,
             });
+          }, () => {
+            this.setState({
+              activeCard: null,
+            });
           });
         })
       }
     </div>;
   }
 
-  _getPlace(item, index, onClick, onMouseEnter) {
+  _getPlace(item, index, onClick, onMouseEnter, onMouseLeave) {
     return <Place
       place={item}
       key={index}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     />;
   }
 }
