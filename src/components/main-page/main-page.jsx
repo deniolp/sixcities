@@ -6,7 +6,7 @@ import Map from '../map/map';
 import Cities from '../cities/cities';
 
 const MainPage = (props) => {
-  const {cities, onClick, leaflet, offers, city} = props;
+  const {cities, onClick, leaflet, offers, city, onCityClick} = props;
 
   return <div className="page page--gray page--main">
     <div style={{display: `none`}}>
@@ -44,6 +44,7 @@ const MainPage = (props) => {
             <Cities
               cities={cities}
               city={city}
+              onCityClick={onCityClick}
             ></Cities>
           </ul>
         </section></div>
@@ -103,6 +104,7 @@ MainPage.propTypes = {
   leaflet: PropTypes.object.isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   city: PropTypes.string.isRequired,
+  onCityClick: PropTypes.func.isRequired,
 };
 
 export default MainPage;

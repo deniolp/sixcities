@@ -53,12 +53,14 @@ const ActionCreator = {
     type: `CHANGE_CITY`,
     payload: selectedCity,
   }),
-  getOffers: (selectedCity, offers) => {
-    const sortedOffers = offers.sort((it) => it.city === selectedCity);
+  getOffers: (selectedCity, places) => {
+    const sortedPlaces = places.filter((it) => {
+      return it.city === selectedCity;
+    });
 
     return {
       type: `GET_OFFERS`,
-      payload: sortedOffers,
+      payload: sortedPlaces,
     };
   },
 };

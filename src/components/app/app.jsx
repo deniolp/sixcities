@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import MainPage from '../main-page/main-page';
+import {ActionCreator} from '../../reducer';
 
 const App = (props) => {
-  const {places, onClick, leaflet, offers, city} = props;
+  const {places, onClick, leaflet, offers, city, onCityClick} = props;
   const cities = Array.from(places.reduce((array, current) => {
     array.add(current.city);
     return array;
@@ -17,6 +18,7 @@ const App = (props) => {
     cities={cities}
     city={city}
     onClick={onClick}
+    onCityClick={(selectedCity) => onCityClick(selectedCity, places)}
     leaflet={leaflet}
   />;
 };
@@ -47,6 +49,7 @@ App.propTypes = {
   onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,
   city: PropTypes.string.isRequired,
+  onCityClick: PropTypes.func.isRequired,
 };
 
 const mapSateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -54,5 +57,12 @@ const mapSateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   offers: state.offers,
 });
 
-export default connect(mapSateToProps
+const mapDispatchToProps = (dispatch) => ({
+  onCityClick: (selectedCity, places) => {
+    dispatch(ActionCreator.changeCity(selectedCity));
+    dispatch(ActionCreator.getOffers(selectedCity, places));
+  }
+});
+
+export default connect(mapSateToProps, mapDispatchToProps
 )(App);
