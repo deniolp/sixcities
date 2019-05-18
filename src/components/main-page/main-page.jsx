@@ -4,7 +4,7 @@ import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
 
 const MainPage = (props) => {
-  const {places, onClick, leaflet} = props;
+  const {places, onClick, leaflet, offers, city} = props;
 
   return <div className="page page--gray page--main">
     <div style={{display: `none`}}>
@@ -92,14 +92,14 @@ const MainPage = (props) => {
               </ul>
             </form>
             <PlaceList
-              places={places}
+              offers={offers}
               onClick={onClick}
             />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
               <Map
-                places={places}
+                offers={offers}
                 city={[52.38333, 4.9]}
                 leaflet={leaflet}
               />
@@ -121,9 +121,22 @@ MainPage.propTypes = {
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    city: PropTypes.string.isRequired,
+  })).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    bookmarked: PropTypes.bool.isRequired,
+    type: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    city: PropTypes.string.isRequired,
   })).isRequired,
   onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,
+  city: PropTypes.string.isRequired,
 };
 
 export default MainPage;

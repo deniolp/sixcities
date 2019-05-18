@@ -12,10 +12,10 @@ class PlaceList extends PureComponent {
   }
 
   render() {
-    const {places, onClick} = this.props;
+    const {offers, onClick} = this.props;
     return <div className="cities__places-list places__list tabs__content">
       {
-        places.map((item, index) => {
+        offers.map((item, index) => {
           return this._getPlace(item, index, onClick, () => {
             this.setState({
               activeCard: item,
@@ -37,7 +37,7 @@ class PlaceList extends PureComponent {
 }
 
 PlaceList.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.shape({
+  offers: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
@@ -46,6 +46,7 @@ PlaceList.propTypes = {
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    city: PropTypes.string.isRequired,
   })).isRequired,
   onClick: PropTypes.func,
 };
