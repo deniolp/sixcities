@@ -10,7 +10,7 @@ const App = (props) => {
   const cities = Array.from(places.reduce((array, current) => {
     array.add(current.city.name);
     return array;
-  }, new Set()));
+  }, new Set())).slice(0, 6);
 
   return <MainPage
     offers={offers}
