@@ -1,9 +1,11 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-class Map extends PureComponent {
+class Map extends Component {
   constructor(props) {
     super(props);
+
+    this.map = null;
   }
 
   render() {
@@ -12,37 +14,49 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const {offers, city, leaflet} = this.props;
+    this._renderMap(offers, city, leaflet);
+  }
+
+  componentWillUnmount() {
+    this.map.remove();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.offers !== this.props.offers) {
+      const {offers, city, leaflet} = nextProps;
+      this.map.remove();
+      this._renderMap(offers, city, leaflet);
+    }
+  }
+
+  _renderMap(offers, city, leaflet) {
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
 
     const zooms = 12;
-    const map = leaflet.map(`map`, {
+    this.map = leaflet.map(`map`, {
       center: city,
       zoom: zooms,
       zoomControl: false,
       marker: true
     });
 
-    map.setView(city, zooms);
+    this.map.setView(city, zooms);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
     })
-    .addTo(map);
+    .addTo(this.map);
 
     offers.map((item) => {
       const offerCords = [item.coords[0], item.coords[1]];
       leaflet
       .marker(offerCords, {icon})
-      .addTo(map);
+      .addTo(this.map);
     });
-  }
-
-  componentWillUnmount() {
-    this.map.remove();
   }
 }
 
