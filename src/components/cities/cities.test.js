@@ -1,9 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Map from '../map/map';
-import leafletMock from '../../mocks/leaflet-mock';
+import Cities from '../cities/cities';
 
-describe(`Map`, () => {
+describe(`Cities`, () => {
   const places = [
     {
       title: `Strange place`,
@@ -35,11 +34,13 @@ describe(`Map`, () => {
     },
   ];
 
+  const cities = [`Berlin`, `Dusseldorf`];
+
   it(`renders correctly`, () => {
-    const tree = renderer.create(<Map
-      offers={places}
-      coords={places[0].city.coords}
-      leaflet={leafletMock}
+    const tree = renderer.create(<Cities
+      cities={cities}
+      city={`Berlin`}
+      onCityClick={jest.fn()}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();

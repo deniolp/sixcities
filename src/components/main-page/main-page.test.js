@@ -14,6 +14,10 @@ describe(`MainPage`, () => {
       type: `Apartment`,
       image: ``,
       coords: [12, 87],
+      city: {
+        name: `Berlin`,
+        coords: [51, 6],
+      },
     },
     {
       title: `Weird place`,
@@ -24,13 +28,22 @@ describe(`MainPage`, () => {
       type: `Private room`,
       image: ``,
       coords: [13, 88],
+      city: {
+        name: `Dusseldorf`,
+        coords: [52, 7],
+      },
     },
   ];
 
+  const cities = [`Berlin`, `Dusseldorf`];
+
   it(`renders correctly`, () => {
     const tree = renderer.create(<MainPage
-      places={places}
+      offers={places}
+      cities={cities}
+      city={`Berlin`}
       onClick={jest.fn()}
+      onCityClick={jest.fn()}
       leaflet={leafletMock}
     />).toJSON();
 

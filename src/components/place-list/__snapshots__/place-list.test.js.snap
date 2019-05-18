@@ -25,6 +25,7 @@ exports[`PlaceList renders correctly 1`] = `
           className="place-card__image"
           height="200"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           src=""
           width="260"
         />
@@ -122,6 +123,7 @@ exports[`PlaceList renders correctly 1`] = `
           className="place-card__image"
           height="200"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           src=""
           width="260"
         />
