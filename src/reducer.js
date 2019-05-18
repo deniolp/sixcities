@@ -10,7 +10,10 @@ const initialState = {
       type: `Apartment`,
       image: `img/apartment-01.jpg`,
       coords: [52.3909553943508, 4.85309666406198],
-      city: `Amsterdam`,
+      city: {
+        name: `Amsterdam`,
+        coords: [52.3679, 4.9014],
+      },
     },
     {
       title: `Wood and stone place`,
@@ -21,7 +24,10 @@ const initialState = {
       type: `Private room`,
       image: `img/room.jpg`,
       coords: [52.369553943508, 4.85309666406198],
-      city: `Amsterdam`,
+      city: {
+        name: `Amsterdam`,
+        coords: [52.3679, 4.9014],
+      },
     },
     {
       title: `Canal View Prinsengracht`,
@@ -32,7 +38,10 @@ const initialState = {
       type: `Apartment`,
       image: `img/apartment-02.jpg`,
       coords: [52.3909553943508, 4.929309666406198],
-      city: `Amsterdam`,
+      city: {
+        name: `Amsterdam`,
+        coords: [52.3679, 4.9014],
+      },
     },
     {
       title: `Nice, cozy, warm big bed apartment`,
@@ -43,7 +52,10 @@ const initialState = {
       type: `Apartment`,
       image: `img/apartment-03.jpg`,
       coords: [52.3809553943508, 4.939309666406198],
-      city: `Amsterdam`,
+      city: {
+        name: `Amsterdam`,
+        coords: [52.3679, 4.9014],
+      },
     },
   ],
 };
@@ -55,7 +67,7 @@ const ActionCreator = {
   }),
   getOffers: (selectedCity, places) => {
     const sortedPlaces = places.filter((it) => {
-      return it.city === selectedCity;
+      return it.city.name === selectedCity;
     });
 
     return {

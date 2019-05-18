@@ -46,7 +46,10 @@ PlaceList.propTypes = {
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-    city: PropTypes.string.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    }).isRequired,
   })).isRequired,
   onClick: PropTypes.func,
 };

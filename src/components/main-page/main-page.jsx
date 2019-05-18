@@ -77,7 +77,7 @@ const MainPage = (props) => {
             <section className="cities__map map">
               <Map
                 offers={offers}
-                city={[52.38333, 4.9]}
+                coords={offers[0].city.coords}
                 leaflet={leaflet}
               />
             </section>
@@ -98,7 +98,10 @@ MainPage.propTypes = {
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-    city: PropTypes.string.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    }).isRequired,
   })).isRequired,
   onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,

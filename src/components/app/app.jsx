@@ -8,12 +8,11 @@ import {ActionCreator} from '../../reducer';
 const App = (props) => {
   const {places, onClick, leaflet, offers, city, onCityClick} = props;
   const cities = Array.from(places.reduce((array, current) => {
-    array.add(current.city);
+    array.add(current.city.name);
     return array;
   }, new Set()));
 
   return <MainPage
-    places={places}
     offers={offers}
     cities={cities}
     city={city}
@@ -33,7 +32,10 @@ App.propTypes = {
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-    city: PropTypes.string.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    }).isRequired,
   })).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -44,7 +46,10 @@ App.propTypes = {
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-    city: PropTypes.string.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    }).isRequired,
   })).isRequired,
   onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,

@@ -13,8 +13,8 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    const {offers, city, leaflet} = this.props;
-    this._renderMap(offers, city, leaflet);
+    const {offers, coords, leaflet} = this.props;
+    this._renderMap(offers, coords, leaflet);
   }
 
   componentWillUnmount() {
@@ -23,13 +23,13 @@ class Map extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.offers !== this.props.offers) {
-      const {offers, city, leaflet} = nextProps;
+      const {offers, coords, leaflet} = nextProps;
       this.map.remove();
-      this._renderMap(offers, city, leaflet);
+      this._renderMap(offers, coords, leaflet);
     }
   }
 
-  _renderMap(offers, city, leaflet) {
+  _renderMap(offers, coords, leaflet) {
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
@@ -37,13 +37,13 @@ class Map extends Component {
 
     const zooms = 12;
     this.map = leaflet.map(`map`, {
-      center: city,
+      center: coords,
       zoom: zooms,
       zoomControl: false,
       marker: true
     });
 
-    this.map.setView(city, zooms);
+    this.map.setView(coords, zooms);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -70,9 +70,12 @@ Map.propTypes = {
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-    city: PropTypes.string.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    }).isRequired,
   })).isRequired,
-  city: PropTypes.arrayOf(PropTypes.number).isRequired,
+  coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   leaflet: PropTypes.object.isRequired,
 };
 

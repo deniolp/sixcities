@@ -8,7 +8,10 @@ export default [
     type: `Apartment`,
     image: `img/apartment-01.jpg`,
     coords: [52.3909553943508, 4.85309666406198],
-    city: `Amsterdam`,
+    city: {
+      name: `Amsterdam`,
+      coords: [52.3679, 4.9014],
+    },
   },
   {
     title: `Wood and stone place`,
@@ -19,7 +22,10 @@ export default [
     type: `Private room`,
     image: `img/room.jpg`,
     coords: [52.369553943508, 4.85309666406198],
-    city: `Amsterdam`,
+    city: {
+      name: `Amsterdam`,
+      coords: [52.3679, 4.9014],
+    },
   },
   {
     title: `Canal View Prinsengracht`,
@@ -30,7 +36,10 @@ export default [
     type: `Apartment`,
     image: `img/apartment-02.jpg`,
     coords: [52.3909553943508, 4.929309666406198],
-    city: `Amsterdam`,
+    city: {
+      name: `Amsterdam`,
+      coords: [52.3679, 4.9014],
+    },
   },
   {
     title: `Nice, cozy, warm big bed apartment`,
@@ -41,7 +50,10 @@ export default [
     type: `Apartment`,
     image: `img/apartment-03.jpg`,
     coords: [52.3809553943508, 4.939309666406198],
-    city: `Amsterdam`,
+    city: {
+      name: `Amsterdam`,
+      coords: [52.3679, 4.9014],
+    },
   },
   {
     title: `German room`,
@@ -51,8 +63,11 @@ export default [
     bookmarked: false,
     type: `Private room`,
     image: `img/room.jpg`,
-    coords: [42.3809553943508, 3.939309666406198],
-    city: `Hamburg`,
+    coords: [53.5466, 10.0075],
+    city: {
+      name: `Hamburg`,
+      coords: [53.5223, 10.0031],
+    },
   },
   {
     title: `French room`,
@@ -62,8 +77,11 @@ export default [
     bookmarked: true,
     type: `Apartment`,
     image: `img/apartment-03.jpg`,
-    coords: [45.3809553943508, 3.339309666406198],
-    city: `Paris`,
+    coords: [48.8509, 2.3585],
+    city: {
+      name: `Paris`,
+      coords: [48.8351, 2.3425],
+    },
   },
   {
     title: `Ruhr room`,
@@ -73,8 +91,11 @@ export default [
     bookmarked: false,
     type: `Apartment`,
     image: `img/apartment-02.jpg`,
-    coords: [44.3809553943508, 3.739309666406198],
-    city: `Cologne`,
+    coords: [50.9308, 6.9598],
+    city: {
+      name: `Cologne`,
+      coords: [50.9130, 6.9540],
+    },
   },
   {
     title: `Belgian room`,
@@ -84,8 +105,11 @@ export default [
     bookmarked: false,
     type: `Apartment`,
     image: `img/apartment-01.jpg`,
-    coords: [41.3809553943508, 2.939309666406198],
-    city: `Brussels`,
+    coords: [50.8375, 4.3627],
+    city: {
+      name: `Brussels`,
+      coords: [50.8222, 4.3599],
+    },
   },
   {
     title: `BVB room`,
@@ -95,7 +119,10 @@ export default [
     bookmarked: false,
     type: `Private room`,
     image: `img/room.jpg`,
-    coords: [32.3809553943508, 2.939309666406198],
-    city: `Dusseldorf`,
+    coords: [51.2140, 6.8019],
+    city: {
+      name: `Dusseldorf`,
+      coords: [51.1961, 6.7813],
+    },
   },
 ];
