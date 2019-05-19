@@ -57,7 +57,7 @@ App.propTypes = {
   onCityClick: PropTypes.func.isRequired,
 };
 
-const mapSateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
   offers: state.offers,
 });
@@ -71,5 +71,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export {App};
 
-export default connect(mapSateToProps, mapDispatchToProps
+export default connect(mapStateToProps, mapDispatchToProps
 )(App);
