@@ -11,7 +11,7 @@ import {reducer} from './reducer';
 const init = () => {
   const onPlaceNameClickHandler = () => {};
 
-  const store = createStore(reducer);
+  const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
   ReactDom.render(<Provider store={store}>
     <App
