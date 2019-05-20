@@ -13,6 +13,10 @@ describe(`PlaceList`, () => {
       type: `Apartment`,
       image: ``,
       coords: [12, 87],
+      city: {
+        name: `Berlin`,
+        coords: [51, 6],
+      },
     },
     {
       title: `Weird place`,
@@ -23,12 +27,16 @@ describe(`PlaceList`, () => {
       type: `Room`,
       image: ``,
       coords: [13, 88],
+      city: {
+        name: `Dusseldorf`,
+        coords: [52, 7],
+      },
     },
   ];
 
   it(`renders correctly`, () => {
     const tree = renderer.create(<PlaceList
-      places={places}
+      offers={places}
       onClick={jest.fn()}
     />).toJSON();
 

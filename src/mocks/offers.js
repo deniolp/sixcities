@@ -8,6 +8,10 @@ export default [
     type: `Apartment`,
     image: `img/apartment-01.jpg`,
     coords: [52.3909553943508, 4.85309666406198],
+    city: {
+      name: `Amsterdam`,
+      coords: [52.3679, 4.9014],
+    },
   },
   {
     title: `Wood and stone place`,
@@ -18,6 +22,10 @@ export default [
     type: `Private room`,
     image: `img/room.jpg`,
     coords: [52.369553943508, 4.85309666406198],
+    city: {
+      name: `Amsterdam`,
+      coords: [52.3679, 4.9014],
+    },
   },
   {
     title: `Canal View Prinsengracht`,
@@ -28,6 +36,10 @@ export default [
     type: `Apartment`,
     image: `img/apartment-02.jpg`,
     coords: [52.3909553943508, 4.929309666406198],
+    city: {
+      name: `Amsterdam`,
+      coords: [52.3679, 4.9014],
+    },
   },
   {
     title: `Nice, cozy, warm big bed apartment`,
@@ -38,5 +50,79 @@ export default [
     type: `Apartment`,
     image: `img/apartment-03.jpg`,
     coords: [52.3809553943508, 4.939309666406198],
+    city: {
+      name: `Amsterdam`,
+      coords: [52.3679, 4.9014],
+    },
+  },
+  {
+    title: `German room`,
+    isPremium: true,
+    price: 200,
+    rating: 90,
+    bookmarked: false,
+    type: `Private room`,
+    image: `img/room.jpg`,
+    coords: [53.5466, 10.0075],
+    city: {
+      name: `Hamburg`,
+      coords: [53.5223, 10.0031],
+    },
+  },
+  {
+    title: `French room`,
+    isPremium: false,
+    price: 220,
+    rating: 95,
+    bookmarked: true,
+    type: `Apartment`,
+    image: `img/apartment-03.jpg`,
+    coords: [48.8509, 2.3585],
+    city: {
+      name: `Paris`,
+      coords: [48.8351, 2.3425],
+    },
+  },
+  {
+    title: `Ruhr room`,
+    isPremium: false,
+    price: 100,
+    rating: 60,
+    bookmarked: false,
+    type: `Apartment`,
+    image: `img/apartment-02.jpg`,
+    coords: [50.9308, 6.9598],
+    city: {
+      name: `Cologne`,
+      coords: [50.9130, 6.9540],
+    },
+  },
+  {
+    title: `Belgian room`,
+    isPremium: true,
+    price: 205,
+    rating: 92,
+    bookmarked: false,
+    type: `Apartment`,
+    image: `img/apartment-01.jpg`,
+    coords: [50.8375, 4.3627],
+    city: {
+      name: `Brussels`,
+      coords: [50.8222, 4.3599],
+    },
+  },
+  {
+    title: `BVB room`,
+    isPremium: false,
+    price: 80,
+    rating: 95,
+    bookmarked: false,
+    type: `Private room`,
+    image: `img/room.jpg`,
+    coords: [51.2140, 6.8019],
+    city: {
+      name: `Dusseldorf`,
+      coords: [51.1961, 6.7813],
+    },
   },
 ];

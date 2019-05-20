@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
+import Cities from '../cities/cities';
 
 const MainPage = (props) => {
-  const {places, onClick, leaflet} = props;
+  const {cities, onClick, leaflet, offers, city, onCityClick} = props;
 
   return <div className="page page--gray page--main">
     <div style={{display: `none`}}>
@@ -39,43 +41,18 @@ const MainPage = (props) => {
       <div className="cities tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Paris</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Cologne</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Brussels</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item tabs__item--active">
-                <span>Amsterdam</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Hamburg</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Dusseldorf</span>
-              </a>
-            </li>
+            <Cities
+              cities={cities}
+              city={city}
+              onCityClick={onCityClick}
+            ></Cities>
           </ul>
         </section></div>
       <div className="cities__places-wrapper">
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">312 places to stay in Amsterdam</b>
+            <b className="places__found">{`${offers.length} ${offers.length === 1 ? `place` : `places`} to stay in ${city}`}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">
@@ -92,15 +69,15 @@ const MainPage = (props) => {
               </ul>
             </form>
             <PlaceList
-              places={places}
+              offers={offers}
               onClick={onClick}
             />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
               <Map
-                places={places}
-                city={[52.38333, 4.9]}
+                offers={offers}
+                coords={offers[0].city.coords}
                 leaflet={leaflet}
               />
             </section>
@@ -112,7 +89,7 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.shape({
+  offers: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
@@ -121,9 +98,16 @@ MainPage.propTypes = {
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    }).isRequired,
   })).isRequired,
   onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,
+  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  city: PropTypes.string.isRequired,
+  onCityClick: PropTypes.func.isRequired,
 };
 
 export default MainPage;

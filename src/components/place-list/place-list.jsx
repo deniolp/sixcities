@@ -12,13 +12,17 @@ class PlaceList extends PureComponent {
   }
 
   render() {
-    const {places, onClick} = this.props;
+    const {offers, onClick} = this.props;
     return <div className="cities__places-list places__list tabs__content">
       {
-        places.map((item, index) => {
+        offers.map((item, index) => {
           return this._getPlace(item, index, onClick, () => {
             this.setState({
               activeCard: item,
+            });
+          }, () => {
+            this.setState({
+              activeCard: null,
             });
           });
         })
@@ -26,18 +30,19 @@ class PlaceList extends PureComponent {
     </div>;
   }
 
-  _getPlace(item, index, onClick, onMouseEnter) {
+  _getPlace(item, index, onClick, onMouseEnter, onMouseLeave) {
     return <Place
       place={item}
       key={index}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     />;
   }
 }
 
 PlaceList.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.shape({
+  offers: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
@@ -46,6 +51,10 @@ PlaceList.propTypes = {
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    }).isRequired,
   })).isRequired,
   onClick: PropTypes.func,
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Place = (props) => {
-  const {place, onClick, onMouseEnter} = props;
+  const {place, onClick, onMouseEnter, onMouseLeave} = props;
 
   return <article className="cities__place-card place-card">
     {
@@ -12,7 +12,7 @@ const Place = (props) => {
     }
     <div className="cities__image-wrapper place-card__image-wrapper">
       <a href="#">
-        <img className="place-card__image" src={place.image} width="260" height="200" alt="Place image" onMouseEnter={onMouseEnter}/>
+        <img className="place-card__image" src={place.image} width="260" height="200" alt="Place image" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}/>
       </a>
     </div>
     <div className="place-card__info">
@@ -52,6 +52,10 @@ Place.propTypes = {
     type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    }).isRequired,
   }).isRequired,
   onClick: PropTypes.func,
   onMouseEnter: PropTypes.func,

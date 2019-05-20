@@ -14,6 +14,10 @@ const mockObj = {
   type: `Apartment`,
   image: ``,
   coords: [13, 88],
+  city: {
+    name: `Dusseldorf`,
+    coords: [52, 7],
+  },
 };
 
 let clickHandler;
@@ -30,6 +34,9 @@ beforeEach(() => {
         onClick={clickHandler}
         onMouseEnter={() => {
           placeObj = mockObj;
+        }}
+        onMouseLeave={() => {
+          placeObj = {};
         }}
       />);
   placeDescription = placeElement.find(`.place-card__name a`);

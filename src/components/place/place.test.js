@@ -12,6 +12,10 @@ describe(`Place`, () => {
     type: `Apartment`,
     image: ``,
     coords: [12, 87],
+    city: {
+      name: `Berlin`,
+      coords: [52, 7],
+    },
   };
 
   it(`renders correctly`, () => {
