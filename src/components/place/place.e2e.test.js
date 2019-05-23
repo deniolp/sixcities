@@ -38,6 +38,9 @@ beforeEach(() => {
         onMouseLeave={() => {
           placeObj = {};
         }}
+        setHighlightedItem={jest.fn()}
+        active={false}
+        index={0}
       />);
   placeDescription = placeElement.find(`.place-card__name a`);
   image = placeElement.find(`.place-card__image`);

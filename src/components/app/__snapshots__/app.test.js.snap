@@ -204,7 +204,7 @@ Array [
             className="cities__places-list places__list tabs__content"
           >
             <article
-              className="cities__place-card place-card"
+              className="cities__place-card place-card "
             >
               <div
                 className="place-card__mark"
@@ -215,6 +215,7 @@ Array [
               </div>
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
+                onClick={[Function]}
               >
                 <a
                   href="#"
@@ -309,10 +310,11 @@ Array [
               </div>
             </article>
             <article
-              className="cities__place-card place-card"
+              className="cities__place-card place-card "
             >
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
+                onClick={[Function]}
               >
                 <a
                   href="#"

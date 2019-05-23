@@ -5,7 +5,7 @@ exports[`PlaceList renders correctly 1`] = `
   className="cities__places-list places__list tabs__content"
 >
   <article
-    className="cities__place-card place-card"
+    className="cities__place-card place-card cities__place-card--active"
   >
     <div
       className="place-card__mark"
@@ -16,6 +16,7 @@ exports[`PlaceList renders correctly 1`] = `
     </div>
     <div
       className="cities__image-wrapper place-card__image-wrapper"
+      onClick={[Function]}
     >
       <a
         href="#"
@@ -110,10 +111,11 @@ exports[`PlaceList renders correctly 1`] = `
     </div>
   </article>
   <article
-    className="cities__place-card place-card"
+    className="cities__place-card place-card "
   >
     <div
       className="cities__image-wrapper place-card__image-wrapper"
+      onClick={[Function]}
     >
       <a
         href="#"
