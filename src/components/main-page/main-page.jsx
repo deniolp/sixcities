@@ -73,6 +73,7 @@ const MainPage = (props) => {
               </ul>
             </form>
             <PlaceListWrapped
+              key={`place-list-${city}`}
               offers={offers}
               onClick={onClick}
               onMouseEnter={onMouseEnter}
