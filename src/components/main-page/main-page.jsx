@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
 import Cities from '../cities/cities';
+import withActiveCard from '../../hocs/with-active-card/with-active-card';
+
+const PlaceListWrapped = withActiveCard(PlaceList);
 
 const MainPage = (props) => {
   const {cities, onClick, leaflet, offers, city, onCityClick} = props;
@@ -68,7 +71,7 @@ const MainPage = (props) => {
                 <li className="places__option" tabIndex="0">Top rated first</li>
               </ul>
             </form>
-            <PlaceList
+            <PlaceListWrapped
               offers={offers}
               onClick={onClick}
             />

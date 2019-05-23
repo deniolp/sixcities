@@ -12,7 +12,7 @@ const Place = (props) => {
     }
     <div className="cities__image-wrapper place-card__image-wrapper">
       <a href="#">
-        <img className="place-card__image" src={place.image} width="260" height="200" alt="Place image" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}/>
+        <img className="place-card__image" src={place.image} width="260" height="200" alt="Place image" onMouseEnter={() => onMouseEnter(place)} onMouseLeave={onMouseLeave}/>
       </a>
     </div>
     <div className="place-card__info">
