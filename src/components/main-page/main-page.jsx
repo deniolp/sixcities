@@ -6,7 +6,7 @@ import Map from '../map/map';
 import Cities from '../cities/cities';
 
 const MainPage = (props) => {
-  const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard} = props;
+  const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard, highlitedItem, setHighlitedItem} = props;
 
   return <Fragment>
     <div style={{display: `none`}}>
@@ -45,6 +45,8 @@ const MainPage = (props) => {
               cities={cities}
               city={city}
               onCityClick={onCityClick}
+              highlitedItem={highlitedItem}
+              setHighlitedItem={setHighlitedItem}
             ></Cities>
           </ul>
         </section></div>
@@ -113,7 +115,9 @@ MainPage.propTypes = {
   onCityClick: PropTypes.func.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
+  setHighlitedItem: PropTypes.func.isRequired,
   activeCard: PropTypes.object.isRequired,
+  highlitedItem: PropTypes.number.isRequired,
 };
 
 export default MainPage;
