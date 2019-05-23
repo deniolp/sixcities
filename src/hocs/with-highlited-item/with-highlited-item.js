@@ -1,12 +1,12 @@
 import React, {PureComponent} from 'react';
 
-const withHighlitedItem = ((Component) => {
+const withHighlitedItem = ((Component, initialIndex = -1) => {
   class WithHighlitedItem extends PureComponent {
     constructor(props) {
       super(props);
 
       this.state = {
-        highlitedItem: -1,
+        highlitedItem: initialIndex,
       };
     }
 
