@@ -45,6 +45,8 @@ describe(`MainPage`, () => {
       onClick={jest.fn()}
       onCityClick={jest.fn()}
       leaflet={leafletMock}
+      onMouseEnter={jest.fn()}
+      onMouseLeave={jest.fn()}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();

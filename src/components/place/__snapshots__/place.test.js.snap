@@ -21,6 +21,8 @@ exports[`Place renders correctly 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
         src=""
         width="260"
       />

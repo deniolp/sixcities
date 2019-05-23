@@ -38,6 +38,8 @@ describe(`PlaceList`, () => {
     const tree = renderer.create(<PlaceList
       offers={places}
       onClick={jest.fn()}
+      onMouseEnter={jest.fn()}
+      onMouseLeave={jest.fn()}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();
