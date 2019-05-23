@@ -8,24 +8,31 @@ const withActiveCard = ((Component) => {
       this.state = {
         activeCard: null,
       };
+
+      this._onCardMouseEnterHandler = this._onCardMouseEnterHandler.bind(this);
+      this._onCardMouseLeaveHandler = this._onCardMouseLeaveHandler.bind(this);
     }
 
     render() {
       return (
         <Component
           {...this.props}
-          onMouseEnter={(item) => {
-            this.setState({
-              activeCard: item,
-            });
-          }}
-          onMouseLeave={() => {
-            this.setState({
-              activeCard: null,
-            });
-          }}
+          onMouseEnter={this._onCardMouseEnterHandler}
+          onMouseLeave={this._onCardMouseLeaveHandler}
         />
       );
+    }
+
+    _onCardMouseEnterHandler(item) {
+      this.setState({
+        activeCard: item,
+      });
+    }
+
+    _onCardMouseLeaveHandler() {
+      this.setState({
+        activeCard: null,
+      });
     }
   }
 
