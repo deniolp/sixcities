@@ -5,9 +5,8 @@ import {connect} from 'react-redux';
 import MainPage from '../main-page/main-page';
 import {ActionCreator} from '../../reducer';
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
-import withHighlitedItem from '../../hocs/with-highlited-item/with-highlited-item';
 
-const MainPageWrapped = withHighlitedItem(withActiveCard(MainPage));
+const MainPageWrapped = withActiveCard(MainPage);
 
 const App = (props) => {
   const {places, onClick, leaflet, offers, city, onCityClick} = props;

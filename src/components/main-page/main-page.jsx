@@ -4,9 +4,13 @@ import PropTypes from 'prop-types';
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
 import Cities from '../cities/cities';
+import withHighlitedItem from '../../hocs/with-highlited-item/with-highlited-item';
+
+const CitiesWrapped = withHighlitedItem(Cities, 0);
+const PlaceListWrapped = withHighlitedItem(PlaceList);
 
 const MainPage = (props) => {
-  const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard, highlitedItem, setHighlitedItem} = props;
+  const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard} = props;
 
   return <Fragment>
     <div style={{display: `none`}}>
@@ -41,13 +45,11 @@ const MainPage = (props) => {
       <div className="cities tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            <Cities
+            <CitiesWrapped
               cities={cities}
               city={city}
               onCityClick={onCityClick}
-              highlitedItem={highlitedItem}
-              setHighlitedItem={setHighlitedItem}
-            ></Cities>
+            ></CitiesWrapped>
           </ul>
         </section></div>
       <div className="cities__places-wrapper">
@@ -70,7 +72,7 @@ const MainPage = (props) => {
                 <li className="places__option" tabIndex="0">Top rated first</li>
               </ul>
             </form>
-            <PlaceList
+            <PlaceListWrapped
               offers={offers}
               onClick={onClick}
               onMouseEnter={onMouseEnter}
@@ -115,9 +117,7 @@ MainPage.propTypes = {
   onCityClick: PropTypes.func.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
-  setHighlitedItem: PropTypes.func.isRequired,
   activeCard: PropTypes.object.isRequired,
-  highlitedItem: PropTypes.number.isRequired,
 };
 
 export default MainPage;
