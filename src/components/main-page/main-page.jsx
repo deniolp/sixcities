@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
 import Cities from '../cities/cities';
-import withHighlitedItem from '../../hocs/with-highlited-item/with-highlited-item';
+import withHighlightedItem from '../../hocs/with-highlighted-item/with-highlighted-item';
 
-const CitiesWrapped = withHighlitedItem(Cities, 0);
-const PlaceListWrapped = withHighlitedItem(PlaceList);
+const CitiesWrapped = withHighlightedItem(Cities, 0);
+const PlaceListWrapped = withHighlightedItem(PlaceList);
 
 const MainPage = (props) => {
   const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard} = props;
