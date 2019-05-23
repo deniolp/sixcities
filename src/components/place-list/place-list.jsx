@@ -3,28 +3,12 @@ import PropTypes from 'prop-types';
 import Place from '../place/place';
 
 class PlaceList extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeCard: null,
-    };
-  }
-
   render() {
-    const {offers, onClick} = this.props;
+    const {offers, onClick, onMouseEnter, onMouseLeave} = this.props;
     return <div className="cities__places-list places__list tabs__content">
       {
         offers.map((item, index) => {
-          return this._getPlace(item, index, onClick, () => {
-            this.setState({
-              activeCard: item,
-            });
-          }, () => {
-            this.setState({
-              activeCard: null,
-            });
-          });
+          return this._getPlace(item, index, onClick, onMouseEnter, onMouseLeave);
         })
       }
     </div>;
@@ -57,6 +41,8 @@ PlaceList.propTypes = {
     }).isRequired,
   })).isRequired,
   onClick: PropTypes.func,
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
 };
 
 export default PlaceList;
