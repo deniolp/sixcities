@@ -4,12 +4,9 @@ import PropTypes from 'prop-types';
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
 import Cities from '../cities/cities';
-import withActiveCard from '../../hocs/with-active-card/with-active-card';
-
-const PlaceListWrapped = withActiveCard(PlaceList);
 
 const MainPage = (props) => {
-  const {cities, onClick, leaflet, offers, city, onCityClick} = props;
+  const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave} = props;
 
   return <Fragment>
     <div style={{display: `none`}}>
@@ -71,9 +68,11 @@ const MainPage = (props) => {
                 <li className="places__option" tabIndex="0">Top rated first</li>
               </ul>
             </form>
-            <PlaceListWrapped
+            <PlaceList
               offers={offers}
               onClick={onClick}
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
             />
           </section>
           <div className="cities__right-section">
@@ -111,6 +110,8 @@ MainPage.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   city: PropTypes.string.isRequired,
   onCityClick: PropTypes.func.isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
 };
 
 export default MainPage;
