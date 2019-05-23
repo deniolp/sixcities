@@ -10,10 +10,13 @@ const MockWrapped = withActiveCard(Mock);
 
 it(`Should change activeCard`, () => {
   const wrapper = shallow(<MockWrapped
+    activeCard={{}}
     onMouseEnter={jest.fn()}
   />);
 
-  expect(wrapper.state().activeCard).toEqual(null);
-  wrapper.props().onMouseEnter(7);
-  expect(wrapper.state().activeCard).toEqual(7);
+  expect(wrapper.state().activeCard).toEqual({});
+  expect(wrapper.props().activeCard).toEqual({});
+  wrapper.props().onMouseEnter({type: 8});
+  expect(wrapper.state().activeCard).toEqual({type: 8});
+  expect(wrapper.props().activeCard).toEqual({type: 8});
 });
