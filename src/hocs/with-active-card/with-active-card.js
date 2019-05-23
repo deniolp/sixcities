@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 
 const withActiveCard = ((Component) => {
   class WithActiveCard extends PureComponent {
@@ -35,6 +36,30 @@ const withActiveCard = ((Component) => {
       });
     }
   }
+
+  withActiveCard.propTypes = {
+    offers: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      isPremium: PropTypes.bool.isRequired,
+      price: PropTypes.number.isRequired,
+      rating: PropTypes.number.isRequired,
+      bookmarked: PropTypes.bool.isRequired,
+      type: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+      city: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+      }).isRequired,
+    })).isRequired,
+    onClick: PropTypes.func,
+    leaflet: PropTypes.object.isRequired,
+    cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+    city: PropTypes.string.isRequired,
+    onCityClick: PropTypes.func.isRequired,
+    onMouseEnter: PropTypes.func.isRequired,
+    onMouseLeave: PropTypes.func.isRequired,
+  };
 
   return WithActiveCard;
 });
