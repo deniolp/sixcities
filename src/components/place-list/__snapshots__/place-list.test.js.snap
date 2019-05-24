@@ -5,7 +5,7 @@ exports[`PlaceList renders correctly 1`] = `
   className="cities__places-list places__list tabs__content"
 >
   <article
-    className="cities__place-card place-card cities__place-card--active"
+    className="cities__place-card place-card "
   >
     <div
       className="place-card__mark"
