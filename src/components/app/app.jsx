@@ -4,9 +4,6 @@ import {connect} from 'react-redux';
 
 import MainPage from '../main-page/main-page';
 import {ActionCreator} from '../../reducer';
-import withActiveCard from '../../hocs/with-active-card/with-active-card';
-
-const MainPageWrapped = withActiveCard(MainPage);
 
 const App = (props) => {
   const {places, onClick, leaflet, offers, city, onCityClick} = props;
@@ -15,7 +12,7 @@ const App = (props) => {
     return array;
   }, new Set())).slice(0, 6);
 
-  return <MainPageWrapped
+  return <MainPage
     offers={offers}
     cities={cities}
     city={city}

@@ -5,6 +5,7 @@ import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
 import Cities from '../cities/cities';
 import withHighlightedItem from '../../hocs/with-highlighted-item/with-highlighted-item';
+import withActiveCard from '../../hocs/with-active-card/with-active-card';
 
 const CitiesWrapped = withHighlightedItem(Cities, 0);
 const PlaceListWrapped = withHighlightedItem(PlaceList);
@@ -121,4 +122,4 @@ MainPage.propTypes = {
   activeCard: PropTypes.object.isRequired,
 };
 
-export default MainPage;
+export default withActiveCard(MainPage);
