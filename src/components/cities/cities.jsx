@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import withHighlightedItem from '../../hocs/with-highlighted-item/with-highlighted-item';
+
 const Cities = (props) => {
   const {cities, onCityClick, setHighlightedItem, highlightedItem} = props;
 
@@ -23,4 +25,4 @@ Cities.propTypes = {
   highlightedItem: PropTypes.number.isRequired,
 };
 
-export default Cities;
+export default withHighlightedItem(Cities, 0);

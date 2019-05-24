@@ -1,5 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+
+import withHighlightedItem from '../../hocs/with-highlighted-item/with-highlighted-item';
 import Place from '../place/place';
 
 class PlaceList extends PureComponent {
@@ -50,4 +52,4 @@ PlaceList.propTypes = {
   highlightedItem: PropTypes.number.isRequired,
 };
 
-export default PlaceList;
+export default withHighlightedItem(PlaceList);

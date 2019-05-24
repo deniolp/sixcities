@@ -4,11 +4,7 @@ import PropTypes from 'prop-types';
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
 import Cities from '../cities/cities';
-import withHighlightedItem from '../../hocs/with-highlighted-item/with-highlighted-item';
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
-
-const CitiesWrapped = withHighlightedItem(Cities, 0);
-const PlaceListWrapped = withHighlightedItem(PlaceList);
 
 const MainPage = (props) => {
   const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard} = props;
@@ -46,11 +42,11 @@ const MainPage = (props) => {
       <div className="cities tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            <CitiesWrapped
+            <Cities
               cities={cities}
               city={city}
               onCityClick={onCityClick}
-            ></CitiesWrapped>
+            />
           </ul>
         </section></div>
       <div className="cities__places-wrapper">
@@ -73,7 +69,7 @@ const MainPage = (props) => {
                 <li className="places__option" tabIndex="0">Top rated first</li>
               </ul>
             </form>
-            <PlaceListWrapped
+            <PlaceList
               key={`place-list-${city}`}
               offers={offers}
               onClick={onClick}
