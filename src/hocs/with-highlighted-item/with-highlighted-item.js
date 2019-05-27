@@ -1,31 +1,35 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 
-const withHighlightedItem = ((Component, initialIndex = -1) => {
+const withHighlightedItem = ((Component) => {
   class WithHighlightedItem extends PureComponent {
     constructor(props) {
       super(props);
+      const {active} = this.props;
 
       this.state = {
-        highlightedItem: initialIndex,
+        highlightedItem: active || null,
       };
     }
 
     render() {
-      const {highlightedItem} = this.state;
-
       return (
         <Component
           {...this.props}
-          highlightedItem={highlightedItem}
-          setHighlightedItem={(index) => {
+          active={this.state.highlightedItem}
+          setHighlightedItem={(active) => {
             this.setState({
-              highlightedItem: index,
+              highlightedItem: active,
             });
           }}
         />
       );
     }
   }
+
+  WithHighlightedItem.propTypes = {
+    active: PropTypes.string,
+  };
 
   return WithHighlightedItem;
 });

@@ -46,6 +46,7 @@ const MainPage = (props) => {
               cities={cities}
               city={city}
               onCityClick={onCityClick}
+              active={cities[0]}
             />
           </ul>
         </section></div>

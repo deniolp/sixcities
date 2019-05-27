@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Place = (props) => {
-  const {place, onClick, onMouseEnter, onMouseLeave, setHighlightedItem, active, index} = props;
+  const {place, onClick, onMouseEnter, onMouseLeave, setHighlightedItem, active} = props;
 
   return <article className={`cities__place-card place-card ${active ? `cities__place-card--active` : ``}`}>
     {
@@ -10,7 +10,7 @@ const Place = (props) => {
         <span>Premium</span>
       </div> : null
     }
-    <div className="cities__image-wrapper place-card__image-wrapper" onClick={() => setHighlightedItem(index)}>
+    <div className="cities__image-wrapper place-card__image-wrapper" onClick={() => setHighlightedItem(place.title)}>
       <a href="#">
         <img className="place-card__image" src={place.image} width="260" height="200" alt="Place image" onMouseEnter={() => onMouseEnter(place)} onMouseLeave={() => onMouseLeave()}/>
       </a>
@@ -62,7 +62,6 @@ Place.propTypes = {
   onMouseLeave: PropTypes.func,
   setHighlightedItem: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,
-  index: PropTypes.number.isRequired,
 };
 
 export default Place;

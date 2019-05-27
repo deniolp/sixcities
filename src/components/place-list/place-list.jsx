@@ -6,26 +6,25 @@ import Place from '../place/place';
 
 class PlaceList extends PureComponent {
   render() {
-    const {offers, onClick, onMouseEnter, onMouseLeave, setHighlightedItem, highlightedItem} = this.props;
+    const {offers, onClick, onMouseEnter, onMouseLeave, setHighlightedItem, active} = this.props;
     return <div className="cities__places-list places__list tabs__content">
       {
-        offers.map((item, index) => {
-          return this._getPlace(item, index, onClick, onMouseEnter, onMouseLeave, setHighlightedItem, highlightedItem);
+        offers.map((item) => {
+          return this._getPlace(item, onClick, onMouseEnter, onMouseLeave, setHighlightedItem, active);
         })
       }
     </div>;
   }
 
-  _getPlace(item, index, onClick, onMouseEnter, onMouseLeave, setHighlightedItem, highlightedItem) {
+  _getPlace(item, onClick, onMouseEnter, onMouseLeave, setHighlightedItem, active) {
     return <Place
       place={item}
-      key={index}
+      key={item.title}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       setHighlightedItem={setHighlightedItem}
-      active={index === highlightedItem}
-      index={index}
+      active={item.title === active}
     />;
   }
 }
@@ -49,7 +48,7 @@ PlaceList.propTypes = {
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
   setHighlightedItem: PropTypes.func.isRequired,
-  highlightedItem: PropTypes.number.isRequired,
+  active: PropTypes.string,
 };
 
 export default withHighlightedItem(PlaceList);
