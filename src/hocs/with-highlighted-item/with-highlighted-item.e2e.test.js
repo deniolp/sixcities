@@ -13,8 +13,6 @@ it(`Should change highlightedItem`, () => {
     setHighlightedItem={jest.fn()}
   />);
 
-  expect(wrapper.props().highlightedItem).toEqual(-1);
-
-  wrapper.props().setHighlightedItem(5);
-  expect(wrapper.props().highlightedItem).toEqual(5);
+  wrapper.props().setHighlightedItem(`Berlin`);
+  expect(wrapper.props().active).toEqual(`Berlin`);
 });
