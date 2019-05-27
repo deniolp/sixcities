@@ -22,6 +22,9 @@ describe(`Place`, () => {
     const tree = renderer.create(<Place
       place={place}
       onClick={jest.fn()}
+      setHighlightedItem={jest.fn()}
+      active={false}
+      index={0}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();

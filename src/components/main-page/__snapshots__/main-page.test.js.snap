@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MainPage renders correctly 1`] = `
-<div
-  className="page page--gray page--main"
->
+Array [
   <div
     style={
       Object {
@@ -43,7 +41,7 @@ exports[`MainPage renders correctly 1`] = `
         />
       </symbol>
     </svg>
-  </div>
+  </div>,
   <header
     className="header"
   >
@@ -95,7 +93,7 @@ exports[`MainPage renders correctly 1`] = `
         </nav>
       </div>
     </div>
-  </header>
+  </header>,
   <main
     className="page__main page__main--index"
   >
@@ -219,7 +217,7 @@ exports[`MainPage renders correctly 1`] = `
             className="cities__places-list places__list tabs__content"
           >
             <article
-              className="cities__place-card place-card"
+              className="cities__place-card place-card "
             >
               <div
                 className="place-card__mark"
@@ -230,6 +228,7 @@ exports[`MainPage renders correctly 1`] = `
               </div>
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
+                onClick={[Function]}
               >
                 <a
                   href="#"
@@ -324,10 +323,11 @@ exports[`MainPage renders correctly 1`] = `
               </div>
             </article>
             <article
-              className="cities__place-card place-card"
+              className="cities__place-card place-card "
             >
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
+                onClick={[Function]}
               >
                 <a
                   href="#"
@@ -433,7 +433,7 @@ exports[`MainPage renders correctly 1`] = `
               id="map"
               style={
                 Object {
-                  "height": 794,
+                  "height": 810,
                 }
               }
             />
@@ -441,6 +441,6 @@ exports[`MainPage renders correctly 1`] = `
         </div>
       </div>
     </div>
-  </main>
-</div>
+  </main>,
+]
 `;

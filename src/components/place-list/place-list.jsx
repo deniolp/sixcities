@@ -1,42 +1,30 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+
+import withHighlightedItem from '../../hocs/with-highlighted-item/with-highlighted-item';
 import Place from '../place/place';
 
 class PlaceList extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeCard: null,
-    };
-  }
-
   render() {
-    const {offers, onClick} = this.props;
+    const {offers, onClick, onMouseEnter, onMouseLeave, setHighlightedItem, active} = this.props;
     return <div className="cities__places-list places__list tabs__content">
       {
-        offers.map((item, index) => {
-          return this._getPlace(item, index, onClick, () => {
-            this.setState({
-              activeCard: item,
-            });
-          }, () => {
-            this.setState({
-              activeCard: null,
-            });
-          });
+        offers.map((item) => {
+          return this._getPlace(item, onClick, onMouseEnter, onMouseLeave, setHighlightedItem, active);
         })
       }
     </div>;
   }
 
-  _getPlace(item, index, onClick, onMouseEnter, onMouseLeave) {
+  _getPlace(item, onClick, onMouseEnter, onMouseLeave, setHighlightedItem, active) {
     return <Place
       place={item}
-      key={index}
+      key={item.title}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      setHighlightedItem={setHighlightedItem}
+      active={item.title === active}
     />;
   }
 }
@@ -57,6 +45,10 @@ PlaceList.propTypes = {
     }).isRequired,
   })).isRequired,
   onClick: PropTypes.func,
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
+  setHighlightedItem: PropTypes.func.isRequired,
+  active: PropTypes.string,
 };
 
-export default PlaceList;
+export default withHighlightedItem(PlaceList);

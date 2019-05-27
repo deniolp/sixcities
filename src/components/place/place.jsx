@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Place = (props) => {
-  const {place, onClick, onMouseEnter, onMouseLeave} = props;
+  const {place, onClick, onMouseEnter, onMouseLeave, setHighlightedItem, active} = props;
 
-  return <article className="cities__place-card place-card">
+  return <article className={`cities__place-card place-card ${active ? `cities__place-card--active` : ``}`}>
     {
       place.isPremium ? <div className="place-card__mark">
         <span>Premium</span>
       </div> : null
     }
-    <div className="cities__image-wrapper place-card__image-wrapper">
+    <div className="cities__image-wrapper place-card__image-wrapper" onClick={() => setHighlightedItem(place.title)}>
       <a href="#">
-        <img className="place-card__image" src={place.image} width="260" height="200" alt="Place image" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}/>
+        <img className="place-card__image" src={place.image} width="260" height="200" alt="Place image" onMouseEnter={() => onMouseEnter(place)} onMouseLeave={() => onMouseLeave()}/>
       </a>
     </div>
     <div className="place-card__info">
@@ -60,6 +60,8 @@ Place.propTypes = {
   onClick: PropTypes.func,
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
+  setHighlightedItem: PropTypes.func.isRequired,
+  active: PropTypes.bool.isRequired,
 };
 
 export default Place;

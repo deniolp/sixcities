@@ -9,7 +9,7 @@ class Map extends Component {
   }
 
   render() {
-    return <div id="map" style={{height: 794}}></div>;
+    return <div id="map" style={{height: 810}}></div>;
   }
 
   componentDidMount() {
