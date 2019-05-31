@@ -8,10 +8,9 @@ describe(`Cities`, () => {
   it(`renders correctly`, () => {
     const tree = renderer.create(<Cities
       cities={cities}
-      city={`Berlin`}
+      city={{name: `Berlin`}}
       onCityClick={jest.fn()}
       setHighlightedItem={jest.fn()}
-      active={`Berlin`}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();

@@ -79,7 +79,7 @@ exports[`Place renders correctly 1`] = `
         <span
           style={
             Object {
-              "width": "95%",
+              "width": "38%",
             }
           }
         />
