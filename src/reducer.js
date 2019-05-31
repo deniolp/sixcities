@@ -1,5 +1,3 @@
-import api from './api';
-
 const initialState = {
   city: {},
   offers: [],
@@ -30,7 +28,7 @@ const normalizeKeys = (obj) => {
 const getCity = (selectedCity, offers) => offers.filter((offer) => offer.city.name === selectedCity)[0].city;
 
 const Operation = {
-  loadOffers: () => (dispatch) => {
+  loadOffers: () => (dispatch, _getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
