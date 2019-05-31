@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import MainPage from '../main-page/main-page';
 import {ActionCreator} from '../../reducer/data/data';
+import {getCity, getOffers} from '../../reducer/data/selectors';
 
 const App = (props) => {
   const {onClick, leaflet, offers, city, onCityClick} = props;
@@ -51,8 +52,8 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  city: state.data.city,
-  offers: state.data.offers,
+  city: getCity(state),
+  offers: getOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
