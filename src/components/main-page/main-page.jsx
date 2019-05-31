@@ -8,6 +8,7 @@ import withActiveCard from '../../hocs/with-active-card/with-active-card';
 
 const MainPage = (props) => {
   const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard} = props;
+  const filteredOffers = offers.filter((item) => item.city.name === city.name);
 
   return <div className="page page--gray page--main">
     <div style={{display: `none`}}>
@@ -53,7 +54,7 @@ const MainPage = (props) => {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{`${offers.length} ${offers.length === 1 ? `place` : `places`} to stay in ${city.name}`}</b>
+            <b className="places__found">{`${filteredOffers.length} ${filteredOffers.length === 1 ? `place` : `places`} to stay in ${city.name}`}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">
@@ -71,7 +72,7 @@ const MainPage = (props) => {
             </form>
             <PlaceList
               key={`place-list-${city}`}
-              offers={offers}
+              offers={filteredOffers}
               onClick={onClick}
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}

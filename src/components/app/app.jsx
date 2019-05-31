@@ -6,7 +6,11 @@ import MainPage from '../main-page/main-page';
 import {ActionCreator} from '../../reducer';
 
 const App = (props) => {
-  const {onClick, leaflet, offers, city, onCityClick, cities} = props;
+  const {onClick, leaflet, offers, city, onCityClick} = props;
+  const cities = Array.from(offers.slice().reduce((array, current) => {
+    array.add(current.city.name);
+    return array;
+  }, new Set())).slice(0, 6);
 
   return <MainPage
     offers={offers}
@@ -44,22 +48,16 @@ App.propTypes = {
   leaflet: PropTypes.object.isRequired,
   city: PropTypes.object.isRequired,
   onCityClick: PropTypes.func.isRequired,
-  cities: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
-  cities: Array.from(state.offers.reduce((array, current) => {
-    array.add(current.city.name);
-    return array;
-  }, new Set())).slice(0, 6),
-  offers: state.offers.filter((item) => item.city.name === state.city.name),
+  offers: state.offers,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCityClick: (selectedCity, places) => {
-    dispatch(ActionCreator.changeCity(selectedCity));
-    dispatch(ActionCreator.getOffers(selectedCity, places));
+    dispatch(ActionCreator.changeCity(selectedCity, places));
   }
 });
 

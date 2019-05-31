@@ -24,6 +24,9 @@ class Map extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.offers !== prevProps.offers) {
       const {offers, city, leaflet} = this.props;
+      if (this.map) {
+        this.map.remove();
+      }
       this._renderMap(offers, city, leaflet);
     }
   }

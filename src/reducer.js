@@ -5,10 +5,6 @@ const initialState = {
   offers: [],
 };
 
-const getFilteredOffers = (selectedCity, places) => {
-  return places.filter((it) => it.city.name === selectedCity);
-};
-
 const getRandomCity = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
 const snakeToCamel = (word) => word.replace(
@@ -31,6 +27,8 @@ const normalizeKeys = (obj) => {
   return obj;
 };
 
+const getCity = (selectedCity, offers) => offers.filter((offer) => offer.city.name === selectedCity)[0].city;
+
 const Operation = {
   loadOffers: () => (dispatch) => {
     return api.get(`/hotels`)
@@ -42,16 +40,11 @@ const Operation = {
 };
 
 const ActionCreator = {
-  changeCity: (selectedCity) => ({
-    type: `CHANGE_CITY`,
-    payload: selectedCity,
-  }),
-  getOffers: (selectedCity, places) => {
-    const filteredPlaces = getFilteredOffers(selectedCity, places);
-
+  changeCity: (selectedCity, places) => {
+    const city = getCity(selectedCity, places);
     return {
-      type: `GET_OFFERS`,
-      payload: filteredPlaces,
+      type: `CHANGE_CITY`,
+      payload: city,
     };
   },
   loadOffers: (offers) => ({
@@ -64,10 +57,6 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case `CHANGE_CITY`: return Object.assign({}, state, {
       city: action.payload,
-    });
-
-    case `GET_OFFERS`: return Object.assign({}, state, {
-      offers: action.payload,
     });
 
     case `LOAD_OFFERS`: return Object.assign({}, state, {
