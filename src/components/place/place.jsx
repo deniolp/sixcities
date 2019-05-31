@@ -10,7 +10,7 @@ const Place = (props) => {
         <span>Premium</span>
       </div> : null
     }
-    <div className="cities__image-wrapper place-card__image-wrapper" onClick={() => setHighlightedItem(place.title)}>
+    <div className="cities__image-wrapper place-card__image-wrapper" onClick={() => setHighlightedItem(place.id)}>
       <a href="#">
         <img className="place-card__image" src={place.previewImage} width="260" height="200" alt="Place image" onMouseEnter={() => onMouseEnter(place)} onMouseLeave={() => onMouseLeave()}/>
       </a>

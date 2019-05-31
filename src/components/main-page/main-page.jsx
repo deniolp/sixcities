@@ -71,7 +71,7 @@ const MainPage = (props) => {
               </ul>
             </form>
             <PlaceList
-              key={`place-list-${city}`}
+              key={`place-list-${city.name}`}
               offers={filteredOffers}
               onClick={onClick}
               onMouseEnter={onMouseEnter}
