@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
@@ -124,11 +123,4 @@ MainPage.propTypes = {
   activeCard: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  city: state.city,
-  offers: state.offers.filter((item) => item.city.name === state.city.name),
-});
-
-export {MainPage};
-
-export default connect(mapStateToProps)(withActiveCard(MainPage));
+export default withActiveCard(MainPage);
