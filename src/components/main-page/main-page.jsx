@@ -54,7 +54,7 @@ const MainPage = (props) => {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{`${offers.length} ${offers.length === 1 ? `place` : `places`} to stay in ${city}`}</b>
+            <b className="places__found">{`${offers.length} ${offers.length === 1 ? `place` : `places`} to stay in ${city.name}`}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">
@@ -79,14 +79,12 @@ const MainPage = (props) => {
             />
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map">
-              <Map
-                offers={offers}
-                city={city}
-                leaflet={leaflet}
-                activeCard={activeCard}
-              />
-            </section>
+            <Map
+              offers={offers}
+              city={city}
+              leaflet={leaflet}
+              activeCard={activeCard}
+            />
           </div>
         </div>
       </div>
@@ -96,17 +94,24 @@ const MainPage = (props) => {
 
 MainPage.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
-    bookmarked: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.array.isRequired,
+    goods: PropTypes.array.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    host: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
     city: PropTypes.shape({
       name: PropTypes.string.isRequired,
-      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+      location: PropTypes.object.isRequired,
     }).isRequired,
   })).isRequired,
   onClick: PropTypes.func,

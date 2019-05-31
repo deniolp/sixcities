@@ -11,11 +11,32 @@ const getFilteredOffers = (selectedCity, places) => {
 
 const getRandomCity = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
+const snakeToCamel = (word) => word.replace(
+    /(_\w)/g,
+    (matches) => matches[1].toUpperCase()
+);
+
+const normalizeKeys = (obj) => {
+  if (Array.isArray(obj)) {
+    return obj.map((item) => normalizeKeys(item));
+  }
+
+  if (obj !== null && obj.constructor === Object) {
+    return Object.keys(obj).reduce((acc, key) => ({
+      ...acc,
+      [snakeToCamel(key)]: normalizeKeys(obj[key])
+    }), {});
+  }
+
+  return obj;
+};
+
 const Operation = {
   loadOffers: () => (dispatch) => {
     return api.get(`/hotels`)
       .then((response) => {
-        dispatch(ActionCreator.loadOffers(response.data));
+        const preparedData = response.data.map((item) => normalizeKeys(item));
+        dispatch(ActionCreator.loadOffers(preparedData));
       });
   }
 };

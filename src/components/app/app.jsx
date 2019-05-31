@@ -20,17 +20,24 @@ const App = (props) => {
 
 App.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
-    bookmarked: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.array.isRequired,
+    goods: PropTypes.array.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    host: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
     city: PropTypes.shape({
       name: PropTypes.string.isRequired,
-      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+      location: PropTypes.object.isRequired,
     }).isRequired,
   })).isRequired,
   onClick: PropTypes.func,
