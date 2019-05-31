@@ -80,7 +80,7 @@ const MainPage = (props) => {
           </section>
           <div className="cities__right-section">
             <Map
-              offers={offers}
+              offers={filteredOffers}
               city={city}
               leaflet={leaflet}
               activeCard={activeCard}

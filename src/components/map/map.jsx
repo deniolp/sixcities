@@ -12,15 +12,6 @@ class Map extends Component {
     return <section id="map" className="cities__map map"></section>;
   }
 
-  componentDidMount() {
-    const {offers, city, leaflet} = this.props;
-    try {
-      this._renderMap(offers, city, leaflet);
-    } catch (err) {
-      // Не даём упасть
-    }
-  }
-
   componentDidUpdate(prevProps) {
     if (this.props.offers !== prevProps.offers) {
       const {offers, city, leaflet} = this.props;
@@ -29,6 +20,13 @@ class Map extends Component {
       }
       this._renderMap(offers, city, leaflet);
     }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (this.props.activeCard !== nextProps.activeCard) {
+      return false;
+    }
+    return true;
   }
 
   _renderMap(offers, city, leaflet) {
@@ -87,6 +85,7 @@ Map.propTypes = {
   })).isRequired,
   city: PropTypes.object.isRequired,
   leaflet: PropTypes.object.isRequired,
+  activeCard: PropTypes.object.isRequired,
 };
 
 export default Map;
