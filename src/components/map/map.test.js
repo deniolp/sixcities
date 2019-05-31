@@ -70,6 +70,7 @@ describe(`Map`, () => {
       offers={places}
       city={places[0].city}
       leaflet={leafletMock}
+      activeCard={places[0]}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();
