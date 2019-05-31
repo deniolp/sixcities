@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 class Map extends Component {
   constructor(props) {
@@ -13,23 +14,18 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    const {offers, coords, leaflet} = this.props;
-    this._renderMap(offers, coords, leaflet);
-  }
-
-  componentWillUnmount() {
-    this.map.remove();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.offers !== this.props.offers) {
-      const {offers, coords, leaflet} = nextProps;
-      this.map.remove();
-      this._renderMap(offers, coords, leaflet);
+    const {offers, city, leaflet} = this.props;
+    try {
+      this._renderMap(offers, city.location, leaflet);
+    } catch (err) {
+      // Не даём упасть
     }
   }
 
-  _renderMap(offers, coords, leaflet) {
+  _renderMap(offers, city, leaflet) {
+    const {
+      location: {latitude, longtitude, zoom},
+    } = city;
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
@@ -37,13 +33,13 @@ class Map extends Component {
 
     const zooms = 12;
     this.map = leaflet.map(`map`, {
-      center: coords,
+      center: city.location,
       zoom: zooms,
       zoomControl: false,
       marker: true
     });
 
-    this.map.setView(coords, zooms);
+    this.map.setView([latitude, longtitude], zoom);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -52,9 +48,9 @@ class Map extends Component {
     .addTo(this.map);
 
     offers.map((item) => {
-      const offerCords = [item.coords[0], item.coords[1]];
+      const offerCoords = [item.coords[0], item.coords[1]];
       leaflet
-      .marker(offerCords, {icon})
+      .marker(offerCoords, {icon})
       .addTo(this.map);
     });
   }
@@ -75,8 +71,15 @@ Map.propTypes = {
       coords: PropTypes.arrayOf(PropTypes.number).isRequired,
     }).isRequired,
   })).isRequired,
-  coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+  city: PropTypes.object.isRequired,
   leaflet: PropTypes.object.isRequired,
 };
 
-export default Map;
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  city: state.city,
+  offers: state.offers.filter((item) => item.city.name === state.city.name),
+});
+
+export {Map};
+
+export default connect(mapStateToProps)(Map);

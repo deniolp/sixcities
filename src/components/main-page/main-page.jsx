@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
@@ -46,7 +47,6 @@ const MainPage = (props) => {
               cities={cities}
               city={city}
               onCityClick={onCityClick}
-              active={cities[0]}
             />
           </ul>
         </section></div>
@@ -82,7 +82,7 @@ const MainPage = (props) => {
             <section className="cities__map map">
               <Map
                 offers={offers}
-                coords={offers[0].city.coords}
+                city={city}
                 leaflet={leaflet}
                 activeCard={activeCard}
               />
@@ -112,11 +112,18 @@ MainPage.propTypes = {
   onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  city: PropTypes.string.isRequired,
+  city: PropTypes.object.isRequired,
   onCityClick: PropTypes.func.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
   activeCard: PropTypes.object.isRequired,
 };
 
-export default withActiveCard(MainPage);
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  city: state.city,
+  offers: state.offers.filter((item) => item.city.name === state.city.name),
+});
+
+export {MainPage};
+
+export default connect(mapStateToProps)(withActiveCard(MainPage));
