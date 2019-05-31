@@ -8,7 +8,8 @@ import {compose} from 'recompose';
 
 import App from './components/app/app';
 import {configureAPI} from './api';
-import {reducer, Operation} from './reducer';
+import reducer from './reducer/index';
+import {Operation} from './reducer/data/data';
 
 const init = () => {
   const onPlaceNameClickHandler = () => {};

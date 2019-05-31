@@ -1,7 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 
-import {reducer, ActionCreator, Operation} from './reducer';
-import {configureAPI} from '../src/api';
+import {reducer, ActionCreator, Operation} from '../data/data';
+import {configureAPI} from '../../api';
 
 const places = [
   {

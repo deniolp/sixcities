@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import MainPage from '../main-page/main-page';
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from '../../reducer/data/data';
 
 const App = (props) => {
   const {onClick, leaflet, offers, city, onCityClick} = props;
@@ -51,8 +51,8 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  city: state.city,
-  offers: state.offers,
+  city: state.data.city,
+  offers: state.data.offers,
 });
 
 const mapDispatchToProps = (dispatch) => ({
