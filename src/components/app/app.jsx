@@ -51,7 +51,7 @@ App.propTypes = {
   onCityClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+const mapStateToProps = (state) => ({
   city: getCity(state),
   offers: getOffers(state),
 });
