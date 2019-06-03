@@ -26,7 +26,9 @@ const App = (props) => {
     signInHandler={() => signIn()}
     userData={userData}
     isAuthorizationRequired={isAuthorizationRequired}
-  /> : <SignIn/>;
+  /> : <div className="page page--gray page--login">
+    <SignIn/>
+  </div>;
 };
 
 App.propTypes = {
