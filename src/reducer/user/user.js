@@ -1,5 +1,5 @@
 const initialState = {
-  isAuthorizationRequired: true,
+  isAuthorizationRequired: false,
   user: null,
   authError: null,
 };
@@ -9,16 +9,16 @@ const Operation = {
     return api.post(`/login`, {email, password})
       .then((response) => {
         if (response.data) {
-          dispatch(ActionCreator.requireAuthorization(false));
-          dispatch(ActionCreator.authorizeUser(response.data));
-          dispatch(ActionCreator.authError(null));
+          dispatch(UserActionCreator.requireAuthorization(false));
+          dispatch(UserActionCreator.authorizeUser(response.data));
+          dispatch(UserActionCreator.authError(null));
         }
       })
-      .catch((error) => dispatch(ActionCreator.authError(error.response.data.error)));
+      .catch((error) => dispatch(UserActionCreator.authError(error.response.data.error)));
   }
 };
 
-const ActionCreator = {
+const UserActionCreator = {
   requireAuthorization: (status) => ({
     type: `REQUIRE_AUTHORIZATION`,
     payload: status,
@@ -53,4 +53,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, ActionCreator, Operation};
+export {reducer, UserActionCreator, Operation};

@@ -7,7 +7,7 @@ import Cities from '../cities/cities';
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
 
 const MainPage = (props) => {
-  const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard} = props;
+  const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard, signInHandler} = props;
   const filteredOffers = offers.filter((item) => item.city.name === city.name);
 
   return <div className="page page--gray page--main">
@@ -29,7 +29,7 @@ const MainPage = (props) => {
                 <a className="header__nav-link header__nav-link--profile" href="#">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                  <span className="header__user-name user__name" onClick={signInHandler}>Sign In</span>
                 </a>
               </li>
             </ul>
@@ -121,6 +121,7 @@ MainPage.propTypes = {
   onCityClick: PropTypes.func.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
+  signInHandler: PropTypes.func.isRequired,
   activeCard: PropTypes.object.isRequired,
 };
 
