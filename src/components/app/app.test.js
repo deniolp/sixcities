@@ -72,6 +72,11 @@ describe(`App`, () => {
       city={offers[0].city}
       leaflet={leafletMock}
       onCityClick={jest.fn()}
+      isAuthorizationRequired={false}
+      userData={{
+        avatarUrl: `/path.jpg`,
+      }}
+      signIn={jest.fn()}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();

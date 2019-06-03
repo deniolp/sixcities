@@ -3,24 +3,32 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import MainPage from '../main-page/main-page';
+import SignIn from '../sign-in/sign-in';
 import {ActionCreator} from '../../reducer/data/data';
+import {UserActionCreator} from '../../reducer/user/user';
 import {getCity, getOffers} from '../../reducer/data/selectors';
+import {getAuthorizationStatus, getUserData} from '../../reducer/user/selectors';
 
 const App = (props) => {
-  const {onClick, leaflet, offers, city, onCityClick} = props;
+  const {onClick, leaflet, offers, city, onCityClick, isAuthorizationRequired, signIn, userData} = props;
   const cities = Array.from(offers.slice().reduce((array, current) => {
     array.add(current.city.name);
     return array;
   }, new Set())).slice(0, 6);
 
-  return <MainPage
+  return !isAuthorizationRequired ? <MainPage
     offers={offers}
     cities={cities}
     city={city}
     onClick={onClick}
     onCityClick={(selectedCity) => onCityClick(selectedCity, offers)}
     leaflet={leaflet}
-  />;
+    signInHandler={() => signIn()}
+    userData={userData}
+    isAuthorizationRequired={isAuthorizationRequired}
+  /> : <div className="page page--gray page--login">
+    <SignIn/>
+  </div>;
 };
 
 App.propTypes = {
@@ -48,17 +56,25 @@ App.propTypes = {
   onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,
   city: PropTypes.object.isRequired,
+  userData: PropTypes.object,
   onCityClick: PropTypes.func.isRequired,
+  signIn: PropTypes.func.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   city: getCity(state),
   offers: getOffers(state),
+  userData: getUserData(state),
+  isAuthorizationRequired: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCityClick: (selectedCity, places) => {
     dispatch(ActionCreator.changeCity(selectedCity, places));
+  },
+  signIn: () => {
+    dispatch(UserActionCreator.requireAuthorization(true));
   }
 });
 
