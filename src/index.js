@@ -8,7 +8,7 @@ import {compose} from 'recompose';
 
 import App from './components/app/app';
 import {configureAPI} from './api';
-import reducer from './reducer/index';
+import reducer from './reducer/main-reducer';
 import {Operation} from './reducer/data/data';
 
 const init = () => {
