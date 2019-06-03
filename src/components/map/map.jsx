@@ -9,41 +9,42 @@ class Map extends Component {
   }
 
   render() {
-    return <div id="map" style={{height: 810}}></div>;
+    return <section id="map" className="cities__map map"></section>;
   }
 
-  componentDidMount() {
-    const {offers, coords, leaflet} = this.props;
-    this._renderMap(offers, coords, leaflet);
-  }
-
-  componentWillUnmount() {
-    this.map.remove();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.offers !== this.props.offers) {
-      const {offers, coords, leaflet} = nextProps;
-      this.map.remove();
-      this._renderMap(offers, coords, leaflet);
+  componentDidUpdate(prevProps) {
+    if (this.props.offers !== prevProps.offers) {
+      const {offers, city, leaflet} = this.props;
+      if (this.map) {
+        this.map.remove();
+      }
+      this._renderMap(offers, city, leaflet);
     }
   }
 
-  _renderMap(offers, coords, leaflet) {
+  shouldComponentUpdate(nextProps) {
+    if (this.props.activeCard !== nextProps.activeCard) {
+      return false;
+    }
+    return true;
+  }
+
+  _renderMap(offers, city, leaflet) {
+    const {latitude, longitude, zoom} = city.location;
+    const SETTINGS = {
+      center: [latitude, longitude],
+      zoom: 12,
+      zoomControl: false,
+      marker: true
+    };
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
 
-    const zooms = 12;
-    this.map = leaflet.map(`map`, {
-      center: coords,
-      zoom: zooms,
-      zoomControl: false,
-      marker: true
-    });
+    this.map = leaflet.map(`map`, SETTINGS);
 
-    this.map.setView(coords, zooms);
+    this.map.setView([latitude, longitude], zoom);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -52,9 +53,9 @@ class Map extends Component {
     .addTo(this.map);
 
     offers.map((item) => {
-      const offerCords = [item.coords[0], item.coords[1]];
+      const offerCoords = [item.location.latitude, item.location.longitude];
       leaflet
-      .marker(offerCords, {icon})
+      .marker(offerCoords, {icon})
       .addTo(this.map);
     });
   }
@@ -62,21 +63,29 @@ class Map extends Component {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
-    bookmarked: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.array.isRequired,
+    goods: PropTypes.array.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    host: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
     city: PropTypes.shape({
       name: PropTypes.string.isRequired,
-      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+      location: PropTypes.object.isRequired,
     }).isRequired,
   })).isRequired,
-  coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+  city: PropTypes.object.isRequired,
   leaflet: PropTypes.object.isRequired,
+  activeCard: PropTypes.object.isRequired,
 };
 
 export default Map;

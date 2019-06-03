@@ -4,73 +4,72 @@ import {App} from '../app/app';
 import leafletMock from '../../mocks/leaflet-mock';
 
 describe(`App`, () => {
-  const places = [
-    {
-      title: `Strange place`,
-      isPremium: true,
-      price: 1200,
-      rating: 95,
-      bookmarked: false,
-      type: `Apartment`,
-      image: ``,
-      coords: [12, 87],
-      city: {
-        name: `Berlin`,
-        coords: [51, 6],
-      },
-    },
-    {
-      title: `Weird place`,
-      isPremium: false,
-      price: 800,
-      rating: 85,
-      bookmarked: true,
-      type: `Private room`,
-      image: ``,
-      coords: [13, 88],
-      city: {
-        name: `Berlin`,
-        coords: [51, 6],
-      },
-    },
-  ];
   const offers = [
     {
+      id: 1,
       title: `Strange place`,
       isPremium: true,
       price: 1200,
-      rating: 95,
-      bookmarked: false,
+      rating: 1.5,
+      isFavorite: false,
+      description: ``,
       type: `Apartment`,
-      image: ``,
-      coords: [12, 87],
+      previewImage: ``,
+      images: [``],
+      goods: [``],
+      bedrooms: 2,
+      maxAdults: 4,
+      host: {},
+      location: {
+        atitude: 12,
+        longitude: 87,
+        zoom: 11,
+      },
       city: {
         name: `Berlin`,
-        coords: [51, 6],
+        location: {
+          atitude: 51,
+          longitude: 7,
+          zoom: 11,
+        },
       },
     },
     {
+      id: 2,
       title: `Weird place`,
-      isPremium: false,
+      isPremium: true,
       price: 800,
-      rating: 85,
-      bookmarked: true,
+      rating: 1.5,
+      isFavorite: false,
+      description: ``,
       type: `Private room`,
-      image: ``,
-      coords: [13, 88],
+      previewImage: ``,
+      images: [``],
+      goods: [``],
+      bedrooms: 2,
+      maxAdults: 4,
+      host: {},
+      location: {
+        atitude: 13,
+        longitude: 88,
+        zoom: 11,
+      },
       city: {
-        name: `Berlin`,
-        coords: [51, 6],
+        name: `Dusseldorf`,
+        location: {
+          atitude: 52,
+          longitude: 8,
+          zoom: 11,
+        },
       },
     },
   ];
 
   it(`renders correctly`, () => {
     const tree = renderer.create(<App
-      places={places}
       offers={offers}
       onClick={jest.fn()}
-      city={`Berlin`}
+      city={offers[0].city}
       leaflet={leafletMock}
       onCityClick={jest.fn()}
     />).toJSON();

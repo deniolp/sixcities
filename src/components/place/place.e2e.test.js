@@ -6,18 +6,33 @@ import Place from '../place/place';
 Enzyme.configure({adapter: new Adapter()});
 
 const mockObj = {
+  id: 1,
   title: `Strange place`,
   isPremium: true,
   price: 1200,
-  rating: 95,
-  bookmarked: false,
+  rating: 1.9,
+  isFavorite: false,
+  description: ``,
   type: `Apartment`,
-  image: ``,
-  coords: [13, 88],
-  city: {
-    name: `Dusseldorf`,
-    coords: [52, 7],
+  previewImage: ``,
+  images: [``],
+  goods: [``],
+  bedrooms: 2,
+  maxAdults: 4,
+  host: {},
+  location: {
+    atitude: 12,
+    longitude: 87,
+    zoom: 11,
   },
+  city: {
+    name: `Berlin`,
+    location: {
+      atitude: 51,
+      longitude: 7,
+      zoom: 11,
+    },
+  }
 };
 
 let clickHandler;
@@ -40,7 +55,6 @@ beforeEach(() => {
         }}
         setHighlightedItem={jest.fn()}
         active={false}
-        index={0}
       />);
   placeDescription = placeElement.find(`.place-card__name a`);
   image = placeElement.find(`.place-card__image`);

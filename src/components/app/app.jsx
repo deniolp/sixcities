@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import MainPage from '../main-page/main-page';
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from '../../reducer/data/data';
+import {getCity, getOffers} from '../../reducer/data/selectors';
 
 const App = (props) => {
-  const {places, onClick, leaflet, offers, city, onCityClick} = props;
-  const cities = Array.from(places.reduce((array, current) => {
+  const {onClick, leaflet, offers, city, onCityClick} = props;
+  const cities = Array.from(offers.slice().reduce((array, current) => {
     array.add(current.city.name);
     return array;
   }, new Set())).slice(0, 6);
@@ -17,55 +18,47 @@ const App = (props) => {
     cities={cities}
     city={city}
     onClick={onClick}
-    onCityClick={(selectedCity) => onCityClick(selectedCity, places)}
+    onCityClick={(selectedCity) => onCityClick(selectedCity, offers)}
     leaflet={leaflet}
   />;
 };
 
 App.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    bookmarked: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-    }).isRequired,
-  })).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
-    bookmarked: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.array.isRequired,
+    goods: PropTypes.array.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    host: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
     city: PropTypes.shape({
       name: PropTypes.string.isRequired,
-      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+      location: PropTypes.object.isRequired,
     }).isRequired,
   })).isRequired,
   onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,
-  city: PropTypes.string.isRequired,
+  city: PropTypes.object.isRequired,
   onCityClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  city: state.city,
-  offers: state.offers,
+const mapStateToProps = (state) => ({
+  city: getCity(state),
+  offers: getOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCityClick: (selectedCity, places) => {
-    dispatch(ActionCreator.changeCity(selectedCity));
-    dispatch(ActionCreator.getOffers(selectedCity, places));
+    dispatch(ActionCreator.changeCity(selectedCity, places));
   }
 });
 

@@ -4,17 +4,32 @@ import Place from '../place/place';
 
 describe(`Place`, () => {
   const place = {
+    id: 1,
     title: `Strange place`,
     isPremium: true,
     price: 1200,
-    rating: 95,
-    bookmarked: false,
+    rating: 1.9,
+    isFavorite: false,
+    description: ``,
     type: `Apartment`,
-    image: ``,
-    coords: [12, 87],
+    previewImage: ``,
+    images: [``],
+    goods: [``],
+    bedrooms: 2,
+    maxAdults: 4,
+    host: {},
+    location: {
+      atitude: 12,
+      longitude: 87,
+      zoom: 11,
+    },
     city: {
       name: `Berlin`,
-      coords: [52, 7],
+      location: {
+        atitude: 51,
+        longitude: 7,
+        zoom: 11,
+      },
     },
   };
 
@@ -24,7 +39,6 @@ describe(`Place`, () => {
       onClick={jest.fn()}
       setHighlightedItem={jest.fn()}
       active={false}
-      index={0}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();

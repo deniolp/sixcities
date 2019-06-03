@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App renders correctly 1`] = `
-Array [
+<div
+  className="page page--gray page--main"
+>
   <div
     style={
       Object {
@@ -41,7 +43,7 @@ Array [
         />
       </symbol>
     </svg>
-  </div>,
+  </div>
   <header
     className="header"
   >
@@ -93,7 +95,7 @@ Array [
         </nav>
       </div>
     </div>
-  </header>,
+  </header>
   <main
     className="page__main page__main--index"
   >
@@ -124,6 +126,19 @@ Array [
               </span>
             </a>
           </li>
+          <li
+            className="locations__item"
+            onClick={[Function]}
+          >
+            <a
+              className="locations__item-link tabs__item"
+              href="#"
+            >
+              <span>
+                Dusseldorf
+              </span>
+            </a>
+          </li>
         </ul>
       </section>
     </div>
@@ -144,7 +159,7 @@ Array [
           <b
             className="places__found"
           >
-            2 places to stay in Berlin
+            1 place to stay in Berlin
           </b>
           <form
             action="#"
@@ -281,7 +296,7 @@ Array [
                     <span
                       style={
                         Object {
-                          "width": "95%",
+                          "width": "30%",
                         }
                       }
                     />
@@ -309,105 +324,6 @@ Array [
                 </p>
               </div>
             </article>
-            <article
-              className="cities__place-card place-card "
-            >
-              <div
-                className="cities__image-wrapper place-card__image-wrapper"
-                onClick={[Function]}
-              >
-                <a
-                  href="#"
-                >
-                  <img
-                    alt="Place image"
-                    className="place-card__image"
-                    height="200"
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                    src=""
-                    width="260"
-                  />
-                </a>
-              </div>
-              <div
-                className="place-card__info"
-              >
-                <div
-                  className="place-card__price-wrapper"
-                >
-                  <div
-                    className="place-card__price"
-                  >
-                    <b
-                      className="place-card__price-value"
-                    >
-                      €
-                      800
-                    </b>
-                    <span
-                      className="place-card__price-text"
-                    >
-                      / night
-                    </span>
-                  </div>
-                  <button
-                    className="place-card__bookmark-button place-card__bookmark-button--active button"
-                    type="button"
-                  >
-                    <svg
-                      className="place-card__bookmark-icon"
-                      height="19"
-                      width="18"
-                    >
-                      <use
-                        xlinkHref="#icon-bookmark"
-                      />
-                    </svg>
-                    <span
-                      className="visually-hidden"
-                    >
-                      To bookmarks
-                    </span>
-                  </button>
-                </div>
-                <div
-                  className="place-card__rating rating"
-                >
-                  <div
-                    className="place-card__stars rating__stars"
-                  >
-                    <span
-                      style={
-                        Object {
-                          "width": "85%",
-                        }
-                      }
-                    />
-                    <span
-                      className="visually-hidden"
-                    >
-                      Rating
-                    </span>
-                  </div>
-                </div>
-                <h2
-                  className="place-card__name"
-                >
-                  <a
-                    href="#"
-                    onClick={[MockFunction]}
-                  >
-                    Weird place
-                  </a>
-                </h2>
-                <p
-                  className="place-card__type"
-                >
-                  Private room
-                </p>
-              </div>
-            </article>
           </div>
         </section>
         <div
@@ -415,19 +331,11 @@ Array [
         >
           <section
             className="cities__map map"
-          >
-            <div
-              id="map"
-              style={
-                Object {
-                  "height": 810,
-                }
-              }
-            />
-          </section>
+            id="map"
+          />
         </div>
       </div>
     </div>
-  </main>,
-]
+  </main>
+</div>
 `;
