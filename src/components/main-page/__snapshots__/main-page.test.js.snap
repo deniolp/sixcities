@@ -83,11 +83,17 @@ exports[`MainPage renders correctly 1`] = `
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
+                  style={
+                    Object {
+                      "backgroundImage": "url(https://es31-server.appspot.com/six-cities/path.jpg)",
+                    }
+                  }
                 />
                 <span
                   className="header__user-name user__name"
+                  onClick={[Function]}
                 >
-                  Oliver.conner@gmail.com
+                  Sign In
                 </span>
               </a>
             </li>

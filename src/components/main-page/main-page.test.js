@@ -85,6 +85,12 @@ describe(`MainPage`, () => {
       onMouseEnter={jest.fn()}
       onMouseLeave={jest.fn()}
       activeCard={{}}
+      signInHandler={jest.fn()}
+      userData={{
+        avatarUrl: `/path.jpg`,
+      }}
+      isAuthorizationRequired={false}
+      signIn={jest.fn()}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();
