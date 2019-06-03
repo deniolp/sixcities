@@ -38,7 +38,7 @@ const MainPage = (props) => {
                 <a className="header__nav-link header__nav-link--profile" href="#">
                   <div className="header__avatar-wrapper user__avatar-wrapper" style={userData.avatarUrl ? userImage : {}}>
                   </div>
-                  <span className="header__user-name user__name" onClick={signInClickHandler}>Sign In</span>
+                  <span className="header__user-name user__name" onClick={signInClickHandler}>{userData.email ? userData.email : `Sign In`}</span>
                 </a>
               </li>
             </ul>
