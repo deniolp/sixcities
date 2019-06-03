@@ -1,3 +1,5 @@
+import {normalizeKeys} from '../data/data';
+
 const initialState = {
   isAuthorizationRequired: false,
   user: {},
@@ -26,7 +28,7 @@ const UserActionCreator = {
 
   authorizeUser: (user) => ({
     type: `AUTHORIZE_USER`,
-    payload: user,
+    payload: normalizeKeys(user),
   }),
 
   authError: (error) => ({

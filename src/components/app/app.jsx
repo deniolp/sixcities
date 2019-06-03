@@ -25,6 +25,7 @@ const App = (props) => {
     leaflet={leaflet}
     signInHandler={() => signIn()}
     userData={userData}
+    isAuthorizationRequired={isAuthorizationRequired}
   /> : <SignIn/>;
 };
 

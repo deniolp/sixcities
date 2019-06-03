@@ -7,7 +7,7 @@ import Cities from '../cities/cities';
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
 
 const MainPage = (props) => {
-  const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard, signInHandler, userData} = props;
+  const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard, signInHandler, userData, isAuthorizationRequired} = props;
   const filteredOffers = offers.filter((item) => item.city.name === city.name);
 
   const signInClickHandler = (evt) => {
@@ -17,6 +17,7 @@ const MainPage = (props) => {
       signInHandler();
     }
   };
+  const userImage = isAuthorizationRequired ? {} : {backgroundImage: `url(https://es31-server.appspot.com/six-cities${userData.avatarUrl})`};
 
   return <div className="page page--gray page--main">
     <div style={{display: `none`}}>
@@ -35,7 +36,7 @@ const MainPage = (props) => {
             <ul className="header__nav-list">
               <li className="header__nav-item user">
                 <a className="header__nav-link header__nav-link--profile" href="#">
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
+                  <div className="header__avatar-wrapper user__avatar-wrapper" style={userData.avatarUrl ? userImage : {}}>
                   </div>
                   <span className="header__user-name user__name" onClick={signInClickHandler}>Sign In</span>
                 </a>
@@ -132,6 +133,7 @@ MainPage.propTypes = {
   onMouseLeave: PropTypes.func.isRequired,
   signInHandler: PropTypes.func.isRequired,
   activeCard: PropTypes.object.isRequired,
+  isAuthorizationRequired: PropTypes.bool,
 };
 
 export default withActiveCard(MainPage);
