@@ -7,8 +7,16 @@ import Cities from '../cities/cities';
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
 
 const MainPage = (props) => {
-  const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard, signInHandler} = props;
+  const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard, signInHandler, userData} = props;
   const filteredOffers = offers.filter((item) => item.city.name === city.name);
+
+  const signInClickHandler = (evt) => {
+    evt.preventDefault();
+
+    if (!Object.keys(userData).length) {
+      signInHandler();
+    }
+  };
 
   return <div className="page page--gray page--main">
     <div style={{display: `none`}}>
@@ -29,7 +37,7 @@ const MainPage = (props) => {
                 <a className="header__nav-link header__nav-link--profile" href="#">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
-                  <span className="header__user-name user__name" onClick={signInHandler}>Sign In</span>
+                  <span className="header__user-name user__name" onClick={signInClickHandler}>Sign In</span>
                 </a>
               </li>
             </ul>
@@ -116,6 +124,7 @@ MainPage.propTypes = {
   })).isRequired,
   onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,
+  userData: PropTypes.object,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   city: PropTypes.object.isRequired,
   onCityClick: PropTypes.func.isRequired,

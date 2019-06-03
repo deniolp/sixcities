@@ -1,6 +1,6 @@
 const initialState = {
   isAuthorizationRequired: false,
-  user: null,
+  user: {},
   authError: null,
 };
 

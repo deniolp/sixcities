@@ -7,10 +7,10 @@ import SignIn from '../sign-in/sign-in';
 import {ActionCreator} from '../../reducer/data/data';
 import {UserActionCreator} from '../../reducer/user/user';
 import {getCity, getOffers} from '../../reducer/data/selectors';
-import {getAuthorizationStatus} from '../../reducer/user/selectors';
+import {getAuthorizationStatus, getUserData} from '../../reducer/user/selectors';
 
 const App = (props) => {
-  const {onClick, leaflet, offers, city, onCityClick, isAuthorizationRequired, signIn} = props;
+  const {onClick, leaflet, offers, city, onCityClick, isAuthorizationRequired, signIn, userData} = props;
   const cities = Array.from(offers.slice().reduce((array, current) => {
     array.add(current.city.name);
     return array;
@@ -24,6 +24,7 @@ const App = (props) => {
     onCityClick={(selectedCity) => onCityClick(selectedCity, offers)}
     leaflet={leaflet}
     signInHandler={() => signIn()}
+    userData={userData}
   /> : <SignIn/>;
 };
 
@@ -52,6 +53,7 @@ App.propTypes = {
   onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,
   city: PropTypes.object.isRequired,
+  userData: PropTypes.object,
   onCityClick: PropTypes.func.isRequired,
   signIn: PropTypes.func.isRequired,
   isAuthorizationRequired: PropTypes.bool.isRequired,
@@ -60,6 +62,7 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   city: getCity(state),
   offers: getOffers(state),
+  userData: getUserData(state),
   isAuthorizationRequired: getAuthorizationStatus(state),
 });
 
