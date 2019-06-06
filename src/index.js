@@ -14,7 +14,7 @@ import {Operation} from './reducer/data/data';
 const init = () => {
   const onPlaceNameClickHandler = () => {};
 
-  const api = configureAPI((...arg) => store.dispatch(...arg));
+  const api = configureAPI(() => history.pushState(null, null, `/login`));
   const store = createStore(reducer, compose(applyMiddleware(thunk.withExtraArgument(api)), window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (a) => a));
 
   store.dispatch(Operation.loadOffers());
