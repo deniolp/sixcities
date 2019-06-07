@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {App} from '../app/app';
+import {BrowserRouter} from 'react-router-dom';
 import leafletMock from '../../mocks/leaflet-mock';
 
 describe(`App`, () => {
@@ -66,18 +67,19 @@ describe(`App`, () => {
   ];
 
   it(`renders correctly`, () => {
-    const tree = renderer.create(<App
-      offers={offers}
-      onClick={jest.fn()}
-      city={offers[0].city}
-      leaflet={leafletMock}
-      onCityClick={jest.fn()}
-      isAuthorizationRequired={false}
-      userData={{
-        avatarUrl: `/path.jpg`,
-      }}
-      signIn={jest.fn()}
-    />).toJSON();
+    const tree = renderer.create(<BrowserRouter>
+      <App
+        offers={offers}
+        onClick={jest.fn()}
+        city={offers[0].city}
+        leaflet={leafletMock}
+        onCityClick={jest.fn()}
+        isAuthorizationRequired={true}
+        user={{
+          avatarUrl: `/path.jpg`,
+        }}
+      />
+    </BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

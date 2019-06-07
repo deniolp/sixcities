@@ -17,3 +17,12 @@ build/
 #Собранные файлы
 public/bundle.js
 public/bundle.js.map
+
+#HTML файлы (кроме index)
+public/favorites-empty.html
+public/favorites.html
+public/login.html
+public/main-empty.html
+public/main.html
+public/property-not-logged.html
+public/property.html

@@ -1,7 +1,7 @@
 import {normalizeKeys} from '../data/data';
 
 const initialState = {
-  isAuthorizationRequired: false,
+  isAuthorizationRequired: true,
   user: {},
   authError: null,
 };
@@ -16,7 +16,14 @@ const Operation = {
           dispatch(UserActionCreator.authError(null));
         }
       })
-      .catch((error) => dispatch(UserActionCreator.authError(error.response.data.error)));
+      .catch((error) => {
+        global.console.log(error);
+        if (error.response.status) {
+          if (error.response.status === 400) {
+            dispatch(UserActionCreator.authError(error.response.data.error));
+          }
+        }
+      });
   }
 };
 
