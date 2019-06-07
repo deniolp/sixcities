@@ -10,6 +10,7 @@ import App from './components/app/app';
 import {configureAPI} from './api';
 import reducer from './reducer/main-reducer';
 import {Operation} from './reducer/data/data';
+import {BrowserRouter} from 'react-router-dom';
 
 const init = () => {
   const onPlaceNameClickHandler = () => {};
@@ -20,10 +21,12 @@ const init = () => {
   store.dispatch(Operation.loadOffers());
 
   ReactDom.render(<Provider store={store}>
-    <App
-      onClick={onPlaceNameClickHandler}
-      leaflet={leaflet}
-    />
+    <BrowserRouter>
+      <App
+        onClick={onPlaceNameClickHandler}
+        leaflet={leaflet}
+      />
+    </BrowserRouter>
   </Provider>,
   document.querySelector(`#root`)
   );

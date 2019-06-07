@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {withRouter} from "react-router-dom";
 
 import {Operation} from '../../reducer/user/user';
 import {getAuthError} from '../../reducer/user/selectors';
@@ -11,6 +12,13 @@ class SignIn extends PureComponent {
     super(props);
 
     this._handleSubmit = this._handleSubmit.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.user !== prevProps.user) {
+      const {history} = this.props;
+      history.push(`/`);
+    }
   }
 
   render() {
@@ -64,6 +72,8 @@ SignIn.propTypes = {
   onChangePasswordInput: PropTypes.func,
   onChangeEmailInput: PropTypes.func,
   formData: PropTypes.objectOf(PropTypes.string),
+  user: PropTypes.object,
+  history: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
@@ -76,4 +86,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export {SignIn};
 
-export default withForm(connect(mapStateToProps, mapDispatchToProps)(SignIn));
+export default withForm(connect(mapStateToProps, mapDispatchToProps)(withRouter(SignIn)));

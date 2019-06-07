@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
@@ -7,17 +8,10 @@ import Cities from '../cities/cities';
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
 
 const MainPage = (props) => {
-  const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard, signInHandler, userData, isAuthorizationRequired} = props;
+  const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard, user, isAuthorizationRequired} = props;
   const filteredOffers = offers.filter((item) => item.city.name === city.name);
 
-  const signInClickHandler = (evt) => {
-    evt.preventDefault();
-
-    if (!Object.keys(userData).length) {
-      signInHandler();
-    }
-  };
-  const userImage = isAuthorizationRequired ? {} : {backgroundImage: `url(https://es31-server.appspot.com/six-cities${userData.avatarUrl})`};
+  const userImage = isAuthorizationRequired ? {} : {backgroundImage: `url(https://es31-server.appspot.com/six-cities${user.avatarUrl})`};
 
   return <div className="page page--gray page--main">
     <div style={{display: `none`}}>
@@ -28,18 +22,22 @@ const MainPage = (props) => {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <a className="header__logo-link header__logo-link--active">
+            <Link to="/" className="header__logo-link header__logo-link--active">
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-            </a>
+            </Link>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
-                  <div className="header__avatar-wrapper user__avatar-wrapper" style={userData.avatarUrl ? userImage : {}}>
-                  </div>
-                  <span className="header__user-name user__name" onClick={signInClickHandler}>{userData.email ? userData.email : `Sign In`}</span>
-                </a>
+                {isAuthorizationRequired ? (
+                  <Link to="/login" className="header__nav-link header__nav-link--profile">
+                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                    <span className="header__user-name user__name">Sign In</span>
+                  </Link>
+                ) : <Link to="/" className="header__nav-link header__nav-link--profile">
+                  <div className="header__avatar-wrapper user__avatar-wrapper" style={user.avatarUrl ? userImage : {}}></div>
+                  <span className="header__user-name user__name">{user.email ? user.email : `Sign In`}</span>
+                </Link>}
               </li>
             </ul>
           </nav>
@@ -125,13 +123,12 @@ MainPage.propTypes = {
   })).isRequired,
   onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,
-  userData: PropTypes.object,
+  user: PropTypes.object,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   city: PropTypes.object.isRequired,
   onCityClick: PropTypes.func.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
-  signInHandler: PropTypes.func.isRequired,
   activeCard: PropTypes.object.isRequired,
   isAuthorizationRequired: PropTypes.bool,
 };

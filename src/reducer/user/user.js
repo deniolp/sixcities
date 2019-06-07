@@ -1,7 +1,7 @@
 import {normalizeKeys} from '../data/data';
 
 const initialState = {
-  isAuthorizationRequired: false,
+  isAuthorizationRequired: true,
   user: {},
   authError: null,
 };
