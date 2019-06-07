@@ -58,6 +58,8 @@ exports[`MainPage renders correctly 1`] = `
         >
           <a
             className="header__logo-link header__logo-link--active"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -79,19 +81,14 @@ exports[`MainPage renders correctly 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/login"
+                onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
-                  style={
-                    Object {
-                      "backgroundImage": "url(https://es31-server.appspot.com/six-cities/path.jpg)",
-                    }
-                  }
                 />
                 <span
                   className="header__user-name user__name"
-                  onClick={[Function]}
                 >
                   Sign In
                 </span>

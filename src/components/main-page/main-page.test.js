@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import MainPage from '../main-page/main-page';
+import {BrowserRouter} from 'react-router-dom';
 import leafletMock from '../../mocks/leaflet-mock';
 
 describe(`MainPage`, () => {
@@ -68,30 +69,32 @@ describe(`MainPage`, () => {
   const cities = [`Berlin`, `Dusseldorf`];
 
   it(`renders correctly`, () => {
-    const tree = renderer.create(<MainPage
-      offers={places}
-      cities={cities}
-      city={{
-        name: `Dusseldorf`,
-        location: {
-          atitude: 52,
-          longitude: 8,
-          zoom: 11,
-        },
-      }}
-      onClick={jest.fn()}
-      onCityClick={jest.fn()}
-      leaflet={leafletMock}
-      onMouseEnter={jest.fn()}
-      onMouseLeave={jest.fn()}
-      activeCard={{}}
-      signInHandler={jest.fn()}
-      userData={{
-        avatarUrl: `/path.jpg`,
-      }}
-      isAuthorizationRequired={false}
-      signIn={jest.fn()}
-    />).toJSON();
+    const tree = renderer.create(<BrowserRouter>
+      <MainPage
+        offers={places}
+        cities={cities}
+        city={{
+          name: `Dusseldorf`,
+          location: {
+            atitude: 52,
+            longitude: 8,
+            zoom: 11,
+          },
+        }}
+        onClick={jest.fn()}
+        onCityClick={jest.fn()}
+        leaflet={leafletMock}
+        onMouseEnter={jest.fn()}
+        onMouseLeave={jest.fn()}
+        activeCard={{}}
+        signInHandler={jest.fn()}
+        userData={{
+          avatarUrl: `/path.jpg`,
+        }}
+        isAuthorizationRequired={true}
+        signIn={jest.fn()}
+      />
+    </BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
