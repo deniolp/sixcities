@@ -21,7 +21,7 @@ const init = () => {
   store.dispatch(Operation.loadOffers());
 
   ReactDom.render(<Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename="/505149-six-cities-1/12/">
       <App
         onClick={onPlaceNameClickHandler}
         leaflet={leaflet}
