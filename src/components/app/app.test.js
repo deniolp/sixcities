@@ -75,10 +75,9 @@ describe(`App`, () => {
         leaflet={leafletMock}
         onCityClick={jest.fn()}
         isAuthorizationRequired={true}
-        userData={{
+        user={{
           avatarUrl: `/path.jpg`,
         }}
-        signIn={jest.fn()}
       />
     </BrowserRouter>).toJSON();
 

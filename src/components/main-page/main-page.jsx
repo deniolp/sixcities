@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
 import PlaceList from '../place-list/place-list';
@@ -10,7 +10,7 @@ const MainPage = (props) => {
   const {cities, onClick, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard} = props;
   const filteredOffers = offers.filter((item) => item.city.name === city.name);
 
-  return <main className="page__main page__main--index">
+  return <Fragment>
     <h1 className="visually-hidden">Cities</h1>
     <div className="cities tabs">
       <section className="locations container">
@@ -60,7 +60,7 @@ const MainPage = (props) => {
         </div>
       </div>
     </div>
-  </main>;
+  </Fragment>;
 };
 
 MainPage.propTypes = {

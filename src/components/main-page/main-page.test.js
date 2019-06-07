@@ -87,12 +87,6 @@ describe(`MainPage`, () => {
         onMouseEnter={jest.fn()}
         onMouseLeave={jest.fn()}
         activeCard={{}}
-        signInHandler={jest.fn()}
-        userData={{
-          avatarUrl: `/path.jpg`,
-        }}
-        isAuthorizationRequired={true}
-        signIn={jest.fn()}
       />
     </BrowserRouter>).toJSON();
 
