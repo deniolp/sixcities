@@ -9,6 +9,7 @@ import Favorites from '../favorites/favorites';
 import {ActionCreator} from '../../reducer/data/data';
 import {getCity, getOffers} from '../../reducer/data/selectors';
 import {getAuthorizationStatus, getUserData} from '../../reducer/user/selectors';
+import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
 
 const App = (props) => {
   const {onClick, leaflet, offers, city, onCityClick, isAuthorizationRequired, user} = props;
@@ -39,8 +40,11 @@ const App = (props) => {
       </div>;
     }}
     />
-    <Route path="/favorites" exact component={Favorites}
-    />
+    <Route path="/favorites" exact render={() => {
+      const WrappedFavorites = withPrivateRoute(Favorites, user);
+      return <WrappedFavorites/>;
+    }
+    }/>
   </Switch>;
 };
 
