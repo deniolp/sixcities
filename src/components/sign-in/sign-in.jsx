@@ -5,7 +5,6 @@ import {withRouter} from "react-router-dom";
 
 import {Operation} from '../../reducer/user/user';
 import {getAuthError} from '../../reducer/user/selectors';
-import withForm from '../../hocs/with-form/with-form';
 
 class SignIn extends PureComponent {
   constructor(props) {
@@ -22,20 +21,24 @@ class SignIn extends PureComponent {
   }
 
   render() {
-    const {authError, onChangeEmailInput, onChangePasswordInput} = this.props;
+    const {authError} = this.props;
 
     return <main className="page__main page__main--login">
       <div className="page__login-container container">
         <section className="login">
           <h1 className="login__title">Sign in</h1>
-          <form className="login__form form" action="#" method="post" onSubmit={this._handleSubmit}>
+          <form className="login__form form" action="#" method="post" onSubmit={(evt) => {
+            evt.preventDefault();
+            const data = new FormData(evt.target);
+            this._handleSubmit(data.get(`email`), data.get(`password`));
+          }}>
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden">E-mail</label>
-              <input className="login__input form__input" type="email" name="email" placeholder="Email" required="" onChange={onChangeEmailInput}/>
+              <input className="login__input form__input" type="email" name="email" placeholder="Email" required=""/>
             </div>
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden">Password</label>
-              <input className="login__input form__input" type="password" name="password" placeholder="Password" required="" onChange={onChangePasswordInput}/>
+              <input className="login__input form__input" type="password" name="password" placeholder="Password" required=""/>
             </div>
             {this._getErrorElement(authError)}
             <button className="login__submit form__submit button" type="submit">Sign in</button>
@@ -52,10 +55,7 @@ class SignIn extends PureComponent {
     </main>;
   }
 
-  _handleSubmit(evt) {
-    evt.preventDefault();
-    const {email = ``, password = ``} = this.props.formData;
-
+  _handleSubmit(email, password) {
     this.props.submitForm(email, password);
   }
 
@@ -71,7 +71,6 @@ SignIn.propTypes = {
   authError: PropTypes.string,
   onChangePasswordInput: PropTypes.func,
   onChangeEmailInput: PropTypes.func,
-  formData: PropTypes.objectOf(PropTypes.string),
   user: PropTypes.object,
   history: PropTypes.object,
 };
@@ -86,4 +85,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export {SignIn};
 
-export default withForm(connect(mapStateToProps, mapDispatchToProps)(withRouter(SignIn)));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignIn));
