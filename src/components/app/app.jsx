@@ -5,6 +5,7 @@ import {Switch, Route} from 'react-router-dom';
 
 import MainPage from '../main-page/main-page';
 import SignIn from '../sign-in/sign-in';
+import Header from '../header/header';
 import Favorites from '../favorites/favorites';
 import {ActionCreator} from '../../reducer/data/data';
 import {getCity, getOffers} from '../../reducer/data/selectors';
@@ -20,20 +21,26 @@ const App = (props) => {
 
   return <Switch>
     <Route path="/" exact render={() => {
-      return <MainPage
-        offers={offers}
-        cities={cities}
-        city={city}
-        onClick={onClick}
-        onCityClick={(selectedCity) => onCityClick(selectedCity, offers)}
-        leaflet={leaflet}
-        user={user}
-        isAuthorizationRequired={isAuthorizationRequired}
-      />;
+      return <div className="page page--gray page--main">
+        <Header
+          user={user}
+          isAuthorizationRequired={isAuthorizationRequired}/>
+        <MainPage
+          offers={offers}
+          cities={cities}
+          city={city}
+          onClick={onClick}
+          onCityClick={(selectedCity) => onCityClick(selectedCity, offers)}
+          leaflet={leaflet}
+        />
+      </div>;
     }}
     />
     <Route path="/login" exact render={() => {
       return <div className="page page--gray page--login">
+        <Header
+          user={user}
+          isAuthorizationRequired={isAuthorizationRequired}/>
         <SignIn
           user={user}
         />
@@ -42,7 +49,12 @@ const App = (props) => {
     />
     <Route path="/favorites" exact render={() => {
       const WrappedFavorites = withPrivateRoute(Favorites, user);
-      return <WrappedFavorites/>;
+      return <div className="page">
+        <Header
+          user={user}
+          isAuthorizationRequired={isAuthorizationRequired}/>
+        <WrappedFavorites/>
+      </div>;
     }
     }/>
   </Switch>;
