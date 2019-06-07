@@ -34,7 +34,7 @@ const MainPage = (props) => {
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     <span className="header__user-name user__name">Sign In</span>
                   </Link>
-                ) : <Link to="/" className="header__nav-link header__nav-link--profile">
+                ) : <Link to="/favorites" className="header__nav-link header__nav-link--profile">
                   <div className="header__avatar-wrapper user__avatar-wrapper" style={user.avatarUrl ? userImage : {}}></div>
                   <span className="header__user-name user__name">{user.email ? user.email : `Sign In`}</span>
                 </Link>}

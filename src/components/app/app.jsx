@@ -5,6 +5,7 @@ import {Switch, Route} from 'react-router-dom';
 
 import MainPage from '../main-page/main-page';
 import SignIn from '../sign-in/sign-in';
+import Favorites from '../favorites/favorites';
 import {ActionCreator} from '../../reducer/data/data';
 import {getCity, getOffers} from '../../reducer/data/selectors';
 import {getAuthorizationStatus, getUserData} from '../../reducer/user/selectors';
@@ -37,6 +38,8 @@ const App = (props) => {
         />
       </div>;
     }}
+    />
+    <Route path="/favorites" exact component={Favorites}
     />
   </Switch>;
 };
