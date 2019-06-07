@@ -358,7 +358,8 @@ Array [
   >
     <a
       className="footer__logo-link"
-      href="#"
+      href="/"
+      onClick={[Function]}
     >
       <img
         alt="6 cities logo"
