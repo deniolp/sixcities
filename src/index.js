@@ -5,12 +5,12 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import leaflet from 'leaflet';
 import {compose} from 'recompose';
+import {BrowserRouter} from 'react-router-dom';
 
 import App from './components/app/app';
 import {configureAPI} from './api';
 import reducer from './reducer/main-reducer';
 import {Operation} from './reducer/data/data';
-import {BrowserRouter} from 'react-router-dom';
 
 const init = () => {
   const onPlaceNameClickHandler = () => {};

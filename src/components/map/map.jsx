@@ -12,6 +12,15 @@ class Map extends Component {
     return <section id="map" className="cities__map map"></section>;
   }
 
+  componentDidMount() {
+    const {offers, city, leaflet} = this.props;
+    try {
+      this._renderMap(offers, city, leaflet);
+    } catch (error) {
+      // global.console.log(error)
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.offers !== prevProps.offers) {
       const {offers, city, leaflet} = this.props;

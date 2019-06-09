@@ -17,7 +17,6 @@ const Operation = {
         }
       })
       .catch((error) => {
-        global.console.log(error);
         if (error.response.status) {
           if (error.response.status === 400) {
             dispatch(UserActionCreator.authError(error.response.data.error));
