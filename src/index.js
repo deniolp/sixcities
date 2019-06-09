@@ -13,8 +13,6 @@ import reducer from './reducer/main-reducer';
 import {Operation} from './reducer/data/data';
 
 const init = () => {
-  const onPlaceNameClickHandler = () => {};
-
   const api = configureAPI(() => history.pushState(null, null, `/login`));
   const store = createStore(reducer, compose(applyMiddleware(thunk.withExtraArgument(api)), window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (a) => a));
 
@@ -23,7 +21,6 @@ const init = () => {
   ReactDom.render(<Provider store={store}>
     <BrowserRouter basename="/505149-six-cities-1/12/">
       <App
-        onClick={onPlaceNameClickHandler}
         leaflet={leaflet}
       />
     </BrowserRouter>

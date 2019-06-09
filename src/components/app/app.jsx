@@ -7,13 +7,14 @@ import MainPage from '../main-page/main-page';
 import SignIn from '../sign-in/sign-in';
 import Header from '../header/header';
 import Favorites from '../favorites/favorites';
+import Room from '../room/room';
 import {ActionCreator} from '../../reducer/data/data';
 import {getCity, getOffers} from '../../reducer/data/selectors';
 import {getAuthorizationStatus, getUserData} from '../../reducer/user/selectors';
 import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
 
 const App = (props) => {
-  const {onClick, leaflet, offers, city, onCityClick, isAuthorizationRequired, user} = props;
+  const {leaflet, offers, city, onCityClick, isAuthorizationRequired, user} = props;
   const cities = Array.from(offers.slice().reduce((array, current) => {
     array.add(current.city.name);
     return array;
@@ -29,7 +30,6 @@ const App = (props) => {
           offers={offers}
           cities={cities}
           city={city}
-          onClick={onClick}
           onCityClick={(selectedCity) => onCityClick(selectedCity, offers)}
           leaflet={leaflet}
         />
@@ -57,6 +57,17 @@ const App = (props) => {
       </div>;
     }
     }/>
+    <Route path="/offer/:id" render={() => {
+      return <div className="page">
+        <Header
+          user={user}
+          isAuthorizationRequired={isAuthorizationRequired}/>
+        <Room
+          offers={offers}
+        />
+      </div>;
+    }}
+    />
   </Switch>;
 };
 
@@ -82,7 +93,6 @@ App.propTypes = {
       location: PropTypes.object.isRequired,
     }).isRequired,
   })).isRequired,
-  onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,
   city: PropTypes.object.isRequired,
   user: PropTypes.object,
