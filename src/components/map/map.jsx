@@ -42,7 +42,7 @@ class Map extends Component {
     const {latitude, longitude, zoom} = city.location;
     const SETTINGS = {
       center: [latitude, longitude],
-      zoom: 12,
+      zoom: 13,
       zoomControl: false,
       marker: true
     };
