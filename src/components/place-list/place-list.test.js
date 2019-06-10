@@ -69,11 +69,7 @@ describe(`PlaceList`, () => {
   it(`renders correctly`, () => {
     const tree = renderer.create(<BrowserRouter><PlaceList
       offers={places}
-      onClick={jest.fn()}
-      onMouseEnter={jest.fn()}
-      onMouseLeave={jest.fn()}
-      setHighlightedItem={jest.fn()}
-      highlightedItem={0}
+      onClickHandler={jest.fn()}
     /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

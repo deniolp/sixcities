@@ -38,9 +38,7 @@ describe(`Place`, () => {
   it(`renders correctly`, () => {
     const tree = renderer.create(<BrowserRouter><Place
       place={place}
-      onClick={jest.fn()}
-      setHighlightedItem={jest.fn()}
-      active={false}
+      onClickHandler={jest.fn()}
     /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

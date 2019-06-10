@@ -1,8 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MainPage from '../main-page/main-page';
 import {BrowserRouter} from 'react-router-dom';
 import leafletMock from '../../mocks/leaflet-mock';
+
+import {MainPage} from '../main-page/main-page';
 
 describe(`MainPage`, () => {
   const places = [
@@ -81,11 +82,9 @@ describe(`MainPage`, () => {
             zoom: 11,
           },
         }}
-        onClick={jest.fn()}
         onCityClick={jest.fn()}
         leaflet={leafletMock}
-        onMouseEnter={jest.fn()}
-        onMouseLeave={jest.fn()}
+        onClickHandler={jest.fn()}
         activeCard={{}}
       />
     </BrowserRouter>).toJSON();

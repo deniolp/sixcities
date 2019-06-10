@@ -1,28 +1,25 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-import withHighlightedItem from '../../hocs/with-highlighted-item/with-highlighted-item';
 import Place from '../place/place';
 
 class PlaceList extends PureComponent {
   render() {
-    const {offers, onClickHandler, setHighlightedItem, active} = this.props;
+    const {offers, onClickHandler} = this.props;
     return <div className="cities__places-list places__list tabs__content">
       {
         offers.map((item) => {
-          return this._getPlace(item, onClickHandler, setHighlightedItem, active);
+          return this._getPlace(item, onClickHandler);
         })
       }
     </div>;
   }
 
-  _getPlace(item, onClickHandler, setHighlightedItem, active) {
+  _getPlace(item, onClickHandler) {
     return <Place
       place={item}
       key={item.id}
       onClickHandler={onClickHandler}
-      setHighlightedItem={setHighlightedItem}
-      active={item.id === active}
     />;
   }
 }
@@ -50,8 +47,6 @@ PlaceList.propTypes = {
     }).isRequired,
   })).isRequired,
   onClickHandler: PropTypes.func.isRequired,
-  setHighlightedItem: PropTypes.func.isRequired,
-  active: PropTypes.number,
 };
 
-export default withHighlightedItem(PlaceList);
+export default PlaceList;

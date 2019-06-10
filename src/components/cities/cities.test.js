@@ -10,7 +10,6 @@ describe(`Cities`, () => {
       cities={cities}
       city={{name: `Berlin`}}
       onCityClick={jest.fn()}
-      setHighlightedItem={jest.fn()}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();

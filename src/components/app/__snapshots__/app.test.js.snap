@@ -219,7 +219,7 @@ exports[`App renders correctly 1`] = `
           className="cities__places-list places__list tabs__content"
         >
           <article
-            className="cities__place-card place-card "
+            className="cities__place-card place-card"
           >
             <div
               className="place-card__mark"
@@ -230,7 +230,6 @@ exports[`App renders correctly 1`] = `
             </div>
             <div
               className="cities__image-wrapper place-card__image-wrapper"
-              onClick={[Function]}
             >
               <a
                 href="#"
@@ -239,8 +238,7 @@ exports[`App renders correctly 1`] = `
                   alt="Place image"
                   className="place-card__image"
                   height="200"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
+                  onClick={[Function]}
                   src=""
                   width="260"
                 />
