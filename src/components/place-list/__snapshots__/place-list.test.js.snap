@@ -97,8 +97,8 @@ exports[`PlaceList renders correctly 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
-          onClick={[MockFunction]}
+          href="/offer/1"
+          onClick={[Function]}
         >
           Strange place
         </a>
@@ -203,8 +203,8 @@ exports[`PlaceList renders correctly 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
-          onClick={[MockFunction]}
+          href="/offer/2"
+          onClick={[Function]}
         >
           Weird place
         </a>

@@ -311,8 +311,8 @@ exports[`App renders correctly 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="#"
-                  onClick={[MockFunction]}
+                  href="/offer/1"
+                  onClick={[Function]}
                 >
                   Strange place
                 </a>

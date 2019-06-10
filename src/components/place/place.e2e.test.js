@@ -46,7 +46,6 @@ beforeEach(() => {
   placeElement = shallow(
       <Place
         place={mockObj}
-        onClick={clickHandler}
         onMouseEnter={() => {
           placeObj = mockObj;
         }}
@@ -56,7 +55,7 @@ beforeEach(() => {
         setHighlightedItem={jest.fn()}
         active={false}
       />);
-  placeDescription = placeElement.find(`.place-card__name a`);
+  placeDescription = placeElement.find(`Link`);
   image = placeElement.find(`.place-card__image`);
 });
 
@@ -72,9 +71,8 @@ describe(`Before clicking`, () => {
 
 describe(`After clicking`, () => {
   it(`clickHandler should be called once`, () => {
-    placeDescription.simulate(`click`);
 
-    expect(clickHandler).toHaveBeenCalledTimes(1);
+    expect(placeDescription.props().to).toBe(`/offer/1`);
   });
 });
 

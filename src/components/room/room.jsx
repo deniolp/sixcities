@@ -334,4 +334,6 @@ const mapDispatchToProps = (dispatch) => ({
   onLoadOffers: () => dispatch(Operation.loadOffers()),
 });
 
+export {Room};
+
 export default connect(mapStateToProps, mapDispatchToProps)(Room);
