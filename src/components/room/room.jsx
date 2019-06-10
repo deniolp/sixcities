@@ -1,19 +1,41 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {Operation} from '../../reducer/data/data';
+import {connect} from 'react-redux';
+
+import {getOffers} from '../../reducer/data/selectors';
 
 class Room extends PureComponent {
   constructor(props) {
     super(props);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.offers !== prevProps.offers) {
+      const id = this.props.match.params.id;
+      const offer = this._getOffer(id, this.props.offers);
+      this._renderOffer(offer);
+    }
+  }
+
   render() {
-    const id = this.props.match.params.id;
-    const offer = this._getOffer(id);
+    const {offers, onLoadOffers} = this.props;
+    if (offers.length !== 0) {
+      const id = this.props.match.params.id;
+      const offer = this._getOffer(id, offers);
+      return this._renderOffer(offer);
+    } else {
+      onLoadOffers();
+    }
+    return null;
+  }
+
+  _renderOffer(offer) {
     return <main className="page__main page__main--property">
       <section className="property">
         <div className="property__gallery-container container">
           <div className="property__gallery">
-            {this._renderPhotos(offer.images)}
+            {this._renderPhotos(offer.images.slice(0, 6))}
           </div>
         </div>
         <div className="property__container container">
@@ -259,9 +281,7 @@ class Room extends PureComponent {
     </main>;
   }
 
-  _getOffer(id) {
-    const {offers} = this.props;
-
+  _getOffer(id, offers) {
     return offers.find((item) => item.id === +id);
   }
 
@@ -282,6 +302,7 @@ class Room extends PureComponent {
 
 Room.propTypes = {
   match: PropTypes.object.isRequired,
+  onLoadOffers: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -305,4 +326,12 @@ Room.propTypes = {
   })).isRequired,
 };
 
-export default Room;
+const mapStateToProps = (state) => ({
+  offers: getOffers(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadOffers: () => dispatch(Operation.loadOffers()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Room);

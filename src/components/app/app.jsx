@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 
 import MainPage from '../main-page/main-page';
 import SignIn from '../sign-in/sign-in';
@@ -69,6 +69,7 @@ const App = (props) => {
       </div>;
     }}
     />
+    <Redirect from='*' to='/' />
   </Switch>;
 };
 
