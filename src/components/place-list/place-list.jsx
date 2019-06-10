@@ -6,22 +6,21 @@ import Place from '../place/place';
 
 class PlaceList extends PureComponent {
   render() {
-    const {offers, onMouseEnter, onMouseLeave, setHighlightedItem, active} = this.props;
+    const {offers, onClickHandler, setHighlightedItem, active} = this.props;
     return <div className="cities__places-list places__list tabs__content">
       {
         offers.map((item) => {
-          return this._getPlace(item, onMouseEnter, onMouseLeave, setHighlightedItem, active);
+          return this._getPlace(item, onClickHandler, setHighlightedItem, active);
         })
       }
     </div>;
   }
 
-  _getPlace(item, onMouseEnter, onMouseLeave, setHighlightedItem, active) {
+  _getPlace(item, onClickHandler, setHighlightedItem, active) {
     return <Place
       place={item}
       key={item.id}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      onClickHandler={onClickHandler}
       setHighlightedItem={setHighlightedItem}
       active={item.id === active}
     />;
@@ -50,8 +49,7 @@ PlaceList.propTypes = {
       location: PropTypes.object.isRequired,
     }).isRequired,
   })).isRequired,
-  onMouseEnter: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
+  onClickHandler: PropTypes.func.isRequired,
   setHighlightedItem: PropTypes.func.isRequired,
   active: PropTypes.number,
 };

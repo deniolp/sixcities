@@ -7,7 +7,7 @@ import Cities from '../cities/cities';
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
 
 const MainPage = (props) => {
-  const {cities, leaflet, offers, city, onCityClick, onMouseEnter, onMouseLeave, activeCard} = props;
+  const {cities, leaflet, offers, city, onCityClick, onClickHandler, activeCard} = props;
   const filteredOffers = offers.filter((item) => item.city.name === city.name);
 
   return <Fragment>
@@ -45,8 +45,7 @@ const MainPage = (props) => {
           <PlaceList
             key={`place-list-${city.name}`}
             offers={filteredOffers}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
+            onClickHandler={onClickHandler}
           />
         </section>
         <div className="cities__right-section">
@@ -88,8 +87,7 @@ MainPage.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   city: PropTypes.object.isRequired,
   onCityClick: PropTypes.func.isRequired,
-  onMouseEnter: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
+  onClickHandler: PropTypes.func.isRequired,
   activeCard: PropTypes.object.isRequired,
 };
 

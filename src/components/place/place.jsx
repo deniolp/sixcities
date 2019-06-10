@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 const Place = (props) => {
-  const {place, onMouseEnter, onMouseLeave, setHighlightedItem, active} = props;
+  const {place, onClickHandler, setHighlightedItem, active} = props;
 
   return <article className={`cities__place-card place-card ${active ? `cities__place-card--active` : ``}`}>
     {
@@ -13,7 +13,7 @@ const Place = (props) => {
     }
     <div className="cities__image-wrapper place-card__image-wrapper" onClick={() => setHighlightedItem(place.id)}>
       <a href="#">
-        <img className="place-card__image" src={place.previewImage} width="260" height="200" alt="Place image" onMouseEnter={() => onMouseEnter(place)} onMouseLeave={() => onMouseLeave()}/>
+        <img className="place-card__image" src={place.previewImage} width="260" height="200" alt="Place image" onClick={() => onClickHandler(place)} />
       </a>
     </div>
     <div className="place-card__info">
@@ -65,8 +65,7 @@ Place.propTypes = {
       location: PropTypes.object.isRequired,
     }).isRequired,
   }).isRequired,
-  onMouseEnter: PropTypes.func,
-  onMouseLeave: PropTypes.func,
+  onClickHandler: PropTypes.func,
   setHighlightedItem: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,
 };
