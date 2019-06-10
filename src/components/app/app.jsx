@@ -57,12 +57,13 @@ const App = (props) => {
       </div>;
     }
     }/>
-    <Route path="/offer/:id" render={() => {
+    <Route path="/offer/:id" render={(routerProps) => {
       return <div className="page">
         <Header
           user={user}
           isAuthorizationRequired={isAuthorizationRequired}/>
         <Room
+          {...routerProps}
           offers={offers}
         />
       </div>;
