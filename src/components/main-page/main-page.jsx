@@ -91,4 +91,6 @@ MainPage.propTypes = {
   activeCard: PropTypes.object.isRequired,
 };
 
+export {MainPage};
+
 export default withActiveCard(MainPage);

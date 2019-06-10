@@ -1,8 +1,5 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-
-import {getCity} from '../../reducer/data/selectors';
 
 const withActiveCard = ((Component) => {
   class WithActiveCard extends PureComponent {
@@ -45,11 +42,7 @@ const withActiveCard = ((Component) => {
     city: PropTypes.object.isRequired,
   };
 
-  const mapStateToProps = (state) => ({
-    city: getCity(state),
-  });
-
-  return connect(mapStateToProps, null)(WithActiveCard);
+  return WithActiveCard;
 });
 
 export default withActiveCard;
