@@ -147,7 +147,7 @@ exports[`Room renders correctly 1`] = `
                 alt="Host avatar"
                 className="property__avatar user__avatar"
                 height="74"
-                src="/undefined"
+                src="undefined"
                 width="74"
               />
             </div>
