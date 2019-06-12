@@ -9,3 +9,7 @@ export const getOffers = (state) => {
 export const getCity = (state) => {
   return state[NAME_SPACE].city;
 };
+
+export const getComments = (state) => {
+  return state[NAME_SPACE].comments;
+};
