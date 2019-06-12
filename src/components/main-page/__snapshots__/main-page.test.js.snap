@@ -122,7 +122,7 @@ Array [
           className="cities__places-list places__list tabs__content"
         >
           <article
-            className="cities__place-card place-card "
+            className="cities__place-card place-card"
           >
             <div
               className="place-card__mark"
@@ -133,7 +133,6 @@ Array [
             </div>
             <div
               className="cities__image-wrapper place-card__image-wrapper"
-              onClick={[Function]}
             >
               <a
                 href="#"
@@ -142,8 +141,7 @@ Array [
                   alt="Place image"
                   className="place-card__image"
                   height="200"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
+                  onClick={[Function]}
                   src=""
                   width="260"
                 />
@@ -214,8 +212,8 @@ Array [
                 className="place-card__name"
               >
                 <a
-                  href="#"
-                  onClick={[MockFunction]}
+                  href="/offer/2"
+                  onClick={[Function]}
                 >
                   Weird place
                 </a>

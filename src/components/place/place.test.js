@@ -1,5 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {BrowserRouter} from 'react-router-dom';
+
 import Place from '../place/place';
 
 describe(`Place`, () => {
@@ -34,12 +36,10 @@ describe(`Place`, () => {
   };
 
   it(`renders correctly`, () => {
-    const tree = renderer.create(<Place
+    const tree = renderer.create(<BrowserRouter><Place
       place={place}
-      onClick={jest.fn()}
-      setHighlightedItem={jest.fn()}
-      active={false}
-    />).toJSON();
+      onClickHandler={jest.fn()}
+    /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

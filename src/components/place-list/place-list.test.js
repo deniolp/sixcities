@@ -1,5 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {BrowserRouter} from 'react-router-dom';
+
 import PlaceList from '../place-list/place-list';
 
 describe(`PlaceList`, () => {
@@ -65,14 +67,10 @@ describe(`PlaceList`, () => {
   ];
 
   it(`renders correctly`, () => {
-    const tree = renderer.create(<PlaceList
+    const tree = renderer.create(<BrowserRouter><PlaceList
       offers={places}
-      onClick={jest.fn()}
-      onMouseEnter={jest.fn()}
-      onMouseLeave={jest.fn()}
-      setHighlightedItem={jest.fn()}
-      highlightedItem={0}
-    />).toJSON();
+      onClickHandler={jest.fn()}
+    /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

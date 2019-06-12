@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-class Map extends Component {
+class Map extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -12,39 +12,55 @@ class Map extends Component {
     return <section id="map" className="cities__map map"></section>;
   }
 
+  componentDidMount() {
+    const {offers, city, leaflet} = this.props;
+    try {
+      this._renderMap(offers, city, leaflet);
+    } catch (error) {
+      // global.console.log(error)
+    }
+  }
+
   componentDidUpdate(prevProps) {
-    if (this.props.offers !== prevProps.offers) {
-      const {offers, city, leaflet} = this.props;
+    if (this.props !== prevProps) {
+      const {offers, city, leaflet, activeCard} = this.props;
       if (this.map) {
         this.map.remove();
       }
-      this._renderMap(offers, city, leaflet);
+      this._renderMap(offers, city, leaflet, activeCard);
     }
   }
 
-  shouldComponentUpdate(nextProps) {
-    if (this.props.activeCard !== nextProps.activeCard) {
-      return false;
-    }
-    return true;
-  }
-
-  _renderMap(offers, city, leaflet) {
+  _renderMap(offers, city, leaflet, activeCard = null) {
+    let settings = {};
     const {latitude, longitude, zoom} = city.location;
-    const SETTINGS = {
-      center: [latitude, longitude],
-      zoom: 12,
-      zoomControl: false,
-      marker: true
-    };
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
+      iconSize: [27, 31]
+    });
+    const orangeIcon = leaflet.icon({
+      iconUrl: `img/active-pin.svg`,
+      iconSize: [28, 32]
     });
 
-    this.map = leaflet.map(`map`, SETTINGS);
+    if (Object.keys(activeCard).length !== 0) {
+      settings = {
+        center: [activeCard.location.latitude, activeCard.location.longitude],
+        zoom: 13,
+        zoomControl: false,
+        marker: true
+      };
+    } else {
+      settings = {
+        center: [latitude, longitude],
+        zoom: 13,
+        zoomControl: false,
+        marker: true
+      };
+    }
 
-    this.map.setView([latitude, longitude], zoom);
+    this.map = leaflet.map(`map`, settings);
+    this.map.setView([settings.center[0], settings.center[1]], zoom);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -54,9 +70,11 @@ class Map extends Component {
 
     offers.map((item) => {
       const offerCoords = [item.location.latitude, item.location.longitude];
-      leaflet
-      .marker(offerCoords, {icon})
-      .addTo(this.map);
+      if (item.id === activeCard.id) {
+        leaflet.marker(offerCoords, {icon: orangeIcon}).addTo(this.map);
+      } else {
+        leaflet.marker(offerCoords, {icon}).addTo(this.map);
+      }
     });
   }
 }

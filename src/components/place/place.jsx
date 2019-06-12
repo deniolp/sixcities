@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 const Place = (props) => {
-  const {place, onClick, onMouseEnter, onMouseLeave, setHighlightedItem, active} = props;
+  const {place, onClickHandler} = props;
 
-  return <article className={`cities__place-card place-card ${active ? `cities__place-card--active` : ``}`}>
+  return <article className="cities__place-card place-card">
     {
       place.isPremium ? <div className="place-card__mark">
         <span>Premium</span>
       </div> : null
     }
-    <div className="cities__image-wrapper place-card__image-wrapper" onClick={() => setHighlightedItem(place.id)}>
+    <div className="cities__image-wrapper place-card__image-wrapper">
       <a href="#">
-        <img className="place-card__image" src={place.previewImage} width="260" height="200" alt="Place image" onMouseEnter={() => onMouseEnter(place)} onMouseLeave={() => onMouseLeave()}/>
+        <img className="place-card__image" src={place.previewImage} width="260" height="200" alt="Place image" onClick={() => onClickHandler(place)} />
       </a>
     </div>
     <div className="place-card__info">
@@ -35,7 +36,7 @@ const Place = (props) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#" onClick={onClick}>{place.title}</a>
+        <Link to={`/offer/${place.id}`}>{place.title}</Link>
       </h2>
       <p className="place-card__type">{place.type}</p>
     </div>
@@ -64,11 +65,7 @@ Place.propTypes = {
       location: PropTypes.object.isRequired,
     }).isRequired,
   }).isRequired,
-  onClick: PropTypes.func,
-  onMouseEnter: PropTypes.func,
-  onMouseLeave: PropTypes.func,
-  setHighlightedItem: PropTypes.func.isRequired,
-  active: PropTypes.bool.isRequired,
+  onClickHandler: PropTypes.func.isRequired,
 };
 
 export default Place;
