@@ -1,7 +1,7 @@
 const initialState = {
   city: {},
   offers: [],
-  comments: [],
+  reviews: [],
 };
 
 const getRandomCity = (min, max) => Math.floor(Math.random() * (max - min)) + min;
@@ -37,11 +37,11 @@ const Operation = {
       });
   },
 
-  loadComments: (id) => (dispatch, _getState, api) => {
+  loadReviews: (id) => (dispatch, _getState, api) => {
     return api.get(`/comments/${id}`)
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
-        dispatch(ActionCreator.loadComments(preparedData));
+        dispatch(ActionCreator.loadReviews(preparedData));
       });
   }
 };
@@ -58,9 +58,9 @@ const ActionCreator = {
     type: `LOAD_OFFERS`,
     payload: offers,
   }),
-  loadComments: (comments) => ({
-    type: `LOAD_COMMENTS`,
-    payload: comments,
+  loadReviews: (reviews) => ({
+    type: `LOAD_REVIEWS`,
+    payload: reviews,
   }),
 };
 
@@ -75,8 +75,8 @@ const reducer = (state = initialState, action) => {
       offers: action.payload,
     });
 
-    case `LOAD_COMMENTS`: return Object.assign({}, state, {
-      comments: action.payload,
+    case `LOAD_REVIEWS`: return Object.assign({}, state, {
+      reviews: action.payload,
     });
   }
   return state;

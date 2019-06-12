@@ -10,6 +10,6 @@ export const getCity = (state) => {
   return state[NAME_SPACE].city;
 };
 
-export const getComments = (state) => {
-  return state[NAME_SPACE].comments;
+export const getReviews = (state) => {
+  return state[NAME_SPACE].reviews;
 };
