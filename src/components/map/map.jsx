@@ -9,7 +9,8 @@ class Map extends PureComponent {
   }
 
   render() {
-    return <section id="map" className="cities__map map"></section>;
+    const className = this.props.className || `cities__map map`;
+    return <section id="map" className={className}></section>;
   }
 
   componentDidMount() {
@@ -104,6 +105,7 @@ Map.propTypes = {
   city: PropTypes.object.isRequired,
   leaflet: PropTypes.object.isRequired,
   activeCard: PropTypes.object.isRequired,
+  className: PropTypes.string,
 };
 
 export default Map;

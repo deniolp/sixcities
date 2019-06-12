@@ -2,9 +2,11 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Operation} from '../../reducer/data/data';
 import {connect} from 'react-redux';
+import leaflet from 'leaflet';
 
 import {getOffers} from '../../reducer/data/selectors';
 import ReviewList from '../review-list/review-list';
+import Map from '../map/map';
 
 class Room extends PureComponent {
   constructor(props) {
@@ -12,10 +14,12 @@ class Room extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
+    const {offers} = this.props;
     if (this.props.offers !== prevProps.offers) {
       const id = this.props.match.params.id;
       const offer = this._getOffer(id, this.props.offers);
-      this._renderOffer(offer);
+      const filteredOffers = this._getFilteredOffers(offers, offer, 3);
+      this._renderOffer(offer, filteredOffers);
     }
   }
 
@@ -24,14 +28,15 @@ class Room extends PureComponent {
     if (offers.length !== 0) {
       const id = this.props.match.params.id;
       const offer = this._getOffer(id, offers);
-      return this._renderOffer(offer);
+      const filteredOffers = this._getFilteredOffers(offers, offer, 3);
+      return this._renderOffer(offer, filteredOffers);
     } else {
       onLoadOffers();
     }
     return null;
   }
 
-  _renderOffer(offer) {
+  _renderOffer(offer, offers) {
     return <main className="page__main page__main--property">
       <section className="property">
         <div className="property__gallery-container container">
@@ -105,7 +110,13 @@ class Room extends PureComponent {
             />
           </div>
         </div>
-        <section className="property__map map"></section>
+        <Map
+          offers={offers.concat(offer)}
+          city={offer.city}
+          leaflet={leaflet}
+          activeCard={offer}
+          className="property__map map"
+        />
       </section>
       <div className="container">
         <section className="near-places places">
@@ -228,6 +239,30 @@ class Room extends PureComponent {
 
   _renderDescription(description) {
     return description.split(`.` || `!`).map((item) => <p className="property__text" key={item}>{item}</p>);
+  }
+
+  _getFilteredOffers(offers, offer, amount = 3) {
+    return offers.map((item) => {
+      item.distance = this._getDistance(offer.location.latitude, offer.location.longitude, item.location.latitude, item.location.longitude);
+      return item;
+    }).sort((place1, place2) => place1.distance - place2.distance).slice(1, amount + 1);
+  }
+
+  _getDistance(lat1, lon1, lat2, lon2) {
+    let radlat1 = Math.PI * lat1 / 180;
+    let radlat2 = Math.PI * lat2 / 180;
+    let theta = lon1 - lon2;
+    let radtheta = Math.PI * theta / 180;
+    let dist = Math.sin(radlat1) * Math.sin(radlat2) +
+      Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    if (dist > 1) {
+      dist = 1;
+    }
+    dist = Math.acos(dist);
+    dist = dist * 180 / Math.PI;
+    dist = dist * 60 * 1.1515;
+    dist = dist * 1.609344;
+    return dist;
   }
 }
 
