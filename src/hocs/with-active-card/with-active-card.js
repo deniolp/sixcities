@@ -7,7 +7,7 @@ const withActiveCard = ((Component) => {
       super(props);
 
       this.state = {
-        activeCard: {},
+        activeCard: null,
       };
 
       this._onCardClickHandler = this._onCardClickHandler.bind(this);
@@ -16,7 +16,7 @@ const withActiveCard = ((Component) => {
     componentDidUpdate(prevProps) {
       if (this.props.city !== prevProps.city) {
         this.setState({
-          activeCard: {},
+          activeCard: null,
         });
       }
     }
@@ -39,7 +39,7 @@ const withActiveCard = ((Component) => {
   }
 
   WithActiveCard.propTypes = {
-    city: PropTypes.object.isRequired,
+    city: PropTypes.object,
   };
 
   return WithActiveCard;

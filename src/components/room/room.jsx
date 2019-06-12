@@ -7,20 +7,12 @@ import leaflet from 'leaflet';
 import {getOffers} from '../../reducer/data/selectors';
 import ReviewList from '../review-list/review-list';
 import Map from '../map/map';
+import PlaceList from '../place-list/place-list';
+import withActiveCard from '../../hocs/with-active-card/with-active-card';
 
 class Room extends PureComponent {
   constructor(props) {
     super(props);
-  }
-
-  componentDidUpdate(prevProps) {
-    const {offers} = this.props;
-    if (this.props.offers !== prevProps.offers) {
-      const id = this.props.match.params.id;
-      const offer = this._getOffer(id, this.props.offers);
-      const filteredOffers = this._getFilteredOffers(offers, offer, 3);
-      this._renderOffer(offer, filteredOffers);
-    }
   }
 
   render() {
@@ -37,6 +29,7 @@ class Room extends PureComponent {
   }
 
   _renderOffer(offer, offers) {
+    const {onClickHandler, activeCard} = this.props;
     return <main className="page__main page__main--property">
       <section className="property">
         <div className="property__gallery-container container">
@@ -114,7 +107,7 @@ class Room extends PureComponent {
           offers={offers.concat(offer)}
           city={offer.city}
           leaflet={leaflet}
-          activeCard={offer}
+          activeCard={activeCard === null ? offer : activeCard}
           className="property__map map"
         />
       </section>
@@ -122,101 +115,11 @@ class Room extends PureComponent {
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            <article className="near-places__card place-card">
-              <div className="near-places__image-wrapper place-card__image-wrapper">
-                <a href="#">
-                  <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image"/>
-                </a>
-              </div>
-              <div className="place-card__info">
-                <div className="place-card__price-wrapper">
-                  <div className="place-card__price">
-                    <b className="place-card__price-value">&euro;80</b>
-                    <span className="place-card__price-text">&#47;&nbsp;night</span>
-                  </div>
-                  <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
-                    <svg className="place-card__bookmark-icon" width="18" height="19">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">In bookmarks</span>
-                  </button>
-                </div>
-                <div className="place-card__rating rating">
-                  <div className="place-card__stars rating__stars">
-                    <span style={{width: `80%`}}></span>
-                    <span className="visually-hidden">Rating</span>
-                  </div>
-                </div>
-                <h2 className="place-card__name">
-                  <a href="#">Wood and stone place</a>
-                </h2>
-                <p className="place-card__type">Private room</p>
-              </div>
-            </article>
-
-            <article className="near-places__card place-card">
-              <div className="near-places__image-wrapper place-card__image-wrapper">
-                <a href="#">
-                  <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image"/>
-                </a>
-              </div>
-              <div className="place-card__info">
-                <div className="place-card__price-wrapper">
-                  <div className="place-card__price">
-                    <b className="place-card__price-value">&euro;132</b>
-                    <span className="place-card__price-text">&#47;&nbsp;night</span>
-                  </div>
-                  <button className="place-card__bookmark-button button" type="button">
-                    <svg className="place-card__bookmark-icon" width="18" height="19">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
-                </div>
-                <div className="place-card__rating rating">
-                  <div className="place-card__stars rating__stars">
-                    <span style={{width: `80%`}}></span>
-                    <span className="visually-hidden">Rating</span>
-                  </div>
-                </div>
-                <h2 className="place-card__name">
-                  <a href="#">Canal View Prinsengracht</a>
-                </h2>
-                <p className="place-card__type">Apartment</p>
-              </div>
-            </article>
-
-            <article className="near-places__card place-card">
-              <div className="near-places__image-wrapper place-card__image-wrapper">
-                <a href="#">
-                  <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place image"/>
-                </a>
-              </div>
-              <div className="place-card__info">
-                <div className="place-card__price-wrapper">
-                  <div className="place-card__price">
-                    <b className="place-card__price-value">&euro;180</b>
-                    <span className="place-card__price-text">&#47;&nbsp;night</span>
-                  </div>
-                  <button className="place-card__bookmark-button button" type="button">
-                    <svg className="place-card__bookmark-icon" width="18" height="19">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
-                </div>
-                <div className="place-card__rating rating">
-                  <div className="place-card__stars rating__stars">
-                    <span style={{width: `100%`}}></span>
-                    <span className="visually-hidden">Rating</span>
-                  </div>
-                </div>
-                <h2 className="place-card__name">
-                  <a href="#">Nice, cozy, warm big bed apartment</a>
-                </h2>
-                <p className="place-card__type">Apartment</p>
-              </div>
-            </article>
+            <PlaceList
+              key={`place-list-${offers.id}`}
+              offers={offers}
+              onClickHandler={onClickHandler}
+            />
           </div>
         </section>
       </div>
@@ -269,6 +172,7 @@ class Room extends PureComponent {
 Room.propTypes = {
   match: PropTypes.object.isRequired,
   onLoadOffers: PropTypes.func.isRequired,
+  onClickHandler: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -290,6 +194,7 @@ Room.propTypes = {
       location: PropTypes.object.isRequired,
     }).isRequired,
   })).isRequired,
+  activeCard: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
@@ -302,4 +207,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export {Room};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Room);
+export default connect(mapStateToProps, mapDispatchToProps)(withActiveCard(Room));

@@ -14,9 +14,9 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {offers, city, leaflet} = this.props;
+    const {offers, city, leaflet, activeCard} = this.props;
     try {
-      this._renderMap(offers, city, leaflet);
+      this._renderMap(offers, city, leaflet, activeCard);
     } catch (error) {
       // global.console.log(error)
     }
@@ -44,7 +44,7 @@ class Map extends PureComponent {
       iconSize: [28, 32]
     });
 
-    if (Object.keys(activeCard).length !== 0) {
+    if (activeCard) {
       settings = {
         center: [activeCard.location.latitude, activeCard.location.longitude],
         zoom: 13,
@@ -71,7 +71,7 @@ class Map extends PureComponent {
 
     offers.map((item) => {
       const offerCoords = [item.location.latitude, item.location.longitude];
-      if (item.id === activeCard.id) {
+      if (activeCard && item.id === activeCard.id) {
         leaflet.marker(offerCoords, {icon: orangeIcon}).addTo(this.map);
       } else {
         leaflet.marker(offerCoords, {icon}).addTo(this.map);
@@ -104,7 +104,7 @@ Map.propTypes = {
   })).isRequired,
   city: PropTypes.object.isRequired,
   leaflet: PropTypes.object.isRequired,
-  activeCard: PropTypes.object.isRequired,
+  activeCard: PropTypes.object,
   className: PropTypes.string,
 };
 

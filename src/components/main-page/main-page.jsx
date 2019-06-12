@@ -88,7 +88,7 @@ MainPage.propTypes = {
   city: PropTypes.object.isRequired,
   onCityClick: PropTypes.func.isRequired,
   onClickHandler: PropTypes.func.isRequired,
-  activeCard: PropTypes.object.isRequired,
+  activeCard: PropTypes.object,
 };
 
 export {MainPage};
