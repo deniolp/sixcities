@@ -173,6 +173,7 @@ exports[`App renders correctly 1`] = `
           </span>
           <span
             className="places__sorting-type"
+            onClick={[Function]}
             tabIndex="0"
           >
             Popular
@@ -187,28 +188,33 @@ exports[`App renders correctly 1`] = `
             </svg>
           </span>
           <ul
-            className="places__options places__options--custom"
+            className="places__options places__options--custom "
+            onMouseLeave={[Function]}
           >
             <li
               className="places__option places__option--active"
+              onClick={[Function]}
               tabIndex="0"
             >
               Popular
             </li>
             <li
-              className="places__option"
+              className="places__option "
+              onClick={[Function]}
               tabIndex="0"
             >
               Price: low to high
             </li>
             <li
-              className="places__option"
+              className="places__option "
+              onClick={[Function]}
               tabIndex="0"
             >
               Price: high to low
             </li>
             <li
-              className="places__option"
+              className="places__option "
+              onClick={[Function]}
               tabIndex="0"
             >
               Top rated first
