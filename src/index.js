@@ -19,7 +19,7 @@ const init = () => {
   store.dispatch(Operation.loadOffers());
 
   ReactDom.render(<Provider store={store}>
-    <BrowserRouter basename="/505149-six-cities-1/15/">
+    <BrowserRouter basename="/505149-six-cities-1/16/">
       <App
         leaflet={leaflet}
       />
