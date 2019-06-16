@@ -10,13 +10,13 @@ const MockWrapped = withActiveCard(Mock);
 
 it(`Should change activeCard`, () => {
   const wrapper = shallow(<MockWrapped
-    activeCard={{}}
+    activeCard={null}
     onClickHandler={jest.fn()}
     city={{}}
   />);
 
-  expect(wrapper.state().activeCard).toEqual({});
-  expect(wrapper.props().activeCard).toEqual({});
+  expect(wrapper.state().activeCard).toEqual(null);
+  expect(wrapper.props().activeCard).toEqual(null);
   wrapper.props().onClickHandler({type: 8});
   expect(wrapper.state().activeCard).toEqual({type: 8});
   expect(wrapper.props().activeCard).toEqual({type: 8});

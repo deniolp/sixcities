@@ -135,13 +135,12 @@ Array [
               className="cities__image-wrapper place-card__image-wrapper"
             >
               <a
-                href="#"
+                onClick={[Function]}
               >
                 <img
                   alt="Place image"
                   className="place-card__image"
                   height="200"
-                  onClick={[Function]}
                   src=""
                   width="260"
                 />

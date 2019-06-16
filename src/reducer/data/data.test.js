@@ -69,6 +69,7 @@ describe(`Reducer works correctly: `, () => {
     expect(reducer(undefined, {})).toEqual({
       city: {},
       offers: [],
+      reviews: [],
     });
   });
 
