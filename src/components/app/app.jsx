@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Switch, Route, Redirect} from 'react-router-dom';
 
 import MainPage from '../main-page/main-page';
+import MainPageEmpty from '../main-page-empty/main-page-empty';
 import SignIn from '../sign-in/sign-in';
 import Header from '../header/header';
 import Favorites from '../favorites/favorites';
@@ -20,19 +21,23 @@ const App = (props) => {
     return array;
   }, new Set())).slice(0, 6);
 
+  const Main = offers.length > 0 ? <MainPage
+    offers={offers}
+    cities={cities}
+    city={city}
+    onCityClick={(selectedCity) => onCityClick(selectedCity, offers)}
+    leaflet={leaflet}
+  /> : <MainPageEmpty
+    city={city}
+  />;
+
   return <Switch>
     <Route path="/" exact render={() => {
       return <div className="page page--gray page--main">
         <Header
           user={user}
           isAuthorizationRequired={isAuthorizationRequired}/>
-        <MainPage
-          offers={offers}
-          cities={cities}
-          city={city}
-          onCityClick={(selectedCity) => onCityClick(selectedCity, offers)}
-          leaflet={leaflet}
-        />
+        {Main}
       </div>;
     }}
     />

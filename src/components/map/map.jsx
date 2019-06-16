@@ -49,6 +49,7 @@ class Map extends PureComponent {
         center: [activeCard.location.latitude, activeCard.location.longitude],
         zoom: 13,
         zoomControl: false,
+        scrollWheelZoom: false,
         marker: true
       };
     } else {
@@ -56,6 +57,7 @@ class Map extends PureComponent {
         center: [latitude, longitude],
         zoom: 13,
         zoomControl: false,
+        scrollWheelZoom: false,
         marker: true
       };
     }
@@ -75,6 +77,14 @@ class Map extends PureComponent {
         leaflet.marker(offerCoords, {icon: orangeIcon}).addTo(this.map);
       } else {
         leaflet.marker(offerCoords, {icon}).addTo(this.map);
+      }
+    });
+
+    this.map.on(`click`, () => {
+      if (this.map.scrollWheelZoom.enabled()) {
+        this.map.scrollWheelZoom.disable();
+      } else {
+        this.map.scrollWheelZoom.enable();
       }
     });
   }
