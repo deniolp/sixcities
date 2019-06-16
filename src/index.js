@@ -11,15 +11,16 @@ import App from './components/app/app';
 import {configureAPI} from './api';
 import reducer from './reducer/main-reducer';
 import {Operation} from './reducer/data/data';
+import history from './history';
 
 const init = () => {
-  const api = configureAPI(() => history.pushState(null, null, `/login`));
+  const api = configureAPI(() => history.push(`/login`));
   const store = createStore(reducer, compose(applyMiddleware(thunk.withExtraArgument(api)), window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (a) => a));
 
   store.dispatch(Operation.loadOffers());
 
   ReactDom.render(<Provider store={store}>
-    <BrowserRouter basename="/505149-six-cities-1/16/">
+    <BrowserRouter basename="/505149-six-cities-1/17/">
       <App
         leaflet={leaflet}
       />

@@ -9,8 +9,9 @@ export const configureAPI = ((onLoginFail) => {
 
   const onSuccess = (response) => response;
   const onFail = (error) => {
-    if (error.response.status === 403) {
+    if (error.response.request.responseURL.indexOf(`/login`) === -1 && error.response.status === 403) {
       onLoginFail();
+      return;
     }
     throw error;
   };
