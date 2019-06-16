@@ -43,6 +43,15 @@ const Operation = {
         const preparedData = response.data.map((item) => normalizeKeys(item));
         dispatch(ActionCreator.loadReviews(preparedData));
       });
+  },
+
+  postReview: (review, id) => (dispatch, _getState, api) => {
+    return api.post(`/comments/${id}`, review)
+      .then((response) => {
+        const preparedData = response.data.map((item) => normalizeKeys(item));
+        dispatch(ActionCreator.postReview(preparedData));
+      })
+      .catch((_error) => {});
   }
 };
 
@@ -62,6 +71,10 @@ const ActionCreator = {
     type: `LOAD_REVIEWS`,
     payload: reviews,
   }),
+  postReview: (reviews) => ({
+    type: `POST_REVIEW`,
+    payload: reviews,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -76,6 +89,10 @@ const reducer = (state = initialState, action) => {
     });
 
     case `LOAD_REVIEWS`: return Object.assign({}, state, {
+      reviews: action.payload,
+    });
+
+    case `POST_REVIEW`: return Object.assign({}, state, {
       reviews: action.payload,
     });
   }
