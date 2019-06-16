@@ -1,6 +1,7 @@
 const initialState = {
   city: {},
   offers: [],
+  reviews: [],
 };
 
 const getRandomCity = (min, max) => Math.floor(Math.random() * (max - min)) + min;
@@ -34,6 +35,14 @@ const Operation = {
         const preparedData = response.data.map((item) => normalizeKeys(item));
         dispatch(ActionCreator.loadOffers(preparedData));
       });
+  },
+
+  loadReviews: (id) => (dispatch, _getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then((response) => {
+        const preparedData = response.data.map((item) => normalizeKeys(item));
+        dispatch(ActionCreator.loadReviews(preparedData));
+      });
   }
 };
 
@@ -49,6 +58,10 @@ const ActionCreator = {
     type: `LOAD_OFFERS`,
     payload: offers,
   }),
+  loadReviews: (reviews) => ({
+    type: `LOAD_REVIEWS`,
+    payload: reviews,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -60,6 +73,10 @@ const reducer = (state = initialState, action) => {
     case `LOAD_OFFERS`: return Object.assign({}, state, {
       city: action.payload[getRandomCity(1, action.payload.length)].city,
       offers: action.payload,
+    });
+
+    case `LOAD_REVIEWS`: return Object.assign({}, state, {
+      reviews: action.payload,
     });
   }
   return state;

@@ -53,7 +53,7 @@ beforeEach(() => {
         active={false}
       />);
   placeDescription = placeElement.find(`Link`);
-  image = placeElement.find(`.place-card__image`);
+  image = placeElement.find(`.place-card__image-wrapper a`);
 });
 
 describe(`Before clicking`, () => {
