@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import {Operation} from '../../reducer/data/data';
 import {getReviews} from '../../reducer/data/selectors';
+import {getAuthorizationStatus} from '../../reducer/user/selectors';
 import Review from '../review/review';
 import SendReviewForm from '../send-review-form/send-review-form';
 
@@ -19,16 +20,16 @@ class ReviewList extends PureComponent {
   }
 
   render() {
-    const {reviews, id} = this.props;
+    const {reviews, id, isAuthorizationRequired} = this.props;
 
     return <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
       <ul className="reviews__list">
         {this._getReviews(reviews)}
       </ul>
-      <SendReviewForm
+      {isAuthorizationRequired ? `` : <SendReviewForm
         id={id}
-      />
+      />}
     </section>;
   }
 
@@ -46,10 +47,12 @@ ReviewList.propTypes = {
   reviews: PropTypes.array.isRequired,
   id: PropTypes.number.isRequired,
   onLoadReviews: PropTypes.func.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   reviews: getReviews(state),
+  isAuthorizationRequired: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
