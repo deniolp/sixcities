@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
 import Cities from '../cities/cities';
+import Sortings from '../sortings/sortings';
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
 
 const MainPage = (props) => {
@@ -27,21 +28,7 @@ const MainPage = (props) => {
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
           <b className="places__found">{`${filteredOffers.length} ${filteredOffers.length === 1 ? `place` : `places`} to stay in ${city.name}`}</b>
-          <form className="places__sorting" action="#" method="get">
-            <span className="places__sorting-caption">Sort by</span>
-            <span className="places__sorting-type" tabIndex="0">
-              Popular
-              <svg className="places__sorting-arrow" width="7" height="4">
-                <use xlinkHref="#icon-arrow-select"/>
-              </svg>
-            </span>
-            <ul className="places__options places__options--custom">
-              <li className="places__option places__option--active" tabIndex="0">Popular</li>
-              <li className="places__option" tabIndex="0">Price: low to high</li>
-              <li className="places__option" tabIndex="0">Price: high to low</li>
-              <li className="places__option" tabIndex="0">Top rated first</li>
-            </ul>
-          </form>
+          <Sortings />
           <PlaceList
             key={`place-list-${city.name}`}
             offers={filteredOffers}
