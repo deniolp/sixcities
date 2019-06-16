@@ -8,7 +8,7 @@ const sortings = [
 ];
 
 const Sortings = (props) => {
-  const {onSortingsClickHandler, onSortingClickHandler, opened, active} = props;
+  const {onSortingsClickHandler, onSortingClickHandler, opened, activeSorting} = props;
 
   return <form className="places__sorting" action="#" method="get">
     <span className="places__sorting-caption">Sort by</span>
@@ -19,7 +19,7 @@ const Sortings = (props) => {
       </svg>
     </span>
     <ul className={`places__options places__options--custom ${opened ? `places__options--opened` : ``}`}>
-      {sortings.map((item, index) => <li className={`places__option ${active ? `places__option--active` : ``}`} tabIndex="0" key={`Sorting-${item}`} onClick={() => onSortingClickHandler(index)}>{item}</li>)}
+      {sortings.map((item, index) => <li className={`places__option ${index === activeSorting ? `places__option--active` : ``}`} tabIndex="0" key={`Sorting-${item}`} onClick={() => onSortingClickHandler(index)}>{item}</li>)}
     </ul>
   </form>;
 };
@@ -28,7 +28,7 @@ Sortings.propTypes = {
   onSortingsClickHandler: PropTypes.func.isRequired,
   onSortingClickHandler: PropTypes.func.isRequired,
   opened: PropTypes.bool.isRequired,
-  active: PropTypes.number.isRequired,
+  activeSorting: PropTypes.number.isRequired,
 };
 
 export {Sortings};
