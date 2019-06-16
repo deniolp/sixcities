@@ -3,8 +3,13 @@ import PropTypes from 'prop-types';
 
 import withSortings from '../../hocs/with-sortings/with-sortings';
 
+const sortings = [
+  `Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`
+];
+
 const Sortings = (props) => {
-  let {onSortingsClickHandler, opened} = props;
+  const {onSortingsClickHandler, onSortingClickHandler, opened, active} = props;
+
   return <form className="places__sorting" action="#" method="get">
     <span className="places__sorting-caption">Sort by</span>
     <span className="places__sorting-type" tabIndex="0" onClick={() => onSortingsClickHandler()}>
@@ -14,17 +19,18 @@ const Sortings = (props) => {
       </svg>
     </span>
     <ul className={`places__options places__options--custom ${opened ? `places__options--opened` : ``}`}>
-      <li className="places__option places__option--active" tabIndex="0">Popular</li>
-      <li className="places__option" tabIndex="0">Price: low to high</li>
-      <li className="places__option" tabIndex="0">Price: high to low</li>
-      <li className="places__option" tabIndex="0">Top rated first</li>
+      {sortings.map((item, index) => <li className={`places__option ${active ? `places__option--active` : ``}`} tabIndex="0" key={`Sorting-${item}`} onClick={() => onSortingClickHandler(index)}>{item}</li>)}
     </ul>
   </form>;
 };
 
 Sortings.propTypes = {
   onSortingsClickHandler: PropTypes.func.isRequired,
+  onSortingClickHandler: PropTypes.func.isRequired,
   opened: PropTypes.bool.isRequired,
+  active: PropTypes.number.isRequired,
 };
+
+export {Sortings};
 
 export default withSortings(Sortings);
