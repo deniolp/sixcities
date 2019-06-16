@@ -14,7 +14,7 @@ const withSorted = (Component) => {
     }
 
     componentDidUpdate(prevProps) {
-      if (this.props.offers !== prevProps.offers) {
+      if (this.props.city !== prevProps.city) {
         this.setState({
           sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name),
         });
@@ -33,15 +33,27 @@ const withSorted = (Component) => {
 
     _onSortingClickHandler(index) {
       switch (index) {
+        case 0:
+          this.setState({
+            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name),
+          });
+          break;
+
         case 1:
           this.setState({
-            sortedOffers: this.state.sortedOffers.slice(``).sort((a, b) => a.price > b.price),
+            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name).slice(``).sort((a, b) => a.price > b.price),
           });
           break;
 
         case 2:
           this.setState({
-            sortedOffers: this.state.sortedOffers.slice(``).sort((a, b) => a.price < b.price),
+            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name).slice(``).sort((a, b) => a.price < b.price),
+          });
+          break;
+
+        case 3:
+          this.setState({
+            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name).slice(``).sort((a, b) => a.rating < b.rating),
           });
           break;
       }
