@@ -77,7 +77,7 @@ class ReviewList extends PureComponent {
   _getReviews(reviews) {
     return reviews.map((item) => {
       return <Review
-        key={item.id}
+        key={`Review-${item.id}`}
         review={item}
       />;
     });

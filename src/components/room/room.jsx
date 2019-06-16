@@ -99,6 +99,7 @@ class Room extends PureComponent {
               </div>
             </div>
             <ReviewList
+              key={`ReviewList-${offer.id}`}
               id={offer.id}
             />
           </div>
