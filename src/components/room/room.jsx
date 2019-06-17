@@ -49,6 +49,7 @@ class Room extends PureComponent {
               </h1>
               <AddFavoritesButton
                 fromRoom={true}
+                place={offer}
               />
             </div>
             <div className="property__rating rating">
