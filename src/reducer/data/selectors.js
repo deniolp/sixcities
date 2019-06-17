@@ -21,3 +21,7 @@ export const getIsReviewSending = (state) => {
 export const getDidReviewSent = (state) => {
   return state[NAME_SPACE].didReviewSent;
 };
+
+export const getError = (state) => {
+  return state[NAME_SPACE].sendError;
+};

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {Operation, ActionCreator} from '../../reducer/data/data';
-import {getIsReviewSending, getDidReviewSent} from '../../reducer/data/selectors';
+import {getIsReviewSending, getDidReviewSent, getError} from '../../reducer/data/selectors';
 import withValidated from '../../hocs/with-validated/with-validated';
 
 class SendReviewForm extends PureComponent {
@@ -21,7 +21,7 @@ class SendReviewForm extends PureComponent {
   }
 
   render() {
-    const {id, onChangeTextareaHandler, onClickRadioHandler, isValidated, isReviewSending} = this.props;
+    const {id, onChangeTextareaHandler, onClickRadioHandler, isValidated, isReviewSending, sendError} = this.props;
 
     return <form className="reviews__form form" action="#" method="post" onSubmit={(evt) => {
       evt.preventDefault();
@@ -67,6 +67,10 @@ class SendReviewForm extends PureComponent {
       </div>
       <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={(evt) => onChangeTextareaHandler(evt)} disabled={isReviewSending ? true : false}></textarea>
       <div className="reviews__button-wrapper">
+        <p style={{
+          color: `red`,
+          fontSize: `20px`,
+        }}>{sendError ? sendError : ``}</p>
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
@@ -94,11 +98,13 @@ SendReviewForm.propTypes = {
   isValidated: PropTypes.bool.isRequired,
   isReviewSending: PropTypes.bool.isRequired,
   didReviewSent: PropTypes.bool.isRequired,
+  sendError: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   isReviewSending: getIsReviewSending(state),
   didReviewSent: getDidReviewSent(state),
+  sendError: getError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
