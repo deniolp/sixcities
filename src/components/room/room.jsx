@@ -8,6 +8,7 @@ import {getOffers} from '../../reducer/data/selectors';
 import ReviewList from '../review-list/review-list';
 import Map from '../map/map';
 import PlaceList from '../place-list/place-list';
+import AddFavoritesButton from '../add-favorites-button/add-favorites-button';
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
 
 class Room extends PureComponent {
@@ -46,12 +47,10 @@ class Room extends PureComponent {
               <h1 className="property__name">
                 {offer.title}
               </h1>
-              <button className="property__bookmark-button button" type="button">
-                <svg className="property__bookmark-icon" width="31" height="33">
-                  <use xlinkHref="#icon-bookmark"></use>
-                </svg>
-                <span className="visually-hidden">To bookmarks</span>
-              </button>
+              <AddFavoritesButton
+                fromRoom={true}
+                place={offer}
+              />
             </div>
             <div className="property__rating rating">
               <div className="property__stars rating__stars">

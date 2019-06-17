@@ -36,11 +36,12 @@ exports[`Room renders correctly 1`] = `
             Weird place
           </h1>
           <button
-            className="property__bookmark-button button"
+            className="property__bookmark-button property__bookmark-button--active button"
+            onClick={[Function]}
             type="button"
           >
             <svg
-              className="property__bookmark-icon"
+              className="property__bookmark-icon--active"
               height="33"
               width="31"
             >
@@ -560,6 +561,7 @@ exports[`Room renders correctly 1`] = `
                 </div>
                 <button
                   className="place-card__bookmark-button place-card__bookmark-button--active button"
+                  onClick={[Function]}
                   type="button"
                 >
                   <svg

@@ -31,6 +31,12 @@ const normalizeKeys = (obj) => {
 
 const getCity = (selectedCity, offers) => offers.filter((offer) => offer.city.name === selectedCity)[0].city;
 
+const changeOffer = (state, newOffer) => {
+  return state.offers.map((item) => {
+    return item.id === newOffer.id ? newOffer : item;
+  });
+};
+
 const Operation = {
   loadOffers: () => (dispatch, _getState, api) => {
     return api.get(`/hotels`)
@@ -61,7 +67,25 @@ const Operation = {
         dispatch(ActionCreator.blockForm(false));
         dispatch(ActionCreator.showError(`Error occured :-(`));
       });
-  }
+  },
+
+  addToFavorites: (id) => (dispatch, _getState, api) => {
+    return api.post(`/favorite/${id}/1`)
+      .then((response) => {
+        const preparedData = normalizeKeys(response.data);
+        dispatch(ActionCreator.addToFavorites(preparedData));
+      })
+      .catch((_error) => {});
+  },
+
+  deleteFromFavorites: (id) => (dispatch, _getState, api) => {
+    return api.post(`/favorite/${id}/0`)
+      .then((response) => {
+        const preparedData = normalizeKeys(response.data);
+        dispatch(ActionCreator.deleteFromFavorites(preparedData));
+      })
+      .catch((_error) => {});
+  },
 };
 
 const ActionCreator = {
@@ -96,6 +120,14 @@ const ActionCreator = {
     type: `SHOW_ERROR`,
     payload: error,
   }),
+  addToFavorites: (data) => ({
+    type: `ADD_TO_FAVORITES`,
+    payload: data,
+  }),
+  deleteFromFavorites: (data) => ({
+    type: `DELETE_FROM_FAVORITES`,
+    payload: data,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -127,6 +159,14 @@ const reducer = (state = initialState, action) => {
 
     case `SHOW_ERROR`: return Object.assign({}, state, {
       sendError: action.payload,
+    });
+
+    case `ADD_TO_FAVORITES`: return Object.assign({}, state, {
+      offers: changeOffer(state, action.payload),
+    });
+
+    case `DELETE_FROM_FAVORITES`: return Object.assign({}, state, {
+      offers: changeOffer(state, action.payload),
     });
   }
   return state;
