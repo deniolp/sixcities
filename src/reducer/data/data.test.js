@@ -70,6 +70,9 @@ describe(`Reducer works correctly: `, () => {
       city: {},
       offers: [],
       reviews: [],
+      isReviewSending: false,
+      didReviewSent: false,
+      sendError: null,
     });
   });
 
