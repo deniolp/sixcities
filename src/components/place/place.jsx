@@ -25,7 +25,7 @@ const Place = (props) => {
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
         <AddFavoritesButton
-          className="place-card__bookmark-button"
+          place={place}
         />
       </div>
       <div className="place-card__rating rating">
