@@ -34,7 +34,7 @@ class ReviewList extends PureComponent {
   }
 
   _getReviews(reviews) {
-    return reviews.sort((a, b) => a.date < b.date).map((item) => {
+    return reviews.sort((a, b) => a.date < b.date).slice(0, 10).map((item) => {
       return <Review
         key={`Review-${item.id}`}
         review={item}
