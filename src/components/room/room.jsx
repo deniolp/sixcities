@@ -1,9 +1,9 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Operation} from '../../reducer/data/data';
 import {connect} from 'react-redux';
 import leaflet from 'leaflet';
 
+import {Operation} from '../../reducer/data/data';
 import {getOffers} from '../../reducer/data/selectors';
 import ReviewList from '../review-list/review-list';
 import Map from '../map/map';
@@ -48,7 +48,9 @@ class Room extends PureComponent {
                 {offer.title}
               </h1>
               <AddFavoritesButton
+                key={offer.id}
                 fromRoom={true}
+                className={`property`}
                 place={offer}
               />
             </div>

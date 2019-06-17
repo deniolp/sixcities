@@ -2,7 +2,7 @@
 
 exports[`AddFavoritesButton renders correctly 1`] = `
 <button
-  className="place-card__bookmark-button button"
+  className="property__bookmark-button button "
   onClick={[Function]}
   type="button"
 >

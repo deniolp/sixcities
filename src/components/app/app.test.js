@@ -18,7 +18,7 @@ Operation.deleteFromFavorites = () => (dispatch) => dispatch(jest.fn());
 OperationUser.authorizeUser = () => (dispatch) => dispatch(jest.fn());
 
 describe(`App`, () => {
-  const offers = [
+  const mockOffers = [
     {
       id: 1,
       title: `Strange place`,
@@ -86,7 +86,7 @@ describe(`App`, () => {
   const initialState = {};
   initialState[NAME_SPACE_DATA] = {
     city: {},
-    offers: [],
+    offers: mockOffers,
     reviews: [
       {
         id: 1,
@@ -127,9 +127,9 @@ describe(`App`, () => {
   it(`renders correctly`, () => {
     const tree = renderer.create(<BrowserRouter><Provider store={store}>
       <App
-        offers={offers}
+        offers={mockOffers}
         onClick={jest.fn()}
-        city={offers[0].city}
+        city={mockOffers[0].city}
         leaflet={leafletMock}
         onCityClick={jest.fn()}
         isAuthorizationRequired={true}

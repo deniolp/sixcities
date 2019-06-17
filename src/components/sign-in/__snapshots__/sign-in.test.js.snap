@@ -33,7 +33,7 @@ exports[`SignIn renders correctly 1`] = `
             className="login__input form__input"
             name="email"
             placeholder="Email"
-            required=""
+            required={true}
             type="email"
           />
         </div>
@@ -49,7 +49,7 @@ exports[`SignIn renders correctly 1`] = `
             className="login__input form__input"
             name="password"
             placeholder="Password"
-            required=""
+            required={true}
             type="password"
           />
         </div>

@@ -15,7 +15,7 @@ jest.mock(`../../reducer/user/user`);
 Operation.loadReviews = () => (dispatch) => dispatch(jest.fn());
 OperationUser.authorizeUser = () => (dispatch) => dispatch(jest.fn());
 
-const offers = [
+const mockOffers = [
   {
     id: 1,
     title: `Strange place`,
@@ -83,7 +83,7 @@ const mockStore = configureMockStore(middleware);
 const initialState = {};
 initialState[NAME_SPACE_DATA] = {
   city: {},
-  offers: [],
+  offers: mockOffers,
   reviews: [
     {
       id: 1,
@@ -124,7 +124,7 @@ const store = mockStore(initialState);
 describe(`Room`, () => {
   it(`renders correctly`, () => {
     const tree = renderer.create(<BrowserRouter><Provider store={store}><Room
-      offers={offers}
+      offers={mockOffers}
       match={{
         params: {
           id: 2,
@@ -132,7 +132,7 @@ describe(`Room`, () => {
       }}
       onLoadOffers={jest.fn()}
       onClickHandler={jest.fn()}
-      activeCard={offers[1]}
+      activeCard={mockOffers[1]}
     /></Provider></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

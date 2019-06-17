@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
@@ -6,7 +6,7 @@ import {withRouter} from "react-router-dom";
 import {Operation} from '../../reducer/data/data';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
-class AddFavoritesButton extends PureComponent {
+class AddFavoritesButton extends Component {
   constructor(props) {
     super(props);
 
@@ -14,8 +14,8 @@ class AddFavoritesButton extends PureComponent {
   }
 
   render() {
-    const {fromRoom, place} = this.props;
-    return <button className={this._getButtonClass(fromRoom, place.isFavorite)} type="button" onClick={() => this._onFavoriteClick()}>
+    const {className, fromRoom, place} = this.props;
+    return <button className={`${className}__bookmark-button button ${this._getButtonClass(place.isFavorite)}`} type="button" onClick={() => this._onFavoriteClick()}>
       <svg className={this._getIconClass(fromRoom, place.isFavorite)} width={fromRoom ? `31` : `18`} height={fromRoom ? `33` : `19`}>
         <use xlinkHref="#icon-bookmark"/>
       </svg>
@@ -23,10 +23,8 @@ class AddFavoritesButton extends PureComponent {
     </button>;
   }
 
-  _getButtonClass(fromRoom, isFavorite) {
-    const source = fromRoom ? `property` : `place-card`;
-
-    return isFavorite ? `${source}__bookmark-button ${source}__bookmark-button--active button` : `${source}__bookmark-button button`;
+  _getButtonClass(isFavorite) {
+    return isFavorite ? `place-card__bookmark-button--active` : ``;
   }
 
   _getIconClass(fromRoom, isFavorite) {
@@ -82,6 +80,7 @@ AddFavoritesButton.propTypes = {
   deleteFromFavorites: PropTypes.func.isRequired,
   isAuthorizationRequired: PropTypes.bool.isRequired,
   history: PropTypes.object,
+  className: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
