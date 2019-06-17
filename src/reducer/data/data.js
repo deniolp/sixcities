@@ -5,6 +5,7 @@ const initialState = {
   isReviewSending: false,
   didReviewSent: false,
   sendError: null,
+  favorites: null,
 };
 
 const getRandomCity = (min, max) => Math.floor(Math.random() * (max - min)) + min;
@@ -51,6 +52,14 @@ const Operation = {
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
         dispatch(ActionCreator.loadReviews(preparedData));
+      });
+  },
+
+  loadFavorites: () => (dispatch, _getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        const preparedData = response.data.map((item) => normalizeKeys(item));
+        dispatch(ActionCreator.loadFavorites(preparedData));
       });
   },
 
@@ -128,6 +137,10 @@ const ActionCreator = {
     type: `DELETE_FROM_FAVORITES`,
     payload: data,
   }),
+  loadFavorites: (favorites) => ({
+    type: `LOAD_FAVORITES`,
+    payload: favorites,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -167,6 +180,10 @@ const reducer = (state = initialState, action) => {
 
     case `DELETE_FROM_FAVORITES`: return Object.assign({}, state, {
       offers: changeOffer(state, action.payload),
+    });
+
+    case `LOAD_FAVORITES`: return Object.assign({}, state, {
+      favorites: action.payload,
     });
   }
   return state;

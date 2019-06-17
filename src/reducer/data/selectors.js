@@ -25,3 +25,7 @@ export const getDidReviewSent = (state) => {
 export const getError = (state) => {
   return state[NAME_SPACE].sendError;
 };
+
+export const getFavorites = (state) => {
+  return state[NAME_SPACE].favorites;
+};
