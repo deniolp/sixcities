@@ -48,7 +48,9 @@ class Room extends PureComponent {
                 {offer.title}
               </h1>
               <AddFavoritesButton
+                key={offer.id}
                 fromRoom={true}
+                className={`property`}
                 place={offer}
               />
             </div>
