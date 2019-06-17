@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {Operation} from '../../reducer/data/data';
 import {getFavorites} from '../../reducer/data/selectors';
 import PlaceList from '../place-list/place-list';
+import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
 class Favorites extends PureComponent {
   constructor(props) {
@@ -19,7 +20,12 @@ class Favorites extends PureComponent {
 
   render() {
     const {favorites, onLoadFavorites} = this.props;
+
     if (favorites !== null) {
+      if (favorites.length === 0) {
+        return <FavoritesEmpty />;
+      }
+
       return this._renderFavorites(favorites);
     } else {
       onLoadFavorites();
