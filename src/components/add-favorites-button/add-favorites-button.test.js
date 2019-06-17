@@ -40,6 +40,7 @@ describe(`AddFavoritesButton`, () => {
       addToFavorites={jest.fn()}
       deleteFromFavorites={jest.fn()}
       isAuthorizationRequired={true}
+      className={`property`}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();

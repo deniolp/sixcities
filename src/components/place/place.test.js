@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 
-import Place from '../place/place';
+import {Place} from '../place/place';
 import {Operation} from '../../reducer/data/data';
 import {Operation as OperationUser} from '../../reducer/user/user';
 import NameSpace from '../../reducer/name-space';
@@ -17,35 +17,66 @@ Operation.deleteFromFavorites = () => (dispatch) => dispatch(jest.fn());
 OperationUser.authorizeUser = () => (dispatch) => dispatch(jest.fn());
 
 describe(`Place`, () => {
-  const place = {
-    id: 1,
-    title: `Strange place`,
-    isPremium: true,
-    price: 1200,
-    rating: 1.9,
-    isFavorite: false,
-    description: ``,
-    type: `Apartment`,
-    previewImage: ``,
-    images: [``],
-    goods: [``],
-    bedrooms: 2,
-    maxAdults: 4,
-    host: {},
-    location: {
-      atitude: 12,
-      longitude: 87,
-      zoom: 11,
-    },
-    city: {
-      name: `Berlin`,
+  const mockOffers = [
+    {
+      id: 1,
+      title: `Strange place`,
+      isPremium: true,
+      price: 1200,
+      rating: 1.5,
+      isFavorite: false,
+      description: ``,
+      type: `Apartment`,
+      previewImage: ``,
+      images: [``],
+      goods: [``],
+      bedrooms: 2,
+      maxAdults: 4,
+      host: {},
       location: {
-        atitude: 51,
-        longitude: 7,
+        atitude: 12,
+        longitude: 87,
         zoom: 11,
       },
+      city: {
+        name: `Berlin`,
+        location: {
+          atitude: 51,
+          longitude: 7,
+          zoom: 11,
+        },
+      },
     },
-  };
+    {
+      id: 2,
+      title: `Weird place`,
+      isPremium: true,
+      price: 800,
+      rating: 1.5,
+      isFavorite: false,
+      description: ``,
+      type: `Private room`,
+      previewImage: ``,
+      images: [``],
+      goods: [``],
+      bedrooms: 2,
+      maxAdults: 4,
+      host: {},
+      location: {
+        atitude: 13,
+        longitude: 88,
+        zoom: 11,
+      },
+      city: {
+        name: `Dusseldorf`,
+        location: {
+          atitude: 52,
+          longitude: 8,
+          zoom: 11,
+        },
+      },
+    },
+  ];
 
   const NAME_SPACE_DATA = NameSpace.DATA;
   const NAME_SPACE_USER = NameSpace.USER;
@@ -54,7 +85,7 @@ describe(`Place`, () => {
   const initialState = {};
   initialState[NAME_SPACE_DATA] = {
     city: {},
-    offers: [],
+    offers: mockOffers,
     reviews: [
       {
         id: 1,
@@ -93,10 +124,13 @@ describe(`Place`, () => {
   const store = mockStore(initialState);
 
   it(`renders correctly`, () => {
-    const tree = renderer.create(<BrowserRouter><Provider store={store}><Place
-      place={place}
-      onClickHandler={jest.fn()}
-    /></Provider></BrowserRouter>).toJSON();
+    const tree = renderer.create(<BrowserRouter>
+      <Provider store={store}><Place
+        place={mockOffers[0]}
+        onClickHandler={jest.fn()}
+        offers={mockOffers}
+      /></Provider>
+    </BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

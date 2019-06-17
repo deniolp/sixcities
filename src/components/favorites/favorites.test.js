@@ -83,7 +83,7 @@ const mockStore = configureMockStore(middleware);
 const initialState = {};
 initialState[NAME_SPACE_DATA] = {
   city: {},
-  offers: [],
+  offers: favorites,
   reviews: [
     {
       id: 1,

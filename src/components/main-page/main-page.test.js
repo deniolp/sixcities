@@ -86,7 +86,7 @@ describe(`MainPage`, () => {
   const initialState = {};
   initialState[NAME_SPACE_DATA] = {
     city: {},
-    offers: [],
+    offers: places,
     reviews: [
       {
         id: 1,
