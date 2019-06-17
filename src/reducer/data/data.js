@@ -2,6 +2,9 @@ const initialState = {
   city: {},
   offers: [],
   reviews: [],
+  isReviewSending: false,
+  didReviewSent: false,
+  sendError: null,
 };
 
 const getRandomCity = (min, max) => Math.floor(Math.random() * (max - min)) + min;
@@ -43,6 +46,21 @@ const Operation = {
         const preparedData = response.data.map((item) => normalizeKeys(item));
         dispatch(ActionCreator.loadReviews(preparedData));
       });
+  },
+
+  postReview: (review, id) => (dispatch, _getState, api) => {
+    return api.post(`/comments/${id}`, review)
+      .then((response) => {
+        const preparedData = response.data.map((item) => normalizeKeys(item));
+        dispatch(ActionCreator.postReview(preparedData));
+        dispatch(ActionCreator.showError(null));
+        dispatch(ActionCreator.blockForm(false));
+        dispatch(ActionCreator.cleanForm(true));
+      })
+      .catch((_error) => {
+        dispatch(ActionCreator.blockForm(false));
+        dispatch(ActionCreator.showError(`Error occured :-(`));
+      });
   }
 };
 
@@ -62,6 +80,22 @@ const ActionCreator = {
     type: `LOAD_REVIEWS`,
     payload: reviews,
   }),
+  postReview: (reviews) => ({
+    type: `POST_REVIEW`,
+    payload: reviews,
+  }),
+  blockForm: (bool) => ({
+    type: `BLOCK_FORM`,
+    payload: bool,
+  }),
+  cleanForm: (bool) => ({
+    type: `CLEAN_FORM`,
+    payload: bool,
+  }),
+  showError: (error) => ({
+    type: `SHOW_ERROR`,
+    payload: error,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -77,6 +111,22 @@ const reducer = (state = initialState, action) => {
 
     case `LOAD_REVIEWS`: return Object.assign({}, state, {
       reviews: action.payload,
+    });
+
+    case `POST_REVIEW`: return Object.assign({}, state, {
+      reviews: action.payload,
+    });
+
+    case `BLOCK_FORM`: return Object.assign({}, state, {
+      isReviewSending: action.payload,
+    });
+
+    case `CLEAN_FORM`: return Object.assign({}, state, {
+      didReviewSent: action.payload,
+    });
+
+    case `SHOW_ERROR`: return Object.assign({}, state, {
+      sendError: action.payload,
     });
   }
   return state;

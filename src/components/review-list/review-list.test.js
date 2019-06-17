@@ -6,12 +6,16 @@ import configureMockStore from 'redux-mock-store';
 
 import ReviewList from '../review-list/review-list';
 import {Operation} from '../../reducer/data/data';
+import {Operation as OperationUser} from '../../reducer/user/user';
 import NameSpace from '../../reducer/name-space';
 
 jest.mock(`../../reducer/data/data`);
+jest.mock(`../../reducer/user/user`);
 Operation.loadReviews = () => (dispatch) => dispatch(jest.fn());
+OperationUser.authorizeUser = () => (dispatch) => dispatch(jest.fn());
 
 const NAME_SPACE = NameSpace.DATA;
+const NAME_SPACE_USER = NameSpace.USER;
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
 const initialState = {};
@@ -44,6 +48,14 @@ initialState[NAME_SPACE] = {
       },
     },
   ],
+  isReviewSending: false,
+  didReviewSent: false,
+  sendError: null,
+};
+initialState[NAME_SPACE_USER] = {
+  user: {},
+  authError: null,
+  isAuthorizationRequired: false,
 };
 const store = mockStore(initialState);
 
