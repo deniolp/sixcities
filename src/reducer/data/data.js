@@ -2,6 +2,8 @@ const initialState = {
   city: {},
   offers: [],
   reviews: [],
+  isReviewSending: false,
+  didReviewSent: false,
 };
 
 const getRandomCity = (min, max) => Math.floor(Math.random() * (max - min)) + min;
@@ -50,8 +52,12 @@ const Operation = {
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
         dispatch(ActionCreator.postReview(preparedData));
+        dispatch(ActionCreator.blockForm(false));
+        dispatch(ActionCreator.cleanForm(true));
       })
-      .catch((_error) => {});
+      .catch((_error) => {
+        dispatch(ActionCreator.blockForm(false));
+      });
   }
 };
 
@@ -75,6 +81,14 @@ const ActionCreator = {
     type: `POST_REVIEW`,
     payload: reviews,
   }),
+  blockForm: (bool) => ({
+    type: `BLOCK_FORM`,
+    payload: bool,
+  }),
+  cleanForm: (bool) => ({
+    type: `CLEAN_FORM`,
+    payload: bool,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -94,6 +108,14 @@ const reducer = (state = initialState, action) => {
 
     case `POST_REVIEW`: return Object.assign({}, state, {
       reviews: action.payload,
+    });
+
+    case `BLOCK_FORM`: return Object.assign({}, state, {
+      isReviewSending: action.payload,
+    });
+
+    case `CLEAN_FORM`: return Object.assign({}, state, {
+      didReviewSent: action.payload,
     });
   }
   return state;

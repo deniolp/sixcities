@@ -13,3 +13,11 @@ export const getCity = (state) => {
 export const getReviews = (state) => {
   return state[NAME_SPACE].reviews;
 };
+
+export const getIsReviewSending = (state) => {
+  return state[NAME_SPACE].isReviewSending;
+};
+
+export const getDidReviewSent = (state) => {
+  return state[NAME_SPACE].didReviewSent;
+};
