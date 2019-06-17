@@ -12,6 +12,11 @@ class Favorites extends PureComponent {
     super(props);
   }
 
+  componentDidMount() {
+    const {onLoadFavorites} = this.props;
+    onLoadFavorites();
+  }
+
   render() {
     const {favorites, onLoadFavorites} = this.props;
     if (favorites !== null) {
@@ -77,14 +82,6 @@ class Favorites extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => ({
-  favorites: getFavorites(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLoadFavorites: () => dispatch(Operation.loadFavorites()),
-});
-
 Favorites.propTypes = {
   onLoadFavorites: PropTypes.func.isRequired,
   favorites: PropTypes.arrayOf(PropTypes.shape({
@@ -109,6 +106,14 @@ Favorites.propTypes = {
     }).isRequired,
   })),
 };
+
+const mapStateToProps = (state) => ({
+  favorites: getFavorites(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadFavorites: () => dispatch(Operation.loadFavorites()),
+});
 
 export {Favorites};
 
