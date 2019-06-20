@@ -5,7 +5,6 @@ const initialState = {
   isReviewSending: false,
   didReviewSent: false,
   sendError: null,
-  favorites: null,
 };
 
 const getRandomCity = (min, max) => Math.floor(Math.random() * (max - min)) + min;
@@ -30,13 +29,13 @@ const normalizeKeys = (obj) => {
   return obj;
 };
 
-const getCity = (selectedCity, offers) => offers.filter((offer) => offer.city.name === selectedCity)[0].city;
-
 const changeOffer = (state, newOffer) => {
   return state.offers.map((item) => {
     return item.id === newOffer.id ? newOffer : item;
   });
 };
+
+const getCity = (selectedCity, offers) => offers.filter((offer) => offer.city.name === selectedCity)[0].city;
 
 const Operation = {
   loadOffers: () => (dispatch, _getState, api) => {
@@ -55,14 +54,6 @@ const Operation = {
       });
   },
 
-  loadFavorites: () => (dispatch, _getState, api) => {
-    return api.get(`/favorite`)
-      .then((response) => {
-        const preparedData = response.data.map((item) => normalizeKeys(item));
-        dispatch(ActionCreator.loadFavorites(preparedData));
-      });
-  },
-
   postReview: (review, id) => (dispatch, _getState, api) => {
     return api.post(`/comments/${id}`, review)
       .then((response) => {
@@ -76,24 +67,6 @@ const Operation = {
         dispatch(ActionCreator.blockForm(false));
         dispatch(ActionCreator.showError(`Error occured :-(`));
       });
-  },
-
-  addToFavorites: (id) => (dispatch, _getState, api) => {
-    return api.post(`/favorite/${id}/1`)
-      .then((response) => {
-        const preparedData = normalizeKeys(response.data);
-        dispatch(ActionCreator.addToFavorites(preparedData));
-      })
-      .catch((_error) => {});
-  },
-
-  deleteFromFavorites: (id) => (dispatch, _getState, api) => {
-    return api.post(`/favorite/${id}/0`)
-      .then((response) => {
-        const preparedData = normalizeKeys(response.data);
-        dispatch(ActionCreator.deleteFromFavorites(preparedData));
-      })
-      .catch((_error) => {});
   },
 };
 
@@ -137,10 +110,6 @@ const ActionCreator = {
     type: `DELETE_FROM_FAVORITES`,
     payload: data,
   }),
-  loadFavorites: (favorites) => ({
-    type: `LOAD_FAVORITES`,
-    payload: favorites,
-  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -180,10 +149,6 @@ const reducer = (state = initialState, action) => {
 
     case `DELETE_FROM_FAVORITES`: return Object.assign({}, state, {
       offers: changeOffer(state, action.payload),
-    });
-
-    case `LOAD_FAVORITES`: return Object.assign({}, state, {
-      favorites: action.payload,
     });
   }
   return state;

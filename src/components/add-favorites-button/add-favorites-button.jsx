@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
 
-import {Operation} from '../../reducer/data/data';
+import {Operation} from '../../reducer/user/user';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
 class AddFavoritesButton extends PureComponent {

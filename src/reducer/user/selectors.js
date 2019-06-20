@@ -13,3 +13,7 @@ export const getAuthError = (state) => {
 export const getUserData = (state) => {
   return state[NAME_SPACE].user;
 };
+
+export const getFavorites = (state) => {
+  return state[NAME_SPACE].favorites;
+};

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {Operation} from '../../reducer/data/data';
-import {getFavorites} from '../../reducer/data/selectors';
+import {Operation} from '../../reducer/user/user';
+import {getFavorites} from '../../reducer/user/selectors';
 import PlaceList from '../place-list/place-list';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
 

@@ -13,8 +13,8 @@ class SignIn extends PureComponent {
     this._handleSubmit = this._handleSubmit.bind(this);
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.user !== prevProps.user) {
+  componentDidUpdate() {
+    if (this.props.user.name) {
       const {history} = this.props;
       history.push(`/`);
     }
