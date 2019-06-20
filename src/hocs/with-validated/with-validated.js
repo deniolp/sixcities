@@ -17,8 +17,8 @@ const withValidated = (Component) => {
       return (
         <Component
           {...this.props}
-          onChangeTextareaHandler={this._onChangeTextareaHandler}
-          onClickRadioHandler={this._onClickRadioHandler}
+          onTextareaChange={this._onChangeTextareaHandler}
+          onRadioClick={this._onClickRadioHandler}
           isValidated={this.state.isValidated}
         />
       );
