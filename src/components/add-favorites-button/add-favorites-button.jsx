@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
@@ -6,7 +6,7 @@ import {withRouter} from "react-router-dom";
 import {Operation} from '../../reducer/data/data';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
-class AddFavoritesButton extends Component {
+class AddFavoritesButton extends PureComponent {
   constructor(props) {
     super(props);
 
