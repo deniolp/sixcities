@@ -56,7 +56,7 @@ class Favorites extends PureComponent {
                       <div className="favorites__places">
                         <PlaceList
                           offers={item.offers}
-                          onClickHandler={() => {}}
+                          onPlaceClick={() => {}}
                         />
                       </div>
                     </li>

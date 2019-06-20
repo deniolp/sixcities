@@ -30,7 +30,7 @@ class Room extends PureComponent {
   }
 
   _renderOffer(offer, offers) {
-    const {onClickHandler, activeCard} = this.props;
+    const {onPlaceClick, activeCard} = this.props;
     return <main className="page__main page__main--property">
       <section className="property">
         <div className="property__gallery-container container">
@@ -120,7 +120,7 @@ class Room extends PureComponent {
             <PlaceList
               key={`place-list-${offers.id}`}
               offers={offers}
-              onClickHandler={onClickHandler}
+              onPlaceClick={onPlaceClick}
             />
           </div>
         </section>
@@ -174,7 +174,7 @@ class Room extends PureComponent {
 Room.propTypes = {
   match: PropTypes.object.isRequired,
   onLoadOffers: PropTypes.func.isRequired,
-  onClickHandler: PropTypes.func.isRequired,
+  onPlaceClick: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
