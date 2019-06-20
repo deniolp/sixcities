@@ -17,7 +17,7 @@ const withSortings = (Component) => {
       return (
         <Component
           {...this.props}
-          onSortingsClickHandler={this._onFormClickHandler}
+          onSortingsClick={this._onFormClickHandler}
           onMouseLeaveHandler={this._onMouseLeaveHandler}
           opened={this.state.opened}
         />

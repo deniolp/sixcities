@@ -8,11 +8,11 @@ const sortings = [
 ];
 
 const Sortings = (props) => {
-  const {onSortingsClickHandler, onSortingClick, onMouseLeaveHandler, opened, activeSorting} = props;
+  const {onSortingsClick, onSortingClick, onMouseLeaveHandler, opened, activeSorting} = props;
 
   return <form className="places__sorting" action="#" method="get">
     <span className="places__sorting-caption">Sort by </span>
-    <span className="places__sorting-type" tabIndex="0" onClick={() => onSortingsClickHandler()}>
+    <span className="places__sorting-type" tabIndex="0" onClick={() => onSortingsClick()}>
       {sortings[activeSorting]}
       <svg className="places__sorting-arrow" width="7" height="4">
         <use xlinkHref="#icon-arrow-select"/>
@@ -25,7 +25,7 @@ const Sortings = (props) => {
 };
 
 Sortings.propTypes = {
-  onSortingsClickHandler: PropTypes.func.isRequired,
+  onSortingsClick: PropTypes.func.isRequired,
   onSortingClick: PropTypes.func.isRequired,
   onMouseLeaveHandler: PropTypes.func.isRequired,
   opened: PropTypes.bool.isRequired,
