@@ -11,7 +11,7 @@ const withSorted = (Component) => {
         activeSorting: 0,
       };
 
-      this._onSortingClickHandler = this._onSortingClickHandler.bind(this);
+      this._handleSortingClick = this._handleSortingClick.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -26,14 +26,14 @@ const withSorted = (Component) => {
       return (
         <Component
           {...this.props}
-          onSortingClick={this._onSortingClickHandler}
+          onSortingClick={this._handleSortingClick}
           sortedOffers={this.state.sortedOffers}
           activeSorting={this.state.activeSorting}
         />
       );
     }
 
-    _onSortingClickHandler(index) {
+    _handleSortingClick(index) {
       switch (index) {
         case 0:
           this.setState({

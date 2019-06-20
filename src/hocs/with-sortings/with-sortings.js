@@ -9,28 +9,28 @@ const withSortings = (Component) => {
         opened: false,
       };
 
-      this._onFormClickHandler = this._onFormClickHandler.bind(this);
-      this._onMouseLeaveHandler = this._onMouseLeaveHandler.bind(this);
+      this._handleFormClick = this._handleFormClick.bind(this);
+      this._handleFormMouseLeave = this._handleFormMouseLeave.bind(this);
     }
 
     render() {
       return (
         <Component
           {...this.props}
-          onSortingsClick={this._onFormClickHandler}
-          onMouseLeave={this._onMouseLeaveHandler}
+          onSortingsClick={this._handleFormClick}
+          onMouseLeave={this._handleFormMouseLeave}
           opened={this.state.opened}
         />
       );
     }
 
-    _onFormClickHandler() {
+    _handleFormClick() {
       this.setState({
         opened: !this.state.opened,
       });
     }
 
-    _onMouseLeaveHandler() {
+    _handleFormMouseLeave() {
       this.setState({
         opened: false,
       });
