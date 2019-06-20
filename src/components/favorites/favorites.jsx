@@ -48,7 +48,7 @@ class Favorites extends PureComponent {
                     <li key={item.city} className="favorites__locations-items">
                       <div className="favorites__locations locations locations--current">
                         <div className="locations__item">
-                          <a className="locations__item-link" href="#">
+                          <a className="locations__item-link">
                             <span>{item.city}</span>
                           </a>
                         </div>

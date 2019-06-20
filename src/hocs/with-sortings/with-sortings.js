@@ -18,7 +18,7 @@ const withSortings = (Component) => {
         <Component
           {...this.props}
           onSortingsClick={this._onFormClickHandler}
-          onMouseLeaveHandler={this._onMouseLeaveHandler}
+          onMouseLeave={this._onMouseLeaveHandler}
           opened={this.state.opened}
         />
       );
