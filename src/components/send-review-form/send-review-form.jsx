@@ -26,7 +26,7 @@ class SendReviewForm extends PureComponent {
     return <form className="reviews__form form" action="#" method="post" onSubmit={(evt) => {
       evt.preventDefault();
       const data = new FormData(evt.target);
-      this._handleSubmit(data.get(`review`), data.get(`rating`), id);
+      this._handleFormSubmit(data.get(`review`), data.get(`rating`), id);
     }} ref={this.formRef}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
@@ -79,7 +79,7 @@ class SendReviewForm extends PureComponent {
     </form>;
   }
 
-  _handleSubmit(comment, rating, id) {
+  _handleFormSubmit(comment, rating, id) {
     const review = {
       rating,
       comment

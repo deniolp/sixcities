@@ -10,12 +10,12 @@ class AddFavoritesButton extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._onFavoriteClick = this._onFavoriteClick.bind(this);
+    this._handleButtonClick = this._handleButtonClick.bind(this);
   }
 
   render() {
     const {className, fromRoom, place} = this.props;
-    return <button className={`${className}__bookmark-button button ${this._getButtonClass(place.isFavorite)}`} type="button" onClick={() => this._onFavoriteClick()}>
+    return <button className={`${className}__bookmark-button button ${this._getButtonClass(place.isFavorite)}`} type="button" onClick={() => this._handleButtonClick()}>
       <svg className={this._getIconClass(fromRoom, place.isFavorite)} width={fromRoom ? `31` : `18`} height={fromRoom ? `33` : `19`}>
         <use xlinkHref="#icon-bookmark"/>
       </svg>
@@ -37,7 +37,7 @@ class AddFavoritesButton extends PureComponent {
     }
   }
 
-  _onFavoriteClick() {
+  _handleButtonClick() {
     const {addToFavorites, deleteFromFavorites, place, isAuthorizationRequired} = this.props;
 
     if (!isAuthorizationRequired) {
