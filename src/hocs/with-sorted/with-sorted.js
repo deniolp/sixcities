@@ -44,21 +44,21 @@ const withSorted = (Component) => {
 
         case 1:
           this.setState({
-            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name).slice(``).sort((a, b) => a.price > b.price),
+            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name).slice(``).sort((a, b) => a.price - b.price),
             activeSorting: 1,
           });
           break;
 
         case 2:
           this.setState({
-            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name).slice(``).sort((a, b) => a.price < b.price),
+            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name).slice(``).sort((a, b) => b.price - a.price),
             activeSorting: 2,
           });
           break;
 
         case 3:
           this.setState({
-            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name).slice(``).sort((a, b) => a.rating < b.rating),
+            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name).slice(``).sort((a, b) => b.rating - a.rating),
             activeSorting: 3,
           });
           break;
