@@ -94,22 +94,22 @@ const mockObj = {
   }
 };
 
-let clickHandler;
+let handleClick;
 let placeElement;
 let placeDescription;
 let image;
 let placeObj = {};
 
 beforeEach(() => {
-  clickHandler = jest.fn();
+  handleClick = jest.fn();
   placeElement = shallow(
       <Place
         offers={offers}
         place={mockObj}
-        onClickHandler={() => {
+        onPlaceClick={() => {
           placeObj = mockObj;
         }}
-        setHighlightedItem={clickHandler}
+        setHighlightedItem={handleClick}
         active={false}
       />);
   placeDescription = placeElement.find(`Link`);
@@ -121,8 +121,8 @@ describe(`Before clicking`, () => {
     expect(placeDescription).toHaveLength(1);
   });
 
-  it(`clickHandler should not be called`, () => {
-    expect(clickHandler).toHaveBeenCalledTimes(0);
+  it(`handleClick should not be called`, () => {
+    expect(handleClick).toHaveBeenCalledTimes(0);
   });
 });
 

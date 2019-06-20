@@ -127,7 +127,7 @@ describe(`Place`, () => {
     const tree = renderer.create(<BrowserRouter>
       <Provider store={store}><Place
         place={mockOffers[0]}
-        onClickHandler={jest.fn()}
+        onPlaceClick={jest.fn()}
         offers={mockOffers}
       /></Provider>
     </BrowserRouter>).toJSON();

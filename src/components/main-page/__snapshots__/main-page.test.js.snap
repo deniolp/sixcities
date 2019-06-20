@@ -72,14 +72,14 @@ Array [
           <span
             className="places__sorting-caption"
           >
-            Sort by
+            Sort by 
           </span>
           <span
             className="places__sorting-type"
             onClick={[Function]}
             tabIndex="0"
           >
-            Popular
+            Price: low to high
             <svg
               className="places__sorting-arrow"
               height="4"

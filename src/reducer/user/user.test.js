@@ -13,7 +13,7 @@ describe(`Reducer works correctly: `, () => {
 
     return Operation.authorizeUser(`d@ya.ru`, `yt`)(dispatch, jest.fn(), api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenCalledTimes(4);
         expect(dispatch.mock.calls[0][0]).toEqual({
           type: `REQUIRE_AUTHORIZATION`,
           payload: false,
