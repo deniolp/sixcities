@@ -5,21 +5,21 @@ import Place from '../place/place';
 
 class PlaceList extends PureComponent {
   render() {
-    const {offers, onClickHandler} = this.props;
+    const {offers, onPlaceClick} = this.props;
     return <div className="cities__places-list places__list tabs__content">
       {
         offers.map((item) => {
-          return this._getPlace(item, onClickHandler);
+          return this._getPlace(item, onPlaceClick);
         })
       }
     </div>;
   }
 
-  _getPlace(item, onClickHandler) {
+  _getPlace(item, onPlaceClick) {
     return <Place
       place={item}
       key={item.id}
-      onClickHandler={onClickHandler}
+      onPlaceClick={onPlaceClick}
     />;
   }
 }
@@ -46,7 +46,7 @@ PlaceList.propTypes = {
       location: PropTypes.object.isRequired,
     }).isRequired,
   })).isRequired,
-  onClickHandler: PropTypes.func.isRequired,
+  onPlaceClick: PropTypes.func.isRequired,
 };
 
 export default PlaceList;

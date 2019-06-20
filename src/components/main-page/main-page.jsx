@@ -9,7 +9,7 @@ import withActiveCard from '../../hocs/with-active-card/with-active-card';
 import withSorted from '../../hocs/with-sorted/with-sorted';
 
 const MainPage = (props) => {
-  const {cities, leaflet, offers, city, onCityClick, onClickHandler, activeCard, onSortingClickHandler, sortedOffers, activeSorting} = props;
+  const {cities, leaflet, offers, city, onCityClick, onPlaceClick, activeCard, onSortingClickHandler, sortedOffers, activeSorting} = props;
   const filteredOffers = sortedOffers.length === 0 ? offers.filter((item) => item.city.name === city.name) : sortedOffers;
 
   return <Fragment>
@@ -36,7 +36,7 @@ const MainPage = (props) => {
           <PlaceList
             key={`place-list-${city.name}`}
             offers={filteredOffers}
-            onClickHandler={onClickHandler}
+            onPlaceClick={onPlaceClick}
           />
         </section>
         <div className="cities__right-section">
@@ -99,7 +99,7 @@ MainPage.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   city: PropTypes.object.isRequired,
   onCityClick: PropTypes.func.isRequired,
-  onClickHandler: PropTypes.func.isRequired,
+  onPlaceClick: PropTypes.func.isRequired,
   onSortingClickHandler: PropTypes.func.isRequired,
   activeCard: PropTypes.object,
   activeSorting: PropTypes.number.isRequired,

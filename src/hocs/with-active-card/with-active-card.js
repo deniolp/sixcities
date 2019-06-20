@@ -25,7 +25,7 @@ const withActiveCard = ((Component) => {
       return (
         <Component
           {...this.props}
-          onClickHandler={this._onCardClickHandler}
+          onPlaceClick={this._onCardClickHandler}
           activeCard={this.state.activeCard}
         />
       );
