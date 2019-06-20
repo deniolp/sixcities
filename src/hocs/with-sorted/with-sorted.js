@@ -26,7 +26,7 @@ const withSorted = (Component) => {
       return (
         <Component
           {...this.props}
-          onSortingClickHandler={this._onSortingClickHandler}
+          onSortingClick={this._onSortingClickHandler}
           sortedOffers={this.state.sortedOffers}
           activeSorting={this.state.activeSorting}
         />
