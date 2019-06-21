@@ -73,7 +73,6 @@ describe(`Reducer works correctly: `, () => {
       isReviewSending: false,
       didReviewSent: false,
       sendError: null,
-      favorites: null,
     });
   });
 

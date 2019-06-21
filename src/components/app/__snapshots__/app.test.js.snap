@@ -169,7 +169,7 @@ exports[`App renders correctly 1`] = `
           <span
             className="places__sorting-caption"
           >
-            Sort by
+            Sort by 
           </span>
           <span
             className="places__sorting-type"

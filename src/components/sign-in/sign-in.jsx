@@ -10,11 +10,11 @@ class SignIn extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._handleSubmit = this._handleSubmit.bind(this);
+    this._handleFormSubmit = this._handleFormSubmit.bind(this);
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.user !== prevProps.user) {
+  componentDidUpdate() {
+    if (this.props.user.name) {
       const {history} = this.props;
       history.push(`/`);
     }
@@ -30,7 +30,7 @@ class SignIn extends PureComponent {
           <form className="login__form form" action="#" method="post" onSubmit={(evt) => {
             evt.preventDefault();
             const data = new FormData(evt.target);
-            this._handleSubmit(data.get(`email`), data.get(`password`));
+            this._handleFormSubmit(data.get(`email`), data.get(`password`));
           }}>
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden">E-mail</label>
@@ -55,7 +55,7 @@ class SignIn extends PureComponent {
     </main>;
   }
 
-  _handleSubmit(email, password) {
+  _handleFormSubmit(email, password) {
     this.props.submitForm(email, password);
   }
 

@@ -141,10 +141,10 @@ describe(`MainPage`, () => {
         }}
         onCityClick={jest.fn()}
         leaflet={leafletMock}
-        onClickHandler={jest.fn()}
+        onPlaceClick={jest.fn()}
         activeCard={{}}
         sortedOffers={places}
-        onSortingClickHandler={jest.fn()}
+        onSortingClick={jest.fn()}
         activeSorting={1}
       />
     </Provider></BrowserRouter>).toJSON();

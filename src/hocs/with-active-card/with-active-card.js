@@ -10,7 +10,7 @@ const withActiveCard = ((Component) => {
         activeCard: null,
       };
 
-      this._onCardClickHandler = this._onCardClickHandler.bind(this);
+      this._handleCardClick = this._handleCardClick.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -25,13 +25,13 @@ const withActiveCard = ((Component) => {
       return (
         <Component
           {...this.props}
-          onClickHandler={this._onCardClickHandler}
+          onPlaceClick={this._handleCardClick}
           activeCard={this.state.activeCard}
         />
       );
     }
 
-    _onCardClickHandler(item) {
+    _handleCardClick(item) {
       this.setState({
         activeCard: item,
       });

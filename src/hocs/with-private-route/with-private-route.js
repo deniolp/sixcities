@@ -4,7 +4,7 @@ import {Redirect} from 'react-router-dom';
 const withPrivateRoute = (Component, data) => {
   class WithPrivateRoute extends PureComponent {
     render() {
-      if (!Object.keys(data).length) {
+      if (!data.name) {
         return <Redirect to="/login" />;
       }
 

@@ -10,14 +10,11 @@ import {BrowserRouter} from 'react-router-dom';
 import App from './components/app/app';
 import {configureAPI} from './api';
 import reducer from './reducer/main-reducer';
-import {Operation} from './reducer/data/data';
 import history from './history';
 
 const init = () => {
   const api = configureAPI(() => history.push(`/login`));
   const store = createStore(reducer, compose(applyMiddleware(thunk.withExtraArgument(api)), window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (a) => a));
-
-  store.dispatch(Operation.loadOffers());
 
   ReactDom.render(<Provider store={store}>
     <BrowserRouter>

@@ -128,10 +128,11 @@ describe(`App`, () => {
     const tree = renderer.create(<BrowserRouter><Provider store={store}>
       <App
         offers={mockOffers}
-        onClick={jest.fn()}
         city={mockOffers[0].city}
         leaflet={leafletMock}
         onCityClick={jest.fn()}
+        onLogIn={jest.fn()}
+        onLoadOffers={jest.fn()}
         isAuthorizationRequired={true}
         user={{
           avatarUrl: `/path.jpg`,

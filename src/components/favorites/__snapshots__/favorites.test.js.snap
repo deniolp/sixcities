@@ -30,7 +30,6 @@ Array [
               >
                 <a
                   className="locations__item-link"
-                  href="#"
                 >
                   <span>
                     Berlin
@@ -162,7 +161,6 @@ Array [
               >
                 <a
                   className="locations__item-link"
-                  href="#"
                 >
                   <span>
                     Dusseldorf

@@ -19,7 +19,7 @@ class Place extends PureComponent {
   }
 
   _renderOffer(place) {
-    const {onClickHandler} = this.props;
+    const {onPlaceClick} = this.props;
 
     return <article className="cities__place-card place-card">
       {
@@ -28,7 +28,7 @@ class Place extends PureComponent {
         </div> : null
       }
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a onClick={() => onClickHandler(place)}>
+        <a onClick={() => onPlaceClick(place)}>
           <img className="place-card__image" src={place.previewImage} width="260" height="200" alt="Place image" />
         </a>
       </div>
@@ -106,7 +106,7 @@ Place.propTypes = {
       location: PropTypes.object.isRequired,
     }).isRequired,
   }).isRequired,
-  onClickHandler: PropTypes.func.isRequired,
+  onPlaceClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

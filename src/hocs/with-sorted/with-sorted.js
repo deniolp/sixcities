@@ -11,7 +11,7 @@ const withSorted = (Component) => {
         activeSorting: 0,
       };
 
-      this._onSortingClickHandler = this._onSortingClickHandler.bind(this);
+      this._handleSortingClick = this._handleSortingClick.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -26,14 +26,14 @@ const withSorted = (Component) => {
       return (
         <Component
           {...this.props}
-          onSortingClickHandler={this._onSortingClickHandler}
+          onSortingClick={this._handleSortingClick}
           sortedOffers={this.state.sortedOffers}
           activeSorting={this.state.activeSorting}
         />
       );
     }
 
-    _onSortingClickHandler(index) {
+    _handleSortingClick(index) {
       switch (index) {
         case 0:
           this.setState({
@@ -44,21 +44,21 @@ const withSorted = (Component) => {
 
         case 1:
           this.setState({
-            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name).slice(``).sort((a, b) => a.price > b.price),
+            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name).slice(``).sort((a, b) => a.price - b.price),
             activeSorting: 1,
           });
           break;
 
         case 2:
           this.setState({
-            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name).slice(``).sort((a, b) => a.price < b.price),
+            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name).slice(``).sort((a, b) => b.price - a.price),
             activeSorting: 2,
           });
           break;
 
         case 3:
           this.setState({
-            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name).slice(``).sort((a, b) => a.rating < b.rating),
+            sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name).slice(``).sort((a, b) => b.rating - a.rating),
             activeSorting: 3,
           });
           break;

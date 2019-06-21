@@ -10,27 +10,27 @@ const withValidated = (Component) => {
         isValidated: false,
       };
 
-      this._onChangeTextareaHandler = this._onChangeTextareaHandler.bind(this);
-      this._onClickRadioHandler = this._onClickRadioHandler.bind(this);
+      this._handleTextareaChange = this._handleTextareaChange.bind(this);
+      this._handleRadioClick = this._handleRadioClick.bind(this);
     }
     render() {
       return (
         <Component
           {...this.props}
-          onChangeTextareaHandler={this._onChangeTextareaHandler}
-          onClickRadioHandler={this._onClickRadioHandler}
+          onTextareaChange={this._handleTextareaChange}
+          onRadioClick={this._handleRadioClick}
           isValidated={this.state.isValidated}
         />
       );
     }
 
-    _onClickRadioHandler() {
+    _handleRadioClick() {
       this.setState({
         isRadioPressed: true,
       });
     }
 
-    _onChangeTextareaHandler(evt) {
+    _handleTextareaChange(evt) {
       evt.preventDefault();
 
       if (evt.target.value.length >= 50 && evt.target.value.length <= 300) {

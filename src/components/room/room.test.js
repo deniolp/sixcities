@@ -131,7 +131,7 @@ describe(`Room`, () => {
         },
       }}
       onLoadOffers={jest.fn()}
-      onClickHandler={jest.fn()}
+      onPlaceClick={jest.fn()}
       activeCard={mockOffers[1]}
     /></Provider></BrowserRouter>).toJSON();
 
