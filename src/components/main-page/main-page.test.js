@@ -123,7 +123,6 @@ describe(`MainPage`, () => {
     isAuthorizationRequired: false,
   };
   const store = mockStore(initialState);
-
   const cities = [`Berlin`, `Dusseldorf`];
 
   it(`renders correctly`, () => {
