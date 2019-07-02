@@ -1,5 +1,4 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import {Switch, Route, Redirect} from 'react-router-dom';
 
@@ -14,8 +13,21 @@ import {Operation as UserOperation} from '../../reducer/user/user';
 import {getCity, getOffers} from '../../reducer/data/selectors';
 import {getAuthorizationStatus, getUserData} from '../../reducer/user/selectors';
 import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
+import {Place, City, User} from '../../types';
 
-class App extends PureComponent {
+interface Props {
+  offers: Array<Place>,
+  city: City,
+  user: User,
+  favorites: [],
+  isAuthorizationRequired: boolean,
+  onCityClick: (selectedCity: string, offers: Array<Place>) => void,
+  onLogIn: () => void,
+  onLoadOffers: () => void,
+  leaflet: {},
+}
+
+class App extends React.PureComponent<Props, null> {
   constructor(props) {
     super(props);
   }
@@ -36,7 +48,7 @@ class App extends PureComponent {
       offers={offers}
       cities={cities}
       city={city}
-      onCityClick={(selectedCity) => onCityClick(selectedCity, offers)}
+      onCityClick={(selectedCity: string) => onCityClick(selectedCity, offers)}
       leaflet={leaflet}
     /> : <MainPageEmpty
       city={city}
@@ -89,37 +101,6 @@ class App extends PureComponent {
     </Switch>;
   }
 }
-
-App.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.array.isRequired,
-    goods: PropTypes.array.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    host: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      location: PropTypes.object.isRequired,
-    }).isRequired,
-  })).isRequired,
-  leaflet: PropTypes.object.isRequired,
-  city: PropTypes.object.isRequired,
-  user: PropTypes.object,
-  onCityClick: PropTypes.func.isRequired,
-  onLogIn: PropTypes.func.isRequired,
-  onLoadOffers: PropTypes.func.isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   city: getCity(state),
