@@ -33,15 +33,14 @@ export interface Place {
   description: string,
   location: Location,
   id: number,
-  distance?: number
 }
 
 export interface User {
   id: number,
   email: string,
   name: string,
-  avatar_url: string,
-  is_pro: boolean
+  avatarUrl: string,
+  isPro: boolean
 }
 
 export interface Review {
@@ -49,5 +48,5 @@ export interface Review {
   user: Host,
   rating: number,
   comment: string,
-  datetime: string
+  date: any,
 }

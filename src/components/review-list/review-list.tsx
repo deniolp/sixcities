@@ -1,5 +1,4 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
 
 import {Operation} from '../../reducer/data/data';
@@ -7,8 +6,16 @@ import {getReviews} from '../../reducer/data/selectors';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 import Review from '../review/review';
 import SendReviewForm from '../send-review-form/send-review-form';
+import {Review as Rev} from '../../types';
 
-class ReviewList extends PureComponent {
+interface Props {
+  reviews: Rev[],
+  id: number,
+  isAuthorizationRequired: boolean,
+  onLoadReviews: (id: number) => void,
+}
+
+class ReviewList extends React.PureComponent<Props, null> {
   constructor(props) {
     super(props);
   }
@@ -42,13 +49,6 @@ class ReviewList extends PureComponent {
     });
   }
 }
-
-ReviewList.propTypes = {
-  reviews: PropTypes.array.isRequired,
-  id: PropTypes.number.isRequired,
-  onLoadReviews: PropTypes.func.isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   reviews: getReviews(state),

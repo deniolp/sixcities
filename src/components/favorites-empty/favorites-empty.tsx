@@ -1,8 +1,8 @@
-import React, {Fragment} from 'react';
+import * as React from 'react';
 import {Link} from 'react-router-dom';
 
 const FavoritesEmpty = () => {
-  return <Fragment>
+  return <React.Fragment>
     <main className="page__main page__main--favorites page__main--favorites-empty">
       <div className="page__favorites-container container">
         <section className="favorites favorites--empty">
@@ -19,7 +19,7 @@ const FavoritesEmpty = () => {
         <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
       </Link>
     </footer>
-  </Fragment>;
+  </React.Fragment>;
 };
 
 export default FavoritesEmpty;

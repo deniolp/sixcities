@@ -1,5 +1,4 @@
-import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
@@ -7,12 +6,27 @@ import Cities from '../cities/cities';
 import Sortings from '../sortings/sortings';
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
 import withSorted from '../../hocs/with-sorted/with-sorted';
+import {Place, City} from '../../types';
 
-const MainPage = (props) => {
-  const {cities, leaflet, offers, city, onCityClick, onPlaceClick, activeCard, onSortingClick, sortedOffers, activeSorting} = props;
+interface Props {
+  offers: Place[],
+  sortedOffers: Place[],
+  activeCard: Place,
+  city: City,
+  cities: [],
+  favorites: [],
+  isAuthorizationRequired: boolean,
+  onCityClick: () => void,
+  onPlaceClick: () => void,
+  onSortingClick: () => void,
+  leaflet: any,
+  activeSorting: number,
+}
+
+const MainPage = ({cities, leaflet, offers, city, onCityClick, onPlaceClick, activeCard, onSortingClick, sortedOffers, activeSorting}: Props) => {
   const filteredOffers = sortedOffers.length === 0 ? offers.filter((item) => item.city.name === city.name) : sortedOffers;
 
-  return <Fragment>
+  return <React.Fragment>
     <h1 className="visually-hidden">Cities</h1>
     <div className="cities tabs">
       <section className="locations container">
@@ -45,64 +59,12 @@ const MainPage = (props) => {
             city={city}
             leaflet={leaflet}
             activeCard={activeCard}
+            className={``}
           />
         </div>
       </div>
     </div>
-  </Fragment>;
-};
-
-MainPage.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.array.isRequired,
-    goods: PropTypes.array.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    host: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      location: PropTypes.object.isRequired,
-    }).isRequired,
-  })).isRequired,
-  sortedOffers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.array.isRequired,
-    goods: PropTypes.array.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    host: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      location: PropTypes.object.isRequired,
-    }).isRequired,
-  })).isRequired,
-  leaflet: PropTypes.object.isRequired,
-  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  city: PropTypes.object.isRequired,
-  onCityClick: PropTypes.func.isRequired,
-  onPlaceClick: PropTypes.func.isRequired,
-  onSortingClick: PropTypes.func.isRequired,
-  activeCard: PropTypes.object,
-  activeSorting: PropTypes.number.isRequired,
+  </React.Fragment>;
 };
 
 export {MainPage};

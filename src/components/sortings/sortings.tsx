@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import withSortings from '../../hocs/with-sortings/with-sortings';
 
@@ -7,8 +6,15 @@ const sortings = [
   `Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`
 ];
 
-const Sortings = (props) => {
-  const {onSortingsClick, onSortingClick, onMouseLeave, opened, activeSorting} = props;
+interface Props {
+  onSortingClick: (index: number) => void,
+  onSortingsClick: () => void,
+  onMouseLeave: () => void,
+  opened: boolean,
+  activeSorting: number,
+}
+
+const Sortings = ({onSortingsClick, onSortingClick, onMouseLeave, opened, activeSorting}: Props) => {
 
   return <form className="places__sorting" action="#" method="get">
     <span className="places__sorting-caption">Sort by </span>
@@ -22,14 +28,6 @@ const Sortings = (props) => {
       {sortings.map((item, index) => <li className={`places__option ${index === activeSorting ? `places__option--active` : ``}`} tabIndex="0" key={`Sorting-${item}`} onClick={() => onSortingClick(index)}>{item}</li>)}
     </ul>
   </form>;
-};
-
-Sortings.propTypes = {
-  onSortingsClick: PropTypes.func.isRequired,
-  onSortingClick: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
-  opened: PropTypes.bool.isRequired,
-  activeSorting: PropTypes.number.isRequired,
 };
 
 export {Sortings};

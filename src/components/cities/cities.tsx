@@ -1,10 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-const Cities = (props) => {
-  const {cities, onCityClick, city} = props;
+import {City} from '../../types';
 
-  return cities.map((item) => {
+interface Props {
+  cities: string[],
+  onCityClick: (city: string) => void,
+  city: City,
+}
+
+const Cities = ({cities, onCityClick, city}: Props) => {
+  return <React.Fragment>
+    {cities.map((item) => {
     return <li className="locations__item" key={`city-${item}`} onClick={() => {
       onCityClick(item);
     }}>
@@ -12,12 +18,7 @@ const Cities = (props) => {
         <span>{item}</span>
       </a>
     </li>;
-  });
-};
-
-Cities.propTypes = {
-  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onCityClick: PropTypes.func.isRequired,
+  })}</React.Fragment>;
 };
 
 export default Cities;

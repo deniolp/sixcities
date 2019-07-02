@@ -16,15 +16,15 @@ import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
 import {Place, City, User} from '../../types';
 
 interface Props {
-  offers: Array<Place>,
+  offers: Place[],
   city: City,
   user: User,
   favorites: [],
   isAuthorizationRequired: boolean,
-  onCityClick: (selectedCity: string, offers: Array<Place>) => void,
+  onCityClick: (selectedCity: string, offers: Place[]) => void,
   onLogIn: () => void,
   onLoadOffers: () => void,
-  leaflet: {},
+  leaflet: any,
 }
 
 class App extends React.PureComponent<Props, null> {

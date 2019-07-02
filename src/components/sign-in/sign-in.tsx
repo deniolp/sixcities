@@ -1,12 +1,19 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
 
 import {Operation} from '../../reducer/user/user';
 import {getAuthError} from '../../reducer/user/selectors';
+import {User} from '../../types';
 
-class SignIn extends PureComponent {
+interface Props {
+  user: User,
+  submitForm: ({rating: number, comment: string}, id: number) => void,
+  history: {push: (path: string) => void},
+  authError: string,
+}
+
+class SignIn extends React.PureComponent<Props, null> {
   constructor(props) {
     super(props);
 
@@ -29,7 +36,7 @@ class SignIn extends PureComponent {
           <h1 className="login__title">Sign in</h1>
           <form className="login__form form" action="#" method="post" onSubmit={(evt) => {
             evt.preventDefault();
-            const data = new FormData(evt.target);
+            const data = new FormData(evt.currentTarget);
             this._handleFormSubmit(data.get(`email`), data.get(`password`));
           }}>
             <div className="login__input-wrapper form__input-wrapper">
@@ -65,15 +72,6 @@ class SignIn extends PureComponent {
     }}>{authError}</span> : ``;
   }
 }
-
-SignIn.propTypes = {
-  submitForm: PropTypes.func.isRequired,
-  authError: PropTypes.string,
-  onChangePasswordInput: PropTypes.func,
-  onChangeEmailInput: PropTypes.func,
-  user: PropTypes.object,
-  history: PropTypes.object,
-};
 
 const mapStateToProps = (state) => ({
   authError: getAuthError(state),

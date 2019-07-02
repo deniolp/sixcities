@@ -1,10 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+
+import {Review as Rev} from '../../types';
+
+interface Props {
+  review: Rev,
+}
 
 const MONTHS = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
 
-const Review = (props) => {
-  const {review} = props;
+const Review = ({review}: Props) => {
   const year = review.date.match(/^(\d){4}/)[0];
   const month = review.date.match(/-0((\d))/)[1] - 1;
 
@@ -20,7 +24,7 @@ const Review = (props) => {
     <div className="reviews__info">
       <div className="reviews__rating rating">
         <div className="reviews__stars rating__stars">
-          <span style={{width: `${(review.rating * 100) / 5}%`}}></span>
+          <span style={{width: `${(review.rating * 100) / 5}%`,}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
@@ -30,21 +34,6 @@ const Review = (props) => {
       <time className="reviews__time" dateTime={review.date}>{MONTHS[month]} {year}</time>
     </div>
   </li>;
-};
-
-Review.propTypes = {
-  review: PropTypes.shape({
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    user: PropTypes.shape({
-      avatarUrl: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
-      isPro: PropTypes.bool.isRequired,
-    })
-  }),
 };
 
 export default Review;

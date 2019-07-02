@@ -1,12 +1,22 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
 
 import {Operation} from '../../reducer/user/user';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
+import {Place} from '../../types';
 
-class AddFavoritesButton extends PureComponent {
+interface Props {
+  place: Place,
+  fromRoom: boolean,
+  history: {push: (path: string) => void},
+  className: string,
+  isAuthorizationRequired: boolean,
+  addToFavorites: (id: number) => void,
+  deleteFromFavorites: (id: number) => void,
+}
+
+class AddFavoritesButton extends React.PureComponent<Props> {
   constructor(props) {
     super(props);
 
@@ -52,36 +62,6 @@ class AddFavoritesButton extends PureComponent {
     }
   }
 }
-
-AddFavoritesButton.propTypes = {
-  place: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.array.isRequired,
-    goods: PropTypes.array.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    host: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      location: PropTypes.object.isRequired,
-    }).isRequired,
-  }).isRequired,
-  fromRoom: PropTypes.bool,
-  addToFavorites: PropTypes.func.isRequired,
-  deleteFromFavorites: PropTypes.func.isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired,
-  history: PropTypes.object,
-  className: PropTypes.string.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   isAuthorizationRequired: getAuthorizationStatus(state),

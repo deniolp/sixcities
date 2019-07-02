@@ -1,7 +1,6 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
-import leaflet from 'leaflet';
+import * as leaflet from 'leaflet';
 
 import {Operation} from '../../reducer/data/data';
 import {getOffers} from '../../reducer/data/selectors';
@@ -10,8 +9,19 @@ import Map from '../map/map';
 import PlaceList from '../place-list/place-list';
 import AddFavoritesButton from '../add-favorites-button/add-favorites-button';
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
+import {Place} from '../../types';
 
-class Room extends PureComponent {
+interface Props {
+  match: {params:{
+    id: number,
+  }},
+  offers: Place[],
+  activeCard: Place,
+  onLoadOffers: () => void,
+  onPlaceClick: () => void,
+}
+
+class Room extends React.PureComponent<Props, null> {
   constructor(props) {
     super(props);
   }
@@ -56,7 +66,7 @@ class Room extends PureComponent {
             </div>
             <div className="property__rating rating">
               <div className="property__stars rating__stars">
-                <span style={{width: `${(offer.rating * 100) / 5}%`}}></span>
+                <span style={{width: `${(offer.rating * 100) / 5}%`,}}></span>
                 <span className="visually-hidden">Rating</span>
               </div>
               <span className="property__rating-value rating__value">{offer.rating}</span>
@@ -170,34 +180,6 @@ class Room extends PureComponent {
     return dist;
   }
 }
-
-Room.propTypes = {
-  match: PropTypes.object.isRequired,
-  onLoadOffers: PropTypes.func.isRequired,
-  onPlaceClick: PropTypes.func.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.array.isRequired,
-    goods: PropTypes.array.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    host: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      location: PropTypes.object.isRequired,
-    }).isRequired,
-  })).isRequired,
-  activeCard: PropTypes.object,
-};
 
 const mapStateToProps = (state) => ({
   offers: getOffers(state),

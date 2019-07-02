@@ -1,8 +1,21 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import {Subtract} from 'utility-types';
+
+import {Place} from '../../types';
+
+interface State {
+  activeCard: null,
+}
+
+interface InjectedProps {
+  onPlaceClick: () => void,
+  activeCard: Place,
+}
 
 const withActiveCard = ((Component) => {
-  class WithActiveCard extends PureComponent {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectedProps>;
+  class WithActiveCard extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
 
@@ -37,10 +50,6 @@ const withActiveCard = ((Component) => {
       });
     }
   }
-
-  WithActiveCard.propTypes = {
-    city: PropTypes.object,
-  };
 
   return WithActiveCard;
 });

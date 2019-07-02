@@ -1,12 +1,18 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import AddFavoritesButton from '../add-favorites-button/add-favorites-button';
 import {getOffers} from '../../reducer/data/selectors';
+import {Place as Offer, City} from '../../types';
 
-class Place extends PureComponent {
+interface Props {
+  offers: Offer[],
+  place: Offer,
+  onPlaceClick: (place: Offer) => void,
+}
+
+class Place extends React.PureComponent<Props, null> {
   constructor(props) {
     super(props);
   }
@@ -46,7 +52,7 @@ class Place extends PureComponent {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${(place.rating * 100) / 5}%`}}></span>
+            <span style={{width: `${(place.rating * 100) / 5}%`,}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -62,52 +68,6 @@ class Place extends PureComponent {
     return offers.find((item) => item.id === +id);
   }
 }
-
-Place.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.array.isRequired,
-    goods: PropTypes.array.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    host: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      location: PropTypes.object.isRequired,
-    }).isRequired,
-  })).isRequired,
-  place: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.array.isRequired,
-    goods: PropTypes.array.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    host: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      location: PropTypes.object.isRequired,
-    }).isRequired,
-  }).isRequired,
-  onPlaceClick: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   offers: getOffers(state),
