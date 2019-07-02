@@ -120,7 +120,7 @@ Array [
                   alt="Place image"
                   className="place-card__image"
                   height="200"
-                  src=""
+                  src="img/1.jpg"
                   width="260"
                 />
               </a>
@@ -224,7 +224,7 @@ Array [
                   alt="Place image"
                   className="place-card__image"
                   height="200"
-                  src=""
+                  src="img/3.jpg"
                   width="260"
                 />
               </a>

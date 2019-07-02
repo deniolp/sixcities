@@ -12,7 +12,17 @@ exports[`Room renders correctly 1`] = `
     >
       <div
         className="property__gallery"
-      />
+      >
+        <div
+          className="property__image-wrapper"
+        >
+          <img
+            alt="Photo studio"
+            className="property__image"
+            src="img/2.jpg"
+          />
+        </div>
+      </div>
     </div>
     <div
       className="property__container container"
@@ -540,7 +550,7 @@ exports[`Room renders correctly 1`] = `
                   alt="Place image"
                   className="place-card__image"
                   height="200"
-                  src=""
+                  src="img/3.jpg"
                   width="260"
                 />
               </a>
