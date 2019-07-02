@@ -35,7 +35,7 @@ class Place extends React.PureComponent<Props, null> {
       }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a onClick={() => onPlaceClick(place)}>
-          <img className="place-card__image" src={place.previewImage} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={this._getSrc(place.previewImage)} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -66,6 +66,11 @@ class Place extends React.PureComponent<Props, null> {
 
   _getOffer(id, offers) {
     return offers.find((item) => item.id === +id);
+  }
+
+  _getSrc(src) {
+    const index = src.match(/\d{1,2}(?=.jpg)/)[0];
+    return `img/${index}.jpg`;
   }
 }
 

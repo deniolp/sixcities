@@ -144,8 +144,13 @@ class Room extends React.PureComponent<Props, null> {
 
   _renderPhotos(images) {
     return images.map((item) => <div className="property__image-wrapper" key={item}>
-      <img className="property__image" src={item} alt="Photo studio"/>
+      <img className="property__image" src={this._getSrc(item)} alt="Photo studio"/>
     </div>);
+  }
+
+  _getSrc(src) {
+    const index = src.match(/\d{1,2}(?=.jpg)/)[0];
+    return `img/${index}.jpg`;
   }
 
   _renderGoods(goods) {
