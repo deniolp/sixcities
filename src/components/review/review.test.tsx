@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import renderer from 'react-test-renderer';
 
-import Review from '../review/review';
+import Review from './review';
 
 describe(`Review`, () => {
   const review = {

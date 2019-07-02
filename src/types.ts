@@ -18,7 +18,7 @@ interface Host {
 
 export interface Place {
   city: City,
-  image: string,
+  previewImage: string,
   images: Array<string>,
   title: string,
   isFavorite: boolean,

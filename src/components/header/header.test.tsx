@@ -1,14 +1,16 @@
-import React from 'react';
+import * as React from 'react';
 import renderer from 'react-test-renderer';
+import Header from './header';
 import {BrowserRouter} from 'react-router-dom';
 
-import FavoritesEmpty from '../favorites-empty/favorites-empty';
-
-describe(`FavoritesEmpty`, () => {
+describe(`SignIn`, () => {
   it(`renders correctly`, () => {
     const tree = renderer.create(<BrowserRouter>
-      <FavoritesEmpty
-      /></BrowserRouter>).toJSON();
+      <Header
+        user={{}}
+        isAuthorizationRequired={true}
+      />
+    </BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

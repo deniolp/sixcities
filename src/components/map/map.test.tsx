@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import renderer from 'react-test-renderer';
-import Map from '../map/map';
+import Map from './map';
 import leafletMock from '../../mocks/leaflet-mock';
 
 describe(`Map`, () => {

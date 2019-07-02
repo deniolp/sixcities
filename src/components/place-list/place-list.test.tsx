@@ -1,12 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
-import leafletMock from '../../mocks/leaflet-mock';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 
-import {MainPage} from '../main-page/main-page';
+import PlaceList from './place-list';
 import {Operation} from '../../reducer/data/data';
 import {Operation as OperationUser} from '../../reducer/user/user';
 import NameSpace from '../../reducer/name-space';
@@ -17,20 +16,20 @@ Operation.addToFavorites = () => (dispatch) => dispatch(jest.fn());
 Operation.deleteFromFavorites = () => (dispatch) => dispatch(jest.fn());
 OperationUser.authorizeUser = () => (dispatch) => dispatch(jest.fn());
 
-describe(`MainPage`, () => {
+describe(`PlaceList`, () => {
   const places = [
     {
       id: 1,
       title: `Strange place`,
       isPremium: true,
       price: 1200,
-      rating: 1.5,
+      rating: 1.8,
       isFavorite: false,
       description: ``,
       type: `Apartment`,
       previewImage: ``,
-      images: [``],
-      goods: [``],
+      images: [],
+      goods: [],
       bedrooms: 2,
       maxAdults: 4,
       host: {},
@@ -54,12 +53,12 @@ describe(`MainPage`, () => {
       isPremium: true,
       price: 800,
       rating: 1.5,
-      isFavorite: false,
+      isFavorite: true,
       description: ``,
       type: `Private room`,
       previewImage: ``,
-      images: [``],
-      goods: [``],
+      images: [],
+      goods: [],
       bedrooms: 2,
       maxAdults: 4,
       host: {},
@@ -123,30 +122,12 @@ describe(`MainPage`, () => {
     isAuthorizationRequired: false,
   };
   const store = mockStore(initialState);
-  const cities = [`Berlin`, `Dusseldorf`];
 
   it(`renders correctly`, () => {
-    const tree = renderer.create(<BrowserRouter><Provider store={store}>
-      <MainPage
-        offers={places}
-        cities={cities}
-        city={{
-          name: `Dusseldorf`,
-          location: {
-            atitude: 52,
-            longitude: 8,
-            zoom: 11,
-          },
-        }}
-        onCityClick={jest.fn()}
-        leaflet={leafletMock}
-        onPlaceClick={jest.fn()}
-        activeCard={{}}
-        sortedOffers={places}
-        onSortingClick={jest.fn()}
-        activeSorting={1}
-      />
-    </Provider></BrowserRouter>).toJSON();
+    const tree = renderer.create(<BrowserRouter><Provider store={store}><PlaceList
+      offers={places}
+      onPlaceClick={jest.fn()}
+    /></Provider></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

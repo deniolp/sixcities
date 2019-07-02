@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import renderer from 'react-test-renderer';
-import Cities from '../cities/cities';
+import Cities from './cities';
 
 describe(`Cities`, () => {
   const cities = [`Berlin`, `Dusseldorf`];

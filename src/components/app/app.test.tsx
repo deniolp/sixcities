@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 import leafletMock from '../../mocks/leaflet-mock';
@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 
-import {App} from '../app/app';
+import {App} from './app';
 import {Operation} from '../../reducer/data/data';
 import {Operation as OperationUser} from '../../reducer/user/user';
 import NameSpace from '../../reducer/name-space';

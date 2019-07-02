@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import renderer from 'react-test-renderer';
 
-import {AddFavoritesButton} from './add-favorites-button/';
+import {AddFavoritesButton} from './add-favorites-button';
 
 const place = {
   id: 1,

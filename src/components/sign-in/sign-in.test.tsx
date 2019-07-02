@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import renderer from 'react-test-renderer';
-import {SignIn} from '../sign-in/sign-in';
+import {SignIn} from './sign-in';
 
 describe(`SignIn`, () => {
   it(`renders correctly`, () => {

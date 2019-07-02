@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 
-import {Favorites} from '../favorites/favorites';
+import {Favorites} from './favorites';
 import {Operation} from '../../reducer/data/data';
 import {Operation as OperationUser} from '../../reducer/user/user';
 import NameSpace from '../../reducer/name-space';

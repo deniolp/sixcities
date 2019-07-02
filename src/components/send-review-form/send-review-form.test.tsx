@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import renderer from 'react-test-renderer';
 
-import {SendReviewForm} from './send-review-form/';
+import {SendReviewForm} from './send-review-form';
 
 describe(`SendReviewForm`, () => {
   it(`renders correctly`, () => {

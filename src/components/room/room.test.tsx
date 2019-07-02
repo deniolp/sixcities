@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 
-import {Room} from '../room/room';
+import {Room} from './room';
 import {Operation} from '../../reducer/data/data';
 import {Operation as OperationUser} from '../../reducer/user/user';
 import NameSpace from '../../reducer/name-space';
