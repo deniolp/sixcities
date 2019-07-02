@@ -2,7 +2,7 @@ const {join} = require(`path`);
 
 const path = join(__dirname, `public`);
 
-const entry = `./src/index.js`;
+const entry = `./src/index.tsx`;
 const output = {
   filename: `bundle.js`,
   path,
@@ -20,10 +20,15 @@ const babelizing = {
   exclude: /node_modules/,
   use: [`babel-loader`],
 };
-const rules = [babelizing];
+const tsLoader = {
+  test: /\.(tsx|ts)?$/,
+  loader: `ts-loader`
+};
+
+const rules = [babelizing, tsLoader];
 
 const resolve = {
-  extensions: [`.js`, `.jsx`],
+  extensions: [`.ts`, `.tsx`, `.js`, `jsx`, `json`],
 };
 
 module.exports = {
