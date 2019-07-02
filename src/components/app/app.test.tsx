@@ -1,5 +1,5 @@
 import * as React from 'react';
-import renderer from 'react-test-renderer';
+import * as renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 import leafletMock from '../../mocks/leaflet-mock';
 import {Provider} from 'react-redux';
@@ -33,16 +33,22 @@ describe(`App`, () => {
       goods: [``],
       bedrooms: 2,
       maxAdults: 4,
-      host: {},
+      host: {
+        id: 3,
+        email: `t@ya.ru`,
+        name: `Alice`,
+        avatarUrl: `path`,
+        isPro: true
+      },
       location: {
-        atitude: 12,
+        latitude: 12,
         longitude: 87,
         zoom: 11,
       },
       city: {
         name: `Berlin`,
         location: {
-          atitude: 51,
+          latitude: 51,
           longitude: 7,
           zoom: 11,
         },
@@ -62,16 +68,22 @@ describe(`App`, () => {
       goods: [``],
       bedrooms: 2,
       maxAdults: 4,
-      host: {},
+      host: {
+        id: 2,
+        email: `y@ya.ru`,
+        name: `Alice`,
+        avatarUrl: `path`,
+        isPro: false
+      },
       location: {
-        atitude: 13,
+        latitude: 13,
         longitude: 88,
         zoom: 11,
       },
       city: {
         name: `Dusseldorf`,
         location: {
-          atitude: 52,
+          latitude: 52,
           longitude: 8,
           zoom: 11,
         },
@@ -128,6 +140,7 @@ describe(`App`, () => {
     const tree = renderer.create(<BrowserRouter><Provider store={store}>
       <App
         offers={mockOffers}
+        favorites={[]}
         city={mockOffers[0].city}
         leaflet={leafletMock}
         onCityClick={jest.fn()}
@@ -135,6 +148,10 @@ describe(`App`, () => {
         onLoadOffers={jest.fn()}
         isAuthorizationRequired={true}
         user={{
+          id: 3,
+          email: `t@ya.ru`,
+          name: `Alice`,
+          isPro: true,
           avatarUrl: `/path.jpg`,
         }}
       />

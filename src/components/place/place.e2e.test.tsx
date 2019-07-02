@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as  Enzyme from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 import {Place} from './place';
 
 Enzyme.configure({adapter: new Adapter()});
@@ -19,16 +19,22 @@ const offers = [
     goods: [``],
     bedrooms: 2,
     maxAdults: 4,
-    host: {},
+    host: {
+      id: 2,
+        email: `y@ya.ru`,
+        name: `Alice`,
+        avatarUrl: `path`,
+        isPro: false
+    },
     location: {
-      atitude: 12,
+      latitude: 12,
       longitude: 87,
       zoom: 11,
     },
     city: {
       name: `Berlin`,
       location: {
-        atitude: 51,
+        latitude: 51,
         longitude: 7,
         zoom: 11,
       },
@@ -48,16 +54,22 @@ const offers = [
     goods: [``],
     bedrooms: 2,
     maxAdults: 4,
-    host: {},
+    host: {
+      id: 3,
+      email: `t@ya.ru`,
+      name: `Alice`,
+      avatarUrl: `path`,
+      isPro: true
+    },
     location: {
-      atitude: 13,
+      latitude: 13,
       longitude: 88,
       zoom: 11,
     },
     city: {
       name: `Dusseldorf`,
       location: {
-        atitude: 52,
+        latitude: 52,
         longitude: 8,
         zoom: 11,
       },
@@ -78,16 +90,22 @@ const mockObj = {
   goods: [``],
   bedrooms: 2,
   maxAdults: 4,
-  host: {},
+  host: {
+    id: 2,
+    email: `y@ya.ru`,
+    name: `Alice`,
+    avatarUrl: `path`,
+    isPro: false
+  },
   location: {
-    atitude: 12,
+    latitude: 12,
     longitude: 87,
     zoom: 11,
   },
   city: {
     name: `Berlin`,
     location: {
-      atitude: 51,
+      latitude: 51,
       longitude: 7,
       zoom: 11,
     },
@@ -102,15 +120,13 @@ let placeObj = {};
 
 beforeEach(() => {
   handleClick = jest.fn();
-  placeElement = shallow(
+  placeElement = Enzyme.shallow(
       <Place
         offers={offers}
         place={mockObj}
         onPlaceClick={() => {
           placeObj = mockObj;
         }}
-        setHighlightedItem={handleClick}
-        active={false}
       />);
   placeDescription = placeElement.find(`Link`);
   image = placeElement.find(`.place-card__image-wrapper a`);

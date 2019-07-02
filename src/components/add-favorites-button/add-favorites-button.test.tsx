@@ -1,5 +1,5 @@
 import * as React from 'react';
-import renderer from 'react-test-renderer';
+import * as renderer from 'react-test-renderer';
 
 import {AddFavoritesButton} from './add-favorites-button';
 
@@ -17,16 +17,21 @@ const place = {
   goods: [``],
   bedrooms: 2,
   maxAdults: 4,
-  host: {},
+  host: {
+    id: 3,
+    name: `Alice`,
+    isPro: false,
+    avatarUrl: `path`
+  },
   location: {
-    atitude: 12,
+    latitude: 12,
     longitude: 87,
     zoom: 11,
   },
   city: {
     name: `Berlin`,
     location: {
-      atitude: 51,
+      latitude: 51,
       longitude: 7,
       zoom: 11,
     },
@@ -41,6 +46,8 @@ describe(`AddFavoritesButton`, () => {
       deleteFromFavorites={jest.fn()}
       isAuthorizationRequired={true}
       className={`property`}
+      fromRoom={false}
+      history={{push: jest.fn()}}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import renderer from 'react-test-renderer';
+import * as renderer from 'react-test-renderer';
 import MainPageEmpty from './main-page-empty';
 
 describe(`MainPageEmpty`, () => {
@@ -7,6 +7,11 @@ describe(`MainPageEmpty`, () => {
     const tree = renderer.create(<MainPageEmpty
       city={{
         name: `Berlin, gelibte`,
+        location: {
+          latitude: 51,
+          longitude: 7,
+          zoom: 11,
+        },
       }}
     />).toJSON();
 

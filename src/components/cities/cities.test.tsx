@@ -1,5 +1,6 @@
 import * as React from 'react';
-import renderer from 'react-test-renderer';
+import * as renderer from 'react-test-renderer';
+
 import Cities from './cities';
 
 describe(`Cities`, () => {
@@ -8,7 +9,14 @@ describe(`Cities`, () => {
   it(`renders correctly`, () => {
     const tree = renderer.create(<Cities
       cities={cities}
-      city={{name: `Berlin`}}
+      city={{
+        name: `Berlin`,
+        location: {
+          latitude: 51,
+          longitude: 7,
+          zoom: 11,
+        },
+      }}
       onCityClick={jest.fn()}
     />).toJSON();
 

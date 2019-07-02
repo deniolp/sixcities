@@ -1,5 +1,5 @@
 import * as React from 'react';
-import renderer from 'react-test-renderer';
+import * as renderer from 'react-test-renderer';
 
 import {SendReviewForm} from './send-review-form';
 
@@ -14,6 +14,7 @@ describe(`SendReviewForm`, () => {
       isValidated={true}
       isReviewSending={false}
       didReviewSent={false}
+      sendError={`no`}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();

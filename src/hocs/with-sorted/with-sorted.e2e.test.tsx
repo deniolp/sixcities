@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as Enzyme from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 
 import withSorted from './with-sorted';
 
@@ -70,7 +70,7 @@ const offers = [
 ];
 
 it(`Should sort offers by price`, () => {
-  const wrapper = shallow(<MockWrapped
+  const wrapper = Enzyme.shallow(<MockWrapped
     onSortingClick={jest.fn()}
     sortedOffers={[]}
     activeSorting={0}
