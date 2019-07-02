@@ -18,14 +18,14 @@ const Sortings = ({onSortingsClick, onSortingClick, onMouseLeave, opened, active
 
   return <form className="places__sorting" action="#" method="get">
     <span className="places__sorting-caption">Sort by </span>
-    <span className="places__sorting-type" tabIndex="0" onClick={() => onSortingsClick()}>
+    <span className="places__sorting-type" tabIndex={0} onClick={() => onSortingsClick()}>
       {sortings[activeSorting]}
       <svg className="places__sorting-arrow" width="7" height="4">
         <use xlinkHref="#icon-arrow-select"/>
       </svg>
     </span>
     <ul className={`places__options places__options--custom ${opened ? `places__options--opened` : ``}`} onMouseLeave={() => onMouseLeave()}>
-      {sortings.map((item, index) => <li className={`places__option ${index === activeSorting ? `places__option--active` : ``}`} tabIndex="0" key={`Sorting-${item}`} onClick={() => onSortingClick(index)}>{item}</li>)}
+      {sortings.map((item, index) => <li className={`places__option ${index === activeSorting ? `places__option--active` : ``}`} tabIndex={0} key={`Sorting-${item}`} onClick={() => onSortingClick(index)}>{item}</li>)}
     </ul>
   </form>;
 };
