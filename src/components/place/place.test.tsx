@@ -141,6 +141,7 @@ describe(`Place`, () => {
         place={mockOffers[0]}
         onPlaceClick={jest.fn()}
         offers={mockOffers}
+        activeCardId={null}
       /></Provider>
     </BrowserRouter>).toJSON();
 

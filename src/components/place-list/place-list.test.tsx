@@ -139,6 +139,7 @@ describe(`PlaceList`, () => {
     const tree = renderer.create(<BrowserRouter><Provider store={store}><PlaceList
       offers={places}
       onPlaceClick={jest.fn()}
+      activeCardId={null}
     /></Provider></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

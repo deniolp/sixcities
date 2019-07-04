@@ -127,6 +127,7 @@ beforeEach(() => {
         onPlaceClick={() => {
           placeObj = mockObj;
         }}
+        activeCardId={null}
       />);
   placeDescription = placeElement.find(`Link`);
   image = placeElement.find(`.place-card__image-wrapper a`);
