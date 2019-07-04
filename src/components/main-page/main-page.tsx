@@ -51,6 +51,7 @@ const MainPage = ({cities, leaflet, offers, city, onCityClick, onPlaceClick, act
             key={`place-list-${city.name}`}
             offers={filteredOffers}
             onPlaceClick={onPlaceClick}
+            activeCardId={activeCard ? activeCard.id : null}
           />
         </section>
         <div className="cities__right-section">

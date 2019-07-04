@@ -131,6 +131,7 @@ class Room extends React.PureComponent<Props, null> {
               key={`place-list-${offers.id}`}
               offers={offers}
               onPlaceClick={onPlaceClick}
+              activeCardId={activeCard ? activeCard.id : null}
             />
           </div>
         </section>

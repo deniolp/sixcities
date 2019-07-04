@@ -4,12 +4,13 @@ import {connect} from 'react-redux';
 
 import AddFavoritesButton from '../add-favorites-button/add-favorites-button';
 import {getOffers} from '../../reducer/data/selectors';
-import {Place as Offer, City} from '../../types';
+import {Place as Offer} from '../../types';
 
 interface Props {
   offers: Offer[],
   place: Offer,
   onPlaceClick: (place: Offer) => void,
+  activeCardId: number | null,
 }
 
 class Place extends React.PureComponent<Props, null> {
@@ -18,13 +19,14 @@ class Place extends React.PureComponent<Props, null> {
   }
 
   render() {
-    const {offers, place} = this.props;
+    const {offers, place, activeCardId} = this.props;
     const id = place.id;
+    const isActive: boolean = id === activeCardId;
     const offer = this._getOffer(id, offers);
-    return this._renderOffer(offer);
+    return this._renderOffer(offer, isActive);
   }
 
-  _renderOffer(place) {
+  _renderOffer(place: Offer, isActive: boolean) {
     const {onPlaceClick} = this.props;
 
     return <article className="cities__place-card place-card">
@@ -38,7 +40,7 @@ class Place extends React.PureComponent<Props, null> {
           <img className="place-card__image" src={this._getSrc(place.previewImage)} width="260" height="200" alt="Place image" />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={isActive ? `place-card__info--active`: `place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{place.price}</b>

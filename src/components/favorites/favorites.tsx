@@ -62,6 +62,7 @@ class Favorites extends React.PureComponent<Props, null> {
                         <PlaceList
                           offers={item.offers}
                           onPlaceClick={() => {}}
+                          activeCardId={null}
                         />
                       </div>
                     </li>
