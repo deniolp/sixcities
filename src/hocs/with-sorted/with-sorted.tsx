@@ -33,6 +33,7 @@ const withSorted = (Component) => {
       if (this.props.city !== prevProps.city) {
         this.setState({
           sortedOffers: this.props.offers.filter((item) => item.city.name === this.props.city.name),
+          activeSorting: 0,
         });
       }
     }
