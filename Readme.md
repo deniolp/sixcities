@@ -1,4 +1,3 @@
 # Project with React «Six cities» [![Build status][travis-image]][travis-url]
 
-[travis-image]: https://travis-ci.com/htmlacademy-react/505149-six-cities-1.svg?branch=master
-[travis-url]: https://travis-ci.com/htmlacademy-react/505149-six-cities-1
+[![Netlify Status](https://api.netlify.com/api/v1/badges/da20b083-019f-4b32-b3a3-2091ebf6a5c2/deploy-status)](https://app.netlify.com/sites/sixcities/deploys)
