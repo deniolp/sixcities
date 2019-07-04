@@ -17,7 +17,7 @@ const init = () => {
   const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api))));
 
   ReactDom.render(<Provider store={store}>
-    <BrowserRouter basename="/505149-six-cities-1/23/">
+    <BrowserRouter>
       <App
         leaflet={leaflet}
       />
