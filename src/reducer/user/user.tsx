@@ -1,4 +1,5 @@
 import {ActionCreator, normalizeKeys, Operation as DataOperation} from '../data/data';
+import {User, Place} from '../../types';
 
 enum TYPE {
   REQUIRE_AUTHORIZATION = 'REQUIRE_AUTHORIZATION',
@@ -51,7 +52,7 @@ const Operation = {
       });
   },
 
-  authorizeUser: (email, password) => (dispatch, _getState, api) => {
+  authorizeUser: (email: string, password: string) => (dispatch, _getState, api) => {
     return api.post(`/login`, {email, password})
       .then((response) => {
         if (response.data) {
@@ -78,7 +79,7 @@ const Operation = {
       });
   },
 
-  addToFavorites: (id) => (dispatch, _getState, api) => {
+  addToFavorites: (id: number) => (dispatch, _getState, api) => {
     return api.post(`/favorite/${id}/1`)
       .then((response) => {
         const preparedData = normalizeKeys(response.data);
@@ -87,7 +88,7 @@ const Operation = {
       .catch((_error) => {});
   },
 
-  deleteFromFavorites: (id) => (dispatch, _getState, api) => {
+  deleteFromFavorites: (id: number) => (dispatch, _getState, api) => {
     return api.post(`/favorite/${id}/0`)
       .then((response) => {
         const preparedData = normalizeKeys(response.data);
@@ -98,12 +99,12 @@ const Operation = {
 };
 
 const UserActionCreator = {
-  requireAuthorization: (status) => ({
+  requireAuthorization: (status: boolean) => ({
     type: TYPE.REQUIRE_AUTHORIZATION,
     payload: status,
   }),
 
-  authorizeUser: (user) => ({
+  authorizeUser: (user: User) => ({
     type: TYPE.AUTHORIZE_USER,
     payload: normalizeKeys(user),
   }),
@@ -112,12 +113,12 @@ const UserActionCreator = {
     type: TYPE.LOG_OUT,
   }),
 
-  authError: (error) => ({
+  authError: (error: any) => ({
     type: TYPE.AUTH_ERROR,
     payload: error,
   }),
 
-  loadFavorites: (favorites) => ({
+  loadFavorites: (favorites: Place[]) => ({
     type: TYPE.LOAD_FAVORITES,
     payload: favorites,
   }),

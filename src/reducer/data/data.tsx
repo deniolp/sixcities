@@ -1,4 +1,4 @@
-import {Place} from '../../types';
+import {Place, Review} from '../../types';
 
 enum TYPE {
   CHANGE_CITY = 'CHANGE_CITY',
@@ -26,14 +26,14 @@ const initialState = {
   sendError: null,
 };
 
-const getRandomCity = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
+const getRandomCity = (min: number, max: number): number => Math.floor(Math.random() * (max - min)) + min;
 
-const snakeToCamel = (word: string) => word.replace(
+const snakeToCamel = (word: string): string => word.replace(
     /(_\w)/g,
     (matches) => matches[1].toUpperCase()
 );
 
-const normalizeKeys = (obj) => {
+const normalizeKeys = (obj: object): object => {
   if (Array.isArray(obj)) {
     return obj.map((item) => normalizeKeys(item));
   }
@@ -48,13 +48,13 @@ const normalizeKeys = (obj) => {
   return obj;
 };
 
-const changeOffer = (state, newOffer: Place) => {
-  return state.offers.map((item) => {
+const changeOffer = (offers: Place[], newOffer: Place) => {
+  return offers.map((item) => {
     return item.id === newOffer.id ? newOffer : item;
   });
 };
 
-const getCity = (selectedCity, offers) => offers.filter((offer) => offer.city.name === selectedCity)[0].city;
+const getCity = (selectedCity: string, offers: Place[]) => offers.filter((offer) => offer.city.name === selectedCity)[0].city;
 
 const Operation = {
   loadOffers: () => (dispatch, _getState, api) => {
@@ -65,7 +65,7 @@ const Operation = {
       });
   },
 
-  loadReviews: (id) => (dispatch, _getState, api) => {
+  loadReviews: (id: number) => (dispatch, _getState, api) => {
     return api.get(`/comments/${id}`)
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
@@ -73,7 +73,7 @@ const Operation = {
       });
   },
 
-  postReview: (review, id) => (dispatch, _getState, api) => {
+  postReview: (review: Review, id: number) => (dispatch, _getState, api) => {
     return api.post(`/comments/${id}`, review)
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
@@ -90,42 +90,42 @@ const Operation = {
 };
 
 const ActionCreator = {
-  changeCity: (selectedCity, places) => {
+  changeCity: (selectedCity: string, places: Place[]) => {
     const city = getCity(selectedCity, places);
     return {
       type: TYPE.CHANGE_CITY,
       payload: city,
     };
   },
-  loadOffers: (offers) => ({
+  loadOffers: (offers: Place[]) => ({
     type: TYPE.LOAD_OFFERS,
     payload: offers,
   }),
-  loadReviews: (reviews) => ({
+  loadReviews: (reviews: Review[]) => ({
     type: TYPE.LOAD_REVIEWS,
     payload: reviews,
   }),
-  postReview: (reviews) => ({
+  postReview: (reviews: Review[]) => ({
     type: TYPE.POST_REVIEW,
     payload: reviews,
   }),
-  blockForm: (bool) => ({
+  blockForm: (bool: boolean) => ({
     type: TYPE.BLOCK_FORM,
     payload: bool,
   }),
-  cleanForm: (bool) => ({
+  cleanForm: (bool: boolean) => ({
     type: TYPE.CLEAN_FORM,
     payload: bool,
   }),
-  showError: (error) => ({
+  showError: (error: any) => ({
     type: TYPE.SHOW_ERROR,
     payload: error,
   }),
-  addToFavorites: (data) => ({
+  addToFavorites: (data: object) => ({
     type: TYPE.ADD_TO_FAVORITES,
     payload: data,
   }),
-  deleteFromFavorites: (data) => ({
+  deleteFromFavorites: (data: object) => ({
     type: TYPE.DELETE_FROM_FAVORITES,
     payload: data,
   }),
@@ -163,11 +163,11 @@ const reducer = (state = initialState, action: ActionType) => {
     });
 
     case TYPE.ADD_TO_FAVORITES: return Object.assign({}, state, {
-      offers: changeOffer(state, action.payload),
+      offers: changeOffer(state.offers, action.payload),
     });
 
     case TYPE.DELETE_FROM_FAVORITES: return Object.assign({}, state, {
-      offers: changeOffer(state, action.payload),
+      offers: changeOffer(state.offers, action.payload),
     });
   }
   return state;

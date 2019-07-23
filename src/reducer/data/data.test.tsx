@@ -1,6 +1,6 @@
 import MockAdapter from 'axios-mock-adapter';
 
-import {reducer, ActionCreator, Operation} from '../data/data';
+import {reducer, ActionCreator, Operation} from './data';
 import {configureAPI} from '../../api';
 
 const places = [
@@ -18,16 +18,21 @@ const places = [
     goods: [``],
     bedrooms: 2,
     maxAdults: 4,
-    host: {},
+    host: {
+      id: 6,
+      name: `string`,
+      isPro: false,
+      avatarUrl: `string`,
+    },
     location: {
-      atitude: 12,
+      latitude: 12,
       longitude: 87,
       zoom: 11,
     },
     city: {
       name: `Berlin`,
       location: {
-        atitude: 51,
+        latitude: 51,
         longitude: 7,
         zoom: 11,
       },
@@ -47,16 +52,21 @@ const places = [
     goods: [``],
     bedrooms: 2,
     maxAdults: 4,
-    host: {},
+    host: {
+      id: 7,
+      name: `string2`,
+      isPro: false,
+      avatarUrl: `string2`,
+    },
     location: {
-      atitude: 13,
+      latitude: 13,
       longitude: 88,
       zoom: 11,
     },
     city: {
       name: `Amsterdam`,
       location: {
-        atitude: 52,
+        latitude: 52,
         longitude: 8,
         zoom: 11,
       },
@@ -66,7 +76,7 @@ const places = [
 
 describe(`Reducer works correctly: `, () => {
   it(`if there is no parameters, should return initial state`, () => {
-    expect(reducer(undefined, {})).toEqual({
+    expect(reducer(undefined, {type: null, payload: null})).toEqual({
       city: {},
       offers: [],
       reviews: [],
@@ -102,7 +112,7 @@ describe(`Action creators works correctly: `, () => {
       payload: {
         name: `Amsterdam`,
         location: {
-          atitude: 52,
+          latitude: 52,
           longitude: 8,
           zoom: 11,
         },
