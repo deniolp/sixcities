@@ -76,7 +76,7 @@ class App extends React.PureComponent<Props, null> {
       }}
       />
       <Route path="/favorites" exact render={() => {
-        const WrappedFavorites = withPrivateRoute(Favorites, user);
+        const WrappedFavorites = withPrivateRoute(Favorites);
         return <div className="page">
           <Header
             user={user}
