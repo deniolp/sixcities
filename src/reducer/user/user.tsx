@@ -1,5 +1,18 @@
 import {ActionCreator, normalizeKeys, Operation as DataOperation} from '../data/data';
 
+enum TYPE {
+  REQUIRE_AUTHORIZATION = 'REQUIRE_AUTHORIZATION',
+  AUTHORIZE_USER = 'AUTHORIZE_USER',
+  LOG_OUT = 'LOG_OUT',
+  AUTH_ERROR = 'AUTH_ERROR',
+  LOAD_FAVORITES = 'LOAD_FAVORITES',
+}
+
+interface ActionType {
+  type: TYPE,
+  payload: any
+}
+
 const initialState = {
   isAuthorizationRequired: true,
   user: {},
@@ -86,50 +99,50 @@ const Operation = {
 
 const UserActionCreator = {
   requireAuthorization: (status) => ({
-    type: `REQUIRE_AUTHORIZATION`,
+    type: TYPE.REQUIRE_AUTHORIZATION,
     payload: status,
   }),
 
   authorizeUser: (user) => ({
-    type: `AUTHORIZE_USER`,
+    type: TYPE.AUTHORIZE_USER,
     payload: normalizeKeys(user),
   }),
 
   logOut: () => ({
-    type: `LOG_OUT`,
+    type: TYPE.LOG_OUT,
   }),
 
   authError: (error) => ({
-    type: `AUTH_ERROR`,
+    type: TYPE.AUTH_ERROR,
     payload: error,
   }),
 
   loadFavorites: (favorites) => ({
-    type: `LOAD_FAVORITES`,
+    type: TYPE.LOAD_FAVORITES,
     payload: favorites,
   }),
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: ActionType) => {
   switch (action.type) {
-    case `REQUIRE_AUTHORIZATION`: return Object.assign({}, state, {
+    case TYPE.REQUIRE_AUTHORIZATION: return Object.assign({}, state, {
       isAuthorizationRequired: action.payload,
     });
 
-    case `AUTHORIZE_USER`: return Object.assign({}, state, {
+    case TYPE.AUTHORIZE_USER: return Object.assign({}, state, {
       user: action.payload,
     });
 
-    case `LOG_OUT`: return Object.assign({}, state, {
+    case TYPE.LOG_OUT: return Object.assign({}, state, {
       user: {},
       isAuthorizationRequired: true,
     });
 
-    case `AUTH_ERROR`: return Object.assign({}, state, {
+    case TYPE.AUTH_ERROR: return Object.assign({}, state, {
       authError: action.payload,
     });
 
-    case `LOAD_FAVORITES`: return Object.assign({}, state, {
+    case TYPE.LOAD_FAVORITES: return Object.assign({}, state, {
       favorites: action.payload,
     });
   }
