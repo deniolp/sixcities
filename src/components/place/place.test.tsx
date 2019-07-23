@@ -6,14 +6,10 @@ import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 
 import {Place} from './place';
-import {Operation} from '../../reducer/data/data';
 import {Operation as OperationUser} from '../../reducer/user/user';
 import NameSpace from '../../reducer/name-space';
 
-jest.mock(`../../reducer/data/data`);
 jest.mock(`../../reducer/user/user`);
-Operation.addToFavorites = () => (dispatch) => dispatch(jest.fn());
-Operation.deleteFromFavorites = () => (dispatch) => dispatch(jest.fn());
 OperationUser.authorizeUser = () => (dispatch) => dispatch(jest.fn());
 
 describe(`Place`, () => {

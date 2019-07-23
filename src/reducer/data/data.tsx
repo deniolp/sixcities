@@ -1,3 +1,22 @@
+import {Place} from '../../types';
+
+enum TYPE {
+  CHANGE_CITY = 'CHANGE_CITY',
+  LOAD_OFFERS = 'LOAD_OFFERS',
+  LOAD_REVIEWS = 'LOAD_REVIEWS',
+  POST_REVIEW = 'POST_REVIEW',
+  BLOCK_FORM = 'BLOCK_FORM',
+  CLEAN_FORM = 'CLEAN_FORM',
+  SHOW_ERROR = 'SHOW_ERROR',
+  ADD_TO_FAVORITES = 'ADD_TO_FAVORITES',
+  DELETE_FROM_FAVORITES = 'DELETE_FROM_FAVORITES',
+}
+
+interface ActionType {
+  type: TYPE,
+  payload: any
+}
+
 const initialState = {
   city: {},
   offers: [],
@@ -7,9 +26,9 @@ const initialState = {
   sendError: null,
 };
 
-const getRandomCity = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+const getRandomCity = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
 
-const snakeToCamel = (word) => word.replace(
+const snakeToCamel = (word: string) => word.replace(
     /(_\w)/g,
     (matches) => matches[1].toUpperCase()
 );
@@ -29,7 +48,7 @@ const normalizeKeys = (obj) => {
   return obj;
 };
 
-const changeOffer = (state, newOffer) => {
+const changeOffer = (state, newOffer: Place) => {
   return state.offers.map((item) => {
     return item.id === newOffer.id ? newOffer : item;
   });
@@ -74,80 +93,80 @@ const ActionCreator = {
   changeCity: (selectedCity, places) => {
     const city = getCity(selectedCity, places);
     return {
-      type: `CHANGE_CITY`,
+      type: TYPE.CHANGE_CITY,
       payload: city,
     };
   },
   loadOffers: (offers) => ({
-    type: `LOAD_OFFERS`,
+    type: TYPE.LOAD_OFFERS,
     payload: offers,
   }),
   loadReviews: (reviews) => ({
-    type: `LOAD_REVIEWS`,
+    type: TYPE.LOAD_REVIEWS,
     payload: reviews,
   }),
   postReview: (reviews) => ({
-    type: `POST_REVIEW`,
+    type: TYPE.POST_REVIEW,
     payload: reviews,
   }),
   blockForm: (bool) => ({
-    type: `BLOCK_FORM`,
+    type: TYPE.BLOCK_FORM,
     payload: bool,
   }),
   cleanForm: (bool) => ({
-    type: `CLEAN_FORM`,
+    type: TYPE.CLEAN_FORM,
     payload: bool,
   }),
   showError: (error) => ({
-    type: `SHOW_ERROR`,
+    type: TYPE.SHOW_ERROR,
     payload: error,
   }),
   addToFavorites: (data) => ({
-    type: `ADD_TO_FAVORITES`,
+    type: TYPE.ADD_TO_FAVORITES,
     payload: data,
   }),
   deleteFromFavorites: (data) => ({
-    type: `DELETE_FROM_FAVORITES`,
+    type: TYPE.DELETE_FROM_FAVORITES,
     payload: data,
   }),
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: ActionType) => {
   switch (action.type) {
-    case `CHANGE_CITY`: return Object.assign({}, state, {
+    case TYPE.CHANGE_CITY: return Object.assign({}, state, {
       city: action.payload,
     });
 
-    case `LOAD_OFFERS`: return Object.assign({}, state, {
+    case TYPE.LOAD_OFFERS: return Object.assign({}, state, {
       city: action.payload[getRandomCity(1, action.payload.length)].city,
       offers: action.payload,
     });
 
-    case `LOAD_REVIEWS`: return Object.assign({}, state, {
+    case TYPE.LOAD_REVIEWS: return Object.assign({}, state, {
       reviews: action.payload,
     });
 
-    case `POST_REVIEW`: return Object.assign({}, state, {
+    case TYPE.POST_REVIEW: return Object.assign({}, state, {
       reviews: action.payload,
     });
 
-    case `BLOCK_FORM`: return Object.assign({}, state, {
+    case TYPE.BLOCK_FORM: return Object.assign({}, state, {
       isReviewSending: action.payload,
     });
 
-    case `CLEAN_FORM`: return Object.assign({}, state, {
+    case TYPE.CLEAN_FORM: return Object.assign({}, state, {
       didReviewSent: action.payload,
     });
 
-    case `SHOW_ERROR`: return Object.assign({}, state, {
+    case TYPE.SHOW_ERROR: return Object.assign({}, state, {
       sendError: action.payload,
     });
 
-    case `ADD_TO_FAVORITES`: return Object.assign({}, state, {
+    case TYPE.ADD_TO_FAVORITES: return Object.assign({}, state, {
       offers: changeOffer(state, action.payload),
     });
 
-    case `DELETE_FROM_FAVORITES`: return Object.assign({}, state, {
+    case TYPE.DELETE_FROM_FAVORITES: return Object.assign({}, state, {
       offers: changeOffer(state, action.payload),
     });
   }
