@@ -56,9 +56,7 @@ exports[`Review renders correctly 1`] = `
       className="reviews__time"
       dateTime="2019-05-16T21:02:58.227Z"
     >
-      May
-       
-      2019
+      May 2019
     </time>
   </div>
 </li>

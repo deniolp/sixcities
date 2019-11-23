@@ -72,9 +72,7 @@ exports[`ReviewList renders correctly 1`] = `
           className="reviews__time"
           dateTime="2019-06-16T21:02:58.227Z"
         >
-          June
-           
-          2019
+          June 2019
         </time>
       </div>
     </li>
@@ -133,9 +131,7 @@ exports[`ReviewList renders correctly 1`] = `
           className="reviews__time"
           dateTime="2019-05-16T21:02:58.227Z"
         >
-          May
-           
-          2019
+          May 2019
         </time>
       </div>
     </li>
