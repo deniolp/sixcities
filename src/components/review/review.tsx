@@ -6,11 +6,12 @@ interface Props {
   review: Rev,
 }
 
-const MONTHS = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
-
 const Review = ({review}: Props) => {
-  const year = review.date.match(/^(\d){4}/)[0];
-  const month = review.date.match(/-0((\d))/)[1] - 1;
+  const getDate = (data) => {
+    const year = data.getFullYear();
+    const month = data.toLocaleString(`en-us`, {month: `long`});
+    return month + ` ` + year;
+  };
 
   return <li className="reviews__item">
     <div className="reviews__user user">
@@ -31,7 +32,7 @@ const Review = ({review}: Props) => {
       <p className="reviews__text">
         {review.comment}
       </p>
-      <time className="reviews__time" dateTime={review.date}>{MONTHS[month]} {year}</time>
+      <time className="reviews__time" dateTime={review.date}>{getDate(new Date(review.date))}</time>
     </div>
   </li>;
 };
