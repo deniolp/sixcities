@@ -6,7 +6,7 @@
   "scripts": {
     "eslint": "eslint --ext .js,.jsx src/",
     "test": "npm run eslint && jest",
-    "build": "webpack --mode development",
+    "build": "webpack --mode production",
     "start": "webpack-dev-server"
   },
   "devDependencies": {
@@ -35,7 +35,7 @@
     "utility-types": "3.7.0",
     "webpack": "4.30.0",
     "webpack-cli": "3.3.1",
-    "webpack-dev-server": "3.3.1"
+    "webpack-dev-server": "3.11.2"
   },
   "engines": {
     "node": "10"
