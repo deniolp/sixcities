@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const configureAPI = ((onLoginFail) => {
   const api = axios.create({
-    baseURL: `https://es31-server.appspot.com/six-cities`,
+    baseURL: `https://6.react.pages.academy/six-cities`,
     timeout: 5000,
     withCredentials: true,
   });
